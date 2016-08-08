@@ -24,8 +24,8 @@ namespace TerraUI {
         }
 
         public virtual void Update() {
-            if(UIParameters.JustPressed(MouseButtons.Left)) {
-                if(UIParameters.MouseRect.Intersects(Rectangle)) {
+            if(UIUtils.JustPressed(MouseButtons.Left)) {
+                if(UIUtils.MouseRect.Intersects(Rectangle)) {
                     Focus();
                 }
                 else {
@@ -33,7 +33,7 @@ namespace TerraUI {
                 }
             }
 
-            if(UIParameters.JustPressed(Keys.Escape)) {
+            if(UIUtils.JustPressed(Keys.Escape)) {
                 Unfocus();
             }
 
@@ -41,7 +41,7 @@ namespace TerraUI {
                 obj.Update();
             }
 
-            UIParameters.UpdateInput();
+            UIUtils.UpdateInput();
         }
 
         public virtual void Draw(SpriteBatch sb) {

@@ -54,8 +54,8 @@ namespace TerraUI {
             base.Update();
 
             if(Focused) {
-                Input.Keys[] oldPressed = UIParameters.oldState.GetPressedKeys();
-                Input.Keys[] newPressed = UIParameters.newState.GetPressedKeys();
+                Input.Keys[] oldPressed = UIUtils.oldState.GetPressedKeys();
+                Input.Keys[] newPressed = UIUtils.newState.GetPressedKeys();
 
                 bool shift = false;
                 bool capsLock = false;
@@ -63,7 +63,7 @@ namespace TerraUI {
                 bool skip = false;
 
                 if(Text.Length > 0) {
-                    if(UIParameters.JustPressed(Input.Keys.Left) || UIParameters.HeldDown(Input.Keys.Left)) {
+                    if(UIUtils.JustPressed(Input.Keys.Left) || UIUtils.HeldDown(Input.Keys.Left)) {
                         if(leftArrow == 0) {
                             SelectionStart--;
                             leftArrow = frameDelay;
@@ -71,7 +71,7 @@ namespace TerraUI {
                         leftArrow--;
                         skip = true;
                     }
-                    else if(UIParameters.JustPressed(Input.Keys.Right) || UIParameters.HeldDown(Input.Keys.Right)) {
+                    else if(UIUtils.JustPressed(Input.Keys.Right) || UIUtils.HeldDown(Input.Keys.Right)) {
                         if(rightArrow == 0) {
                             SelectionStart++;
                             rightArrow = frameDelay;
@@ -79,7 +79,7 @@ namespace TerraUI {
                         rightArrow--;
                         skip = true;
                     }
-                    else if(UIParameters.HeldDown(Input.Keys.Back)) {
+                    else if(UIUtils.HeldDown(Input.Keys.Back)) {
                         if(backSpace == 0) {
                             if(SelectionStart > 0) {
                                 Text = Text.Remove(SelectionStart - 1, 1);
@@ -90,7 +90,7 @@ namespace TerraUI {
                         backSpace--;
                         skip = true;
                     }
-                    else if(UIParameters.JustPressed(Input.Keys.Delete) || UIParameters.HeldDown(Input.Keys.Delete)) {
+                    else if(UIUtils.JustPressed(Input.Keys.Delete) || UIUtils.HeldDown(Input.Keys.Delete)) {
                         if(delete == 0) {
                             if(SelectionStart < Text.Length) {
                                 Text = Text.Remove(SelectionStart, 1);
@@ -110,7 +110,7 @@ namespace TerraUI {
                 }
 
                 if(!skip) {
-                    if(UIParameters.HeldDown(Input.Keys.LeftShift) || UIParameters.HeldDown(Input.Keys.RightShift)) {
+                    if(UIUtils.HeldDown(Input.Keys.LeftShift) || UIUtils.HeldDown(Input.Keys.RightShift)) {
                         shift = true;
                     }
 
@@ -141,7 +141,7 @@ namespace TerraUI {
                             }
 
                             if(doTranslate) {
-                                Text = Text.Insert(SelectionStart, UIParameters.TranslateChar(newPressed[i], shift, capsLock, numLock));
+                                Text = Text.Insert(SelectionStart, UIUtils.TranslateChar(newPressed[i], shift, capsLock, numLock));
                                 SelectionStart++;
                             }
                         }

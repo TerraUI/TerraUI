@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Terraria;
 using Terraria.ModLoader;
 
 namespace TerraUI {
-    public class UIParameters {
+    public class UIUtils {
         public static Mod Mod { get; set; }
         internal static KeyboardState oldState;
         internal static KeyboardState newState;

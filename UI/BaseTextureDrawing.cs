@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace TerraUI {
     public static class BaseTextureDrawing {
         public static void DrawRectangleBox(SpriteBatch sb, Color colour, Color colour2, Rectangle rect, int width) {
-            Texture2D texture = UIParameters.Mod.GetTexture("Textures/1x1");
+            Texture2D texture = UIUtils.Mod.GetTexture("Textures/1x1");
 
             sb.Draw(texture, new Rectangle(rect.X + width, rect.Y + width, rect.Width - (width * 2), rect.Height - (width * 2)), colour2);
             sb.Draw(texture, new Rectangle((int)(rect.X), (int)(rect.Y), rect.Width, width), new Rectangle(0, 0, 0, 0), colour);
@@ -16,7 +16,7 @@ namespace TerraUI {
         }
 
         public static void DrawTerrariaStyledBox(SpriteBatch sb, Color colour, Rectangle rect, bool solid = false) {
-            Mod mod = UIParameters.Mod;
+            Mod mod = UIUtils.Mod;
             string add = "";
 
             if(solid) {
