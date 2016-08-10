@@ -12,7 +12,41 @@ namespace TerraUI {
         private int rightArrow = 0;
         private int delete = 0;
 
+        /// <summary>
+        /// The text displayed in the UITextBox.
+        /// </summary>
         public string Text { get; set; }
+        /// <summary>
+        /// The font used in the UITextBox.
+        /// </summary>
+        public SpriteFont Font { get; set; }
+        /// <summary>
+        /// The default border color.
+        /// </summary>
+        public Color BorderColor { get; set; }
+        /// <summary>
+        /// The focused border color.
+        /// </summary>
+        public Color FocusedBorderColor { get; set; }
+        /// <summary>
+        /// The default background color.
+        /// </summary>
+        public Color BackColor { get; set; }
+        /// <summary>
+        /// The focused background color.
+        /// </summary>
+        public Color FocusedBackColor { get; set; }
+        /// <summary>
+        /// The default text color.
+        /// </summary>
+        public Color TextColor { get; set; }
+        /// <summary>
+        /// The focused text color.
+        /// </summary>
+        public Color FocusedTextColor { get; set; }
+        /// <summary>
+        /// The index where the selection in the UITextBox begins.
+        /// </summary>
         public int SelectionStart {
             get { return selectionStart; }
             private set {
@@ -27,14 +61,15 @@ namespace TerraUI {
                 }
             }
         }
-        public SpriteFont Font { get; set; }
-        public Color BorderColor { get; set; }
-        public Color FocusedBorderColor { get; set; }
-        public Color BackColor { get; set; }
-        public Color FocusedBackColor { get; set; }
-        public Color TextColor { get; set; }
-        public Color FocusedTextColor { get; set; }
 
+        /// <summary>
+        /// Create a new UITextBox.
+        /// </summary>
+        /// <param name="position">position of object in pixels</param>
+        /// <param name="size">size of object in pixels</param>
+        /// <param name="font">text font</param>
+        /// <param name="text">displayed text</param>
+        /// <param name="parent">parent object</param>
         public UITextBox(Vector2 position, Vector2 size, SpriteFont font, string text = "", UIObject parent = null)
             : base(position, size, parent, true) {
             Text = text;
@@ -45,14 +80,18 @@ namespace TerraUI {
             TextColor = FocusedTextColor = Color.Black;
         }
 
+        /// <summary>
+        /// Give the object focus.
+        /// </summary>
         public override void Focus() {
             base.Focus();
             SelectionStart = Text.Length;
         }
 
+        /// <summary>
+        /// Update the object. Call during any Update() function.
+        /// </summary>
         public override void Update() {
-            base.Update();
-
             if(Focused) {
                 Input.Keys[] oldPressed = UIUtils.oldState.GetPressedKeys();
                 Input.Keys[] newPressed = UIUtils.newState.GetPressedKeys();
@@ -63,7 +102,7 @@ namespace TerraUI {
                 bool skip = false;
 
                 if(Text.Length > 0) {
-                    if(UIUtils.JustPressed(Input.Keys.Left) || UIUtils.HeldDown(Input.Keys.Left)) {
+                    if(KeyboardUtils.JustPressed(Input.Keys.Left) || KeyboardUtils.HeldDown(Input.Keys.Left)) {
                         if(leftArrow == 0) {
                             SelectionStart--;
                             leftArrow = frameDelay;
@@ -71,7 +110,7 @@ namespace TerraUI {
                         leftArrow--;
                         skip = true;
                     }
-                    else if(UIUtils.JustPressed(Input.Keys.Right) || UIUtils.HeldDown(Input.Keys.Right)) {
+                    else if(KeyboardUtils.JustPressed(Input.Keys.Right) || KeyboardUtils.HeldDown(Input.Keys.Right)) {
                         if(rightArrow == 0) {
                             SelectionStart++;
                             rightArrow = frameDelay;
@@ -79,7 +118,7 @@ namespace TerraUI {
                         rightArrow--;
                         skip = true;
                     }
-                    else if(UIUtils.HeldDown(Input.Keys.Back)) {
+                    else if(KeyboardUtils.HeldDown(Input.Keys.Back)) {
                         if(backSpace == 0) {
                             if(SelectionStart > 0) {
                                 Text = Text.Remove(SelectionStart - 1, 1);
@@ -90,7 +129,7 @@ namespace TerraUI {
                         backSpace--;
                         skip = true;
                     }
-                    else if(UIUtils.JustPressed(Input.Keys.Delete) || UIUtils.HeldDown(Input.Keys.Delete)) {
+                    else if(KeyboardUtils.JustPressed(Input.Keys.Delete) || KeyboardUtils.HeldDown(Input.Keys.Delete)) {
                         if(delete == 0) {
                             if(SelectionStart < Text.Length) {
                                 Text = Text.Remove(SelectionStart, 1);
@@ -110,7 +149,7 @@ namespace TerraUI {
                 }
 
                 if(!skip) {
-                    if(UIUtils.HeldDown(Input.Keys.LeftShift) || UIUtils.HeldDown(Input.Keys.RightShift)) {
+                    if(KeyboardUtils.HeldDown(Input.Keys.LeftShift) || KeyboardUtils.HeldDown(Input.Keys.RightShift)) {
                         shift = true;
                     }
 
@@ -148,6 +187,8 @@ namespace TerraUI {
                     }
                 }
             }
+
+            base.Update();
         }
 
         public override void Draw(SpriteBatch sb) {
