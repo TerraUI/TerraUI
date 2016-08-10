@@ -4,21 +4,11 @@ using Terraria;
 using Terraria.ModLoader;
 
 namespace TerraUI {
-    public class UIUtils {
+    public static class UIUtils {
         public static Mod Mod { get; set; }
         internal static KeyboardState oldState;
         internal static KeyboardState newState;
-        internal static MouseState oldMouseState;
-        internal static MouseState newMouseState;
-
-        public static Rectangle MouseRect {
-            get { return new Rectangle(Main.mouseX, Main.mouseY, 1, 1); }
-        }
-
-        public static Vector2 MousePos {
-            get { return new Vector2(Main.mouseX, Main.mouseY); }
-        }
-
+        
         public static bool NoChildrenIntersect(UIObject obj, Rectangle rect) {
             bool flag = true;
 
@@ -34,61 +24,8 @@ namespace TerraUI {
         }
 
         public static void UpdateInput() {
-            oldState = newState;
-            newState = Keyboard.GetState();
-            oldMouseState = newMouseState;
-            newMouseState = Mouse.GetState();
-        }
-
-        public static bool JustPressed(Keys key) {
-            if(oldState.IsKeyUp(key) && newState.IsKeyDown(key)) {
-                return true;
-            }
-
-            return false;
-        }
-
-        public static bool JustReleased(Keys key) {
-            if(oldState.IsKeyDown(key) && newState.IsKeyUp(key)) {
-                return true;
-            }
-
-            return false;
-        }
-
-        public static bool JustPressed(MouseButtons mouseButton) {
-            if(GetButtonState(mouseButton, oldMouseState) == ButtonState.Released &&
-               GetButtonState(mouseButton, newMouseState) == ButtonState.Pressed) {
-                return true;
-            }
-
-            return false;
-        }
-
-        public static bool JustReleased(MouseButtons mouseButton) {
-            if(GetButtonState(mouseButton, oldMouseState) == ButtonState.Pressed &&
-               GetButtonState(mouseButton, newMouseState) == ButtonState.Released) {
-                return true;
-            }
-
-            return false;
-        }
-
-        public static bool HeldDown(Keys key) {
-            if(oldState.IsKeyDown(key) && newState.IsKeyDown(key)) {
-                return true;
-            }
-
-            return false;
-        }
-
-        public static bool HeldDown(MouseButtons mouseButton) {
-            if(GetButtonState(mouseButton, oldMouseState) == ButtonState.Pressed &&
-               GetButtonState(mouseButton, newMouseState) == ButtonState.Pressed) {
-                return true;
-            }
-
-            return false;
+            MouseUtils.UpdateState();
+            KeyboardUtils.UpdateState();
         }
 
         public static ButtonState GetButtonState(MouseButtons mouseButton, MouseState mouseState) {
@@ -107,17 +44,7 @@ namespace TerraUI {
                     return ButtonState.Released;
             }
         }
-
-        public static bool LeftClick(Rectangle r) {
-            if(MouseRect.Intersects(r)) {
-                if(JustPressed(MouseButtons.Left)) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
+        
         public static void SwitchItems(ref Item item1, ref Item item2) {
             if((item1.type == 0 || item1.stack < 1) && (item2.type != 0 || item2.stack > 0)) //if item2 is mouseitem, then if item slot is empty and item is picked up
             {
