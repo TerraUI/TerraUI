@@ -93,8 +93,8 @@ namespace TerraUI {
         /// </summary>
         public override void Update() {
             if(Focused) {
-                Input.Keys[] oldPressed = UIUtils.oldState.GetPressedKeys();
-                Input.Keys[] newPressed = UIUtils.newState.GetPressedKeys();
+                Input.Keys[] oldPressed = KeyboardUtils.LastState.GetPressedKeys();
+                Input.Keys[] newPressed = KeyboardUtils.State.GetPressedKeys();
 
                 bool shift = false;
                 bool capsLock = false;
