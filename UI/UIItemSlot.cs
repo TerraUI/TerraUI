@@ -82,17 +82,16 @@ namespace TerraUI {
         /// The default left click event.
         /// </summary>
         protected override void DefaultLeftClick() {
-            if(MouseUtils.Rectangle.Intersects(tickRect)) {
-                if(Context == Contexts.EquipAccessory ||
-                   Context == Contexts.EquipLight ||
-                   Context == Contexts.EquipPet) {
-                    ItemVisible = !ItemVisible;
-                }
-            }
-            else {
-                ItemSlot.LeftClick(ref item, 0);
-                Recipe.FindRecipes();
-            }
+            ItemSlot.LeftClick(ref item, 0);
+            Recipe.FindRecipes();
+        }
+
+        /// <summary>
+        /// Toggle the visibility of the item in the slot.
+        /// </summary>
+        protected void ToggleVisibility() {
+            ItemVisible = !ItemVisible;
+            UIUtils.PlaySound(Sounds.MenuTick);
         }
 
         /// <summary>
@@ -100,11 +99,11 @@ namespace TerraUI {
         /// </summary>
         public override void Update() {
             if(!PlayerInput.IgnoreMouseInterface) {
-                if(MouseUtils.Rectangle.Intersects(tickRect)) {
+                if(MouseUtils.Rectangle.Intersects(tickRect) && HasTick()) {
                     Main.player[Main.myPlayer].mouseInterface = true;
 
                     if(MouseUtils.JustPressed(MouseButtons.Left)) {
-                        DefaultLeftClick();
+                        ToggleVisibility();
                     }
                 }
             }
@@ -182,9 +181,7 @@ namespace TerraUI {
                 PostDrawItem(spriteBatch, this);
             }
             else {
-                if(Context == Contexts.EquipAccessory ||
-                   Context == Contexts.EquipLight ||
-                   Context == Contexts.EquipPet) {
+                if(HasTick()) {
                     Texture2D tickTexture = Main.inventoryTickOnTexture;
 
                     if(!ItemVisible) {
@@ -197,6 +194,16 @@ namespace TerraUI {
             }
 
             base.Draw(spriteBatch);
+        }
+
+        protected bool HasTick() {
+            if(Context == Contexts.EquipAccessory ||
+               Context == Contexts.EquipLight ||
+               Context == Contexts.EquipPet) {
+                return true;
+            }
+
+            return false;
         }
     }
 }
