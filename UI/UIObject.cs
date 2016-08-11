@@ -108,7 +108,6 @@ namespace TerraUI {
             }
         }
         
-
         /// <summary>
         /// Handle the mouse click events.
         /// </summary>
