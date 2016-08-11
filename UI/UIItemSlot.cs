@@ -106,10 +106,10 @@ namespace TerraUI {
                         ToggleVisibility();
                     }
                 }
+                else {
+                    base.Update();
+                }
             }
-
-            UIUtils.UpdateInput();
-            base.Update();
         }
 
         /// <summary>
