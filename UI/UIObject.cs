@@ -88,7 +88,7 @@ namespace TerraUI {
         }
 
         /// <summary>
-        /// Update the object. Call during any Update() function.
+        /// Update the object. Call during any PreUpdate() function.
         /// </summary>
         public virtual void Update() {
             if(!PlayerInput.IgnoreMouseInterface) {
@@ -109,6 +109,7 @@ namespace TerraUI {
 
             UIUtils.UpdateInput();
         }
+        
 
         /// <summary>
         /// Handle the mouse click events.
@@ -145,7 +146,7 @@ namespace TerraUI {
                 }
             }
         }
-        
+
         /// <summary>
         /// The default left click event.
         /// </summary>
