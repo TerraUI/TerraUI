@@ -10,25 +10,74 @@ using Microsoft.Xna.Framework.Input;
 
 namespace TerraUI {
     public class UIButton : UIObject {
+        /// <summary>
+        /// The font used for the text on the button.
+        /// </summary>
         public SpriteFont Font { get; set; }
+        /// <summary>
+        /// The text displayed on the button.
+        /// </summary>
         public string Text { get; set; }
+        /// <summary>
+        /// The texture used for the back of the button. If null, the BackColor value will be used.
+        /// </summary>
         public Texture2D BackTexture { get; set; }
+        /// <summary>
+        /// The method that is called when the button is clicked.
+        /// </summary>
         public Action Action { get; set; }
-
+        /// <summary>
+        /// The width of the button's border.
+        /// </summary>
         public byte BorderWidth { get; set; }
-
+        /// <summary>
+        /// The normal background color.
+        /// </summary>
         public Color BackColor { get; set; }
+        /// <summary>
+        /// The background color when the mouse cursor is over the button.
+        /// </summary>
         public Color HoverBackColor { get; set; }
+        /// <summary>
+        /// The background color when the button is clicked.
+        /// </summary>
         public Color ClickBackColor { get; set; }
-
+        /// <summary>
+        /// The normal border color.
+        /// </summary>
         public Color BorderColor { get; set; }
+        /// <summary>
+        /// The border color when the mouse cursor is over the button.
+        /// </summary>
         public Color HoverBorderColor { get; set; }
+        /// <summary>
+        /// The border color when the button is clicked.
+        /// </summary>
         public Color ClickBorderColor { get; set; }
-
+        /// <summary>
+        /// The normal text color.
+        /// </summary>
         public Color TextColor { get; set; }
+        /// <summary>
+        /// The text color when the mouse cursor is over the button.
+        /// </summary>
         public Color HoverTextColor { get; set; }
+        /// <summary>
+        /// The text color when the button is clicked.
+        /// </summary>
         public Color ClickTextColor { get; set; }
 
+        /// <summary>
+        /// Create a new UIButton.
+        /// </summary>
+        /// <param name="position">position of button in pixels</param>
+        /// <param name="size">size of button in pixels</param>
+        /// <param name="action">method to call when button is clicked</param>
+        /// <param name="font">font used for button text</param>
+        /// <param name="text">text displayed on button</param>
+        /// <param name="borderWidth">width of button border</param>
+        /// <param name="backTexture">texture used to draw back of button</param>
+        /// <param name="parent">parent UIObject</param>
         public UIButton(Vector2 position, Vector2 size, Action action, SpriteFont font, string text = "",
             byte borderWidth = 1, Texture2D backTexture = null, UIObject parent = null) : base(position, size, parent, false) {
             Action = action;
@@ -50,10 +99,17 @@ namespace TerraUI {
             ClickTextColor = Color.White;
         }
 
+        /// <summary>
+        /// The default left click action.
+        /// </summary>
         protected override void DefaultLeftClick() {
             Action();
         }
 
+        /// <summary>
+        /// Draw the UIButton.
+        /// </summary>
+        /// <param name="spriteBatch">drawing SpriteBatch</param>
         public override void Draw(SpriteBatch spriteBatch) {
             Vector2 position = Position;
 
