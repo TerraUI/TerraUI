@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Terraria;
 using Terraria.ModLoader;
@@ -19,6 +20,10 @@ namespace TerraUI {
             }
 
             return flag;
+        }
+
+        public static void PlaySound(Sounds type, int x = -1, int y = -1, int style = 1) {
+            Main.PlaySound((int)type, x, y, style);
         }
 
         /// <summary>
@@ -46,7 +51,39 @@ namespace TerraUI {
                     return ButtonState.Released;
             }
         }
-        
+
+        public static Texture2D GetContextTexture(Contexts context) {
+            switch(context) {
+                case Contexts.EquipAccessory:
+                case Contexts.EquipArmor:
+                case Contexts.EquipGrapple:
+                case Contexts.EquipMount:
+                case Contexts.EquipMinecart:
+                case Contexts.EquipPet:
+                case Contexts.EquipLight:
+                    return Main.inventoryBack3Texture;
+                case Contexts.EquipArmorVanity:
+                case Contexts.EquipAccessoryVanity:
+                    return Main.inventoryBack8Texture;
+                case Contexts.EquipDye:
+                    return Main.inventoryBack12Texture;
+                case Contexts.ChestItem:
+                    return Main.inventoryBack5Texture;
+                case Contexts.BankItem:
+                    return Main.inventoryBack2Texture;
+                case Contexts.GuideItem:
+                case Contexts.PrefixItem:
+                case Contexts.CraftingMaterial:
+                    return Main.inventoryBack4Texture;
+                case Contexts.TrashItem:
+                    return Main.inventoryBack7Texture;
+                case Contexts.ShopItem:
+                    return Main.inventoryBack6Texture;
+                default:
+                    return Main.inventoryBackTexture;
+            }
+        }
+
         public static void SwitchItems(ref Item item1, ref Item item2) {
             if((item1.type == 0 || item1.stack < 1) && (item2.type != 0 || item2.stack > 0)) //if item2 is mouseitem, then if item slot is empty and item is picked up
             {
