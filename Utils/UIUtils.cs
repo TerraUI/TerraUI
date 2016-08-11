@@ -21,6 +21,10 @@ namespace TerraUI {
             return flag;
         }
 
+        /// <summary>
+        /// Updates the current mouse and keyboard state.
+        /// Call after all UIObjects have been updated.
+        /// </summary>
         public static void UpdateInput() {
             MouseUtils.UpdateState();
             KeyboardUtils.UpdateState();

@@ -106,8 +106,6 @@ namespace TerraUI {
             foreach(UIObject obj in Children) {
                 obj.Update();
             }
-
-            UIUtils.UpdateInput();
         }
         
 
