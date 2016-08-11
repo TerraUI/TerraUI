@@ -1,15 +1,15 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameInput;
-using Terraria.ModLoader;
 using Terraria.UI;
 
 namespace TerraUI {
     public class UIItemSlot : UIObject {
-        private Item item;
+        protected Item item;
         protected const int defaultSize = 52;
+        protected Rectangle tickRect;
+
         public delegate void DrawItemSlotHandler(SpriteBatch spriteBatch, UIItemSlot slot);
         public delegate bool ConditionHandler(Item item);
 
@@ -30,13 +30,21 @@ namespace TerraUI {
         /// </summary>
         public DrawItemSlotHandler PostDrawItem { get; set; }
         /// <summary>
+        /// Whether the item in the slot is visible on the player character.
+        /// </summary>
+        public bool ItemVisible { get; set; }
+        /// <summary>
         /// Whether to draw the slot as a normal item slot.
         /// </summary>
         public bool DrawAsNormalItemSlot { get; set; }
         /// <summary>
-        /// The context for the slot if DrawAsNormalItemSlot is true.
+        /// The context for the slot.
         /// </summary>
-        public int Context { get; set; }
+        public Contexts Context { get; set; }
+        /// <summary>
+        /// Whether to scale the slot with the inventory's scale.
+        /// </summary>
+        public bool ScaleToInventory { get; set; }
         /// <summary>
         /// The item shown in the slot.
         /// </summary>
@@ -50,32 +58,59 @@ namespace TerraUI {
         /// </summary>
         /// <param name="position">position of slot in pixels</param>
         /// <param name="size">size of slot in pixels</param>
-        /// <param name="condition">checked before item is placed in slot; if null, all items are permitted</param>
+        /// <param name="context">context for slot</param>
         /// <param name="parent">parent UIObject</param>
+        /// <param name="conditions">checked before item is placed in slot; if null, all items are permitted</param>
         /// <param name="drawBackground">run when slot background is drawn; if null, slot is drawn with background texture</param>
         /// <param name="drawItem">run when item in slot is drawn; if null, item is drawn in center of slot</param>
         /// <param name="postDrawItem">run after item in slot is drawn; use to draw elements over the item</param>
         /// <param name="drawAsNormalItemSlot">draw as a normal inventory ItemSlot</param>
-        /// <param name="context">context for slot if drawAsNormalItemSlot is true</param>
-        public UIItemSlot(Vector2 position, int size = 52, ConditionHandler conditions = null, UIObject parent = null,
-            DrawItemSlotHandler drawBackground = null, DrawItemSlotHandler drawItem = null,
-            DrawItemSlotHandler postDrawItem = null, bool drawAsNormalItemSlot = false, int context = 0)
+        public UIItemSlot(Vector2 position, int size = 52, Contexts context = Contexts.InventoryItem, UIObject parent = null,
+                          ConditionHandler conditions = null, DrawItemSlotHandler drawBackground = null, DrawItemSlotHandler drawItem = null,
+                          DrawItemSlotHandler postDrawItem = null, bool drawAsNormalItemSlot = false, bool scaleToInventory = false)
             : base(position, new Vector2(size), parent, false) {
             Item = new Item();
+            Context = context;
             Conditions = conditions;
             DrawBackground = drawBackground;
             DrawItem = drawItem;
             PostDrawItem = postDrawItem;
             DrawAsNormalItemSlot = drawAsNormalItemSlot;
-            Context = context;
         }
 
         /// <summary>
         /// The default left click event.
         /// </summary>
         protected override void DefaultLeftClick() {
-            ItemSlot.LeftClick(ref item, 0);
-            Recipe.FindRecipes();
+            if(MouseUtils.Rectangle.Intersects(tickRect)) {
+                if(Context == Contexts.EquipAccessory ||
+                   Context == Contexts.EquipLight ||
+                   Context == Contexts.EquipPet) {
+                    ItemVisible = !ItemVisible;
+                }
+            }
+            else {
+                ItemSlot.LeftClick(ref item, 0);
+                Recipe.FindRecipes();
+            }
+        }
+
+        /// <summary>
+        /// Update the item slot.
+        /// </summary>
+        public override void Update() {
+            if(!PlayerInput.IgnoreMouseInterface) {
+                if(MouseUtils.Rectangle.Intersects(tickRect)) {
+                    Main.player[Main.myPlayer].mouseInterface = true;
+
+                    if(MouseUtils.JustPressed(MouseButtons.Left)) {
+                        DefaultLeftClick();
+                    }
+                }
+            }
+
+            UIUtils.UpdateInput();
+            base.Update();
         }
 
         /// <summary>
@@ -100,14 +135,15 @@ namespace TerraUI {
             Rectangle = new Rectangle((int)position.X, (int)position.Y, (int)Size.X, (int)Size.Y);
 
             if(DrawAsNormalItemSlot) {
-                ItemSlot.Draw(spriteBatch, ref item, Context, position);
+                ItemSlot.Draw(spriteBatch, ref item, (int)Context, position);
             }
             else {
                 if(DrawBackground != null) {
                     DrawBackground(spriteBatch, this);
                 }
                 else {
-                    spriteBatch.Draw(Main.inventoryBackTexture, Rectangle, Color.White);
+                    Texture2D backTex = UIUtils.GetContextTexture(Context);
+                    spriteBatch.Draw(backTex, Rectangle, Color.White);
                 }
             }
 
@@ -130,13 +166,13 @@ namespace TerraUI {
 
                     spriteBatch.Draw(
                         Main.itemTexture[item.type],
-                        new Vector2(Rectangle.X + Rectangle.Width / 2, 
+                        new Vector2(Rectangle.X + Rectangle.Width / 2,
                                     Rectangle.Y + Rectangle.Height / 2),
                         new Rectangle?(rectangle2),
                         Color.White,
                         0f,
                         origin,
-                        1f,
+                        (ScaleToInventory ? Main.inventoryScale : 1f),
                         SpriteEffects.None,
                         0f);
                 }
@@ -144,6 +180,20 @@ namespace TerraUI {
 
             if(PostDrawItem != null) {
                 PostDrawItem(spriteBatch, this);
+            }
+            else {
+                if(Context == Contexts.EquipAccessory ||
+                   Context == Contexts.EquipLight ||
+                   Context == Contexts.EquipPet) {
+                    Texture2D tickTexture = Main.inventoryTickOnTexture;
+
+                    if(!ItemVisible) {
+                        tickTexture = Main.inventoryTickOffTexture;
+                    }
+
+                    tickRect = new Rectangle(Rectangle.Left + 34, Rectangle.Top - 2, tickTexture.Width, tickTexture.Height);
+                    spriteBatch.Draw(tickTexture, tickRect, Color.White * 0.7f);
+                }
             }
 
             base.Draw(spriteBatch);
