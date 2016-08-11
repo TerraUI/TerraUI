@@ -6,8 +6,6 @@ using Terraria.ModLoader;
 namespace TerraUI {
     public static class UIUtils {
         public static Mod Mod { get; set; }
-        internal static KeyboardState oldState;
-        internal static KeyboardState newState;
         
         public static bool NoChildrenIntersect(UIObject obj, Rectangle rect) {
             bool flag = true;
