@@ -53,16 +53,14 @@ namespace TerraUI {
             if(oldMouseRect.Intersects(Window.Rectangle) &&
                MouseUtils.Rectangle.Intersects(Window.Rectangle) &&
                UIUtils.NoChildrenIntersect(Window, MouseUtils.Rectangle)) {
-                if(MouseUtils.JustPressed(MouseButtons.Left)) {
-                    distance = new Vector2(Main.mouseX, Main.mouseY) - Window.Position;
+                if(MouseUtils.State.LeftButton == ButtonState.Pressed) {
+                    distance = MouseUtils.Position - Window.Position;
                     CanMove = true;
                 }
             }
 
-            if(MouseUtils.HeldDown(MouseButtons.Left)) {
-                if(CanMove) {
-                    Window.Position = new Vector2(Main.mouseX, Main.mouseY) - distance;
-                }
+            if(CanMove) {
+                Window.Position = new Vector2(Main.mouseX, Main.mouseY) - distance;
             }
 
             if(MouseUtils.State.LeftButton == ButtonState.Released) {
