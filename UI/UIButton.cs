@@ -86,17 +86,10 @@ namespace TerraUI {
             BackTexture = backTexture;
             BorderWidth = borderWidth;
 
-            BackColor = new Color(63, 65, 151, 255);
-            HoverBackColor = new Color(100, 102, 190, 255);
-            ClickBackColor = new Color(100, 102, 190, 255);
-
-            BorderColor = Color.White;
-            HoverBorderColor = Color.White;
-            ClickBorderColor = Color.White;
-
-            TextColor = Color.White;
-            HoverTextColor = Color.White;
-            ClickTextColor = Color.White;
+            BackColor = UIColors.DarkBackColorTransparent;
+            HoverBackColor = ClickBackColor = UIColors.LightBackColorTransparent;
+            BorderColor = HoverBorderColor = ClickBorderColor = UIColors.Button.BorderColor;
+            TextColor = HoverTextColor = ClickTextColor = UIColors.Button.TextColor;
         }
 
         /// <summary>

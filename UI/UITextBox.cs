@@ -75,9 +75,9 @@ namespace TerraUI {
             Text = text;
             Focused = false;
             Font = font;
-            BorderColor = FocusedBorderColor = Color.DarkGray;
-            BackColor = FocusedBackColor = Color.White;
-            TextColor = FocusedTextColor = Color.Black;
+            BorderColor = FocusedBorderColor = UIColors.TextBox.BorderColor;
+            BackColor = FocusedBackColor = UIColors.TextBox.BackColor;
+            TextColor = FocusedTextColor = UIColors.TextBox.TextColor;
         }
 
         /// <summary>
