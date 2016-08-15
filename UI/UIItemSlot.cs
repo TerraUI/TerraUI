@@ -81,7 +81,7 @@ namespace TerraUI {
         /// <summary>
         /// The default left click event.
         /// </summary>
-        protected override void DefaultLeftClick() {
+        public override void DefaultLeftClick() {
             ItemSlot.LeftClick(ref item, (int)Context);
             Recipe.FindRecipes();
         }
@@ -115,7 +115,7 @@ namespace TerraUI {
         /// <summary>
         /// The default right click event.
         /// </summary>
-        protected override void DefaultRightClick() {
+        public override void DefaultRightClick() {
             ItemSlot.RightClick(ref item, 0);
         }
 

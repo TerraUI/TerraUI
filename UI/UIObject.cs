@@ -160,23 +160,23 @@ namespace TerraUI {
         /// <summary>
         /// The default left click event.
         /// </summary>
-        protected virtual void DefaultLeftClick() { }
+        public virtual void DefaultLeftClick() { }
         /// <summary>
         /// The default middle click event.
         /// </summary>
-        protected virtual void DefaultMiddleClick() { }
+        public virtual void DefaultMiddleClick() { }
         /// <summary>
         /// The default right click event.
         /// </summary>
-        protected virtual void DefaultRightClick() { }
+        public virtual void DefaultRightClick() { }
         /// <summary>
         /// The default XButton1 click event.
         /// </summary>
-        protected virtual void DefaultXButton1Click() { }
+        public virtual void DefaultXButton1Click() { }
         /// <summary>
         /// The default XButton2 click event.
         /// </summary>
-        protected virtual void DefaultXButton2Click() { }
+        public virtual void DefaultXButton2Click() { }
 
         /// <summary>
         /// Draw the object. Call during any Draw() function.

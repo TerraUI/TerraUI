@@ -95,7 +95,7 @@ namespace TerraUI {
         /// <summary>
         /// The default left click action.
         /// </summary>
-        protected override void DefaultLeftClick() {
+        public override void DefaultLeftClick() {
             Action();
         }
 
