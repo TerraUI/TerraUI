@@ -18,7 +18,7 @@ namespace TerraUI {
                 new Vector2(Main.screenWidth / 2 - 150,
                             Main.screenHeight / 2 - 75),
                 new Vector2(300, 150),
-                null);
+                true);
 
             // Window.Children.Add(something);
             Window.LeftClick += Window_LeftClick;
