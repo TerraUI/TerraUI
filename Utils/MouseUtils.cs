@@ -110,12 +110,12 @@ namespace TerraUI {
         public static bool AnyButtonPressed(out MouseButtons pressedButton) {
             foreach(MouseButtons button in Enum.GetValues(typeof(MouseButtons))) {
                 if(JustPressed(button)) {
-                    pressButton = button;
+                    pressedButton = button;
                     return true;
                 }
             }
 
-            pressButton = MouseButtons.None;
+            pressedButton = MouseButtons.None;
             return false;
         }
 
