@@ -101,7 +101,10 @@ namespace TerraUI {
                 return parent;       
             }
             set {
-                parent.Children.Remove(this);
+                if(parent != null) {
+                    parent.Children.Remove(this);
+                }
+
                 parent = value;
 
                 if(parent != null) {
