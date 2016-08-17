@@ -9,6 +9,7 @@ using Terraria.GameInput;
 namespace TerraUI {
     public class UIObject {
         protected bool acceptsKeyboardInput = false;
+        protected UIObject parent = null;
 
         /// <summary>
         /// Fires when the object is clicked with the left button. Return true if click handled;
@@ -95,7 +96,19 @@ namespace TerraUI {
         /// <summary>
         /// The parent of the object.
         /// </summary>
-        public UIObject Parent { get; set; }
+        public UIObject Parent {
+            get {
+                return parent;       
+            }
+            set {
+                parent.Children.Remove(this);
+                parent = value;
+
+                if(parent != null) {
+                    parent.Children.Add(this);
+                }
+            }
+        }
 
         /// <summary>
         /// Create a new UIObject.
