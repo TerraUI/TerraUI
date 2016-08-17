@@ -126,10 +126,6 @@ namespace TerraUI {
             Children = new List<UIObject>();
             Parent = parent;
             this.acceptsKeyboardInput = acceptsKeyboardInput;
-
-            if(parent != null) {
-                parent.Children.Add(this);
-            }
         }
 
         /// <summary>
