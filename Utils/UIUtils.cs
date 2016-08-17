@@ -6,8 +6,17 @@ using Terraria.ModLoader;
 
 namespace TerraUI {
     public static class UIUtils {
+        /// <summary>
+        /// The mod that uses TerraUI.
+        /// </summary>
         public static Mod Mod { get; set; }
-        
+        /// <summary>
+        /// The subdirectory that TerraUI is stored in, if it is not in the mod's base folder. Used to determine where to load UI
+        /// textures from.
+        /// Example: Addons/TerraUI
+        /// </summary>
+        public static string Subdirectory { get; set; }
+
         public static bool NoChildrenIntersect(UIObject obj, Rectangle rect) {
             bool flag = true;
 
