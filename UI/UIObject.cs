@@ -92,7 +92,7 @@ namespace TerraUI {
         /// <summary>
         /// The children of the object.
         /// </summary>
-        public List<UIObject> Children { get; set; }
+        public List<UIObject> Children { get; protected set; }
         /// <summary>
         /// The parent of the object.
         /// </summary>
