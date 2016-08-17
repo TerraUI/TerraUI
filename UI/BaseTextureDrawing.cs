@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace TerraUI {
     public static class BaseTextureDrawing {
         public static void DrawRectangleBox(SpriteBatch spriteBatch, Color borderColour, Color backColour, Rectangle rect, int borderWidth) {
-            Texture2D texture = UIUtils.Mod.GetTexture(Path.Combine(UIUtils.Subdirectory, "Textures", "1x1"));
+            Texture2D texture = UIUtils.Mod.GetTexture(UIUtils.Subdirectory + "/Textures/1x1");
 
             spriteBatch.Draw(texture, new Rectangle(rect.X + borderWidth, rect.Y + borderWidth, rect.Width - (borderWidth * 2), rect.Height - (borderWidth * 2)), backColour);
             spriteBatch.Draw(texture, new Rectangle(rect.X, rect.Y, rect.Width, borderWidth), new Rectangle(0, 0, 0, 0), borderColour);
@@ -22,9 +22,9 @@ namespace TerraUI {
                 add = "Solid";
             }
 
-            string corner = Path.Combine(UIUtils.Subdirectory, "Textures", "Corner" + add);
-            string side = Path.Combine(UIUtils.Subdirectory, "Textures", "Side" + add);
-            string background = Path.Combine(UIUtils.Subdirectory, "Textures", "Background" + add);
+            string corner = UIUtils.Subdirectory + "/Textures/Corner" + add;
+            string side = UIUtils.Subdirectory + "/Textures/Side" + add;
+            string background = UIUtils.Subdirectory + "/Textures/Background" + add;
 
             spriteBatch.Draw(UIUtils.Mod.GetTexture(corner), new Vector2(rect.X, rect.Y), colour);
             spriteBatch.Draw(UIUtils.Mod.GetTexture(corner), new Vector2(rect.X + rect.Width, rect.Y), null, colour, (float)(Math.PI / 2), default(Vector2), 1f, SpriteEffects.None, 0f);
