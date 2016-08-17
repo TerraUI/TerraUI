@@ -61,6 +61,22 @@ namespace TerraUI {
             }
         }
         /// <summary>
+        /// The X and Y position of the object on the screen, accounting for all its parent objects.
+        /// </summary>
+        public Vector2 ScreenPosition {
+            get {
+                UIObject obj = Parent;
+                Vector2 position = Position;
+
+                while(obj != null) {
+                    position += obj.Position;
+                    obj = obj.Parent;
+                }
+
+                return position;
+            }
+        }
+        /// <summary>
         /// The width and height of the object on the screen.
         /// </summary>
         public Vector2 Size { get; set; }
