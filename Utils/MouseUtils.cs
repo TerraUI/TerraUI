@@ -107,7 +107,7 @@ namespace TerraUI {
         /// </summary>
         /// <param name="pressedButton">pressed button</param>
         /// <returns>whether any button has just been pressed</returns>
-        public static bool AnyButtonPressed(out MouseButtons pressButton) {
+        public static bool AnyButtonPressed(out MouseButtons pressedButton) {
             foreach(MouseButtons button in Enum.GetValues(typeof(MouseButtons))) {
                 if(JustPressed(button)) {
                     pressButton = button;
