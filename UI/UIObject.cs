@@ -44,7 +44,7 @@ namespace TerraUI {
         /// </summary>
         public event FocusHandler GotFocus;
         /// <summary>
-        /// The X and Y position of the object on the screen.
+        /// The X and Y position of the object.
         /// </summary>
         public Vector2 Position { get; set; }
         /// <summary>
