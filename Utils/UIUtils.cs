@@ -98,15 +98,13 @@ namespace TerraUI {
             {
                 item1 = item2;
                 item2 = new Item();
-                item2.type = 0;
-                item2.stack = 0;
+                item2.SetDefaults();
             }
             else if((item1.type != 0 || item1.stack > 0) && (item2.type == 0 || item2.stack < 1)) //if item2 is mouseitem, then if item slot is empty and item is picked up
             {
                 item2 = item1;
                 item1 = new Item();
-                item1.type = 0;
-                item1.stack = 0;
+                item1.SetDefaults();
             }
             else if((item1.type != 0 || item1.stack > 0) && (item2.type != 0 || item2.stack > 0)) //if item2 is mouseitem, then if item slot is empty and item is picked up
             {
