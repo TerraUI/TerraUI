@@ -1,13 +1,12 @@
-﻿using System.Windows.Forms;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria;
 using Input = Microsoft.Xna.Framework.Input;
 
 namespace TerraUI {
     public class UITextBox : UIObject {
         private const int frameDelay = 9;
         private int selectionStart = 0;
-        private int backSpace = 0;
         private int leftArrow = 0;
         private int rightArrow = 0;
         private int delete = 0;
@@ -93,12 +92,6 @@ namespace TerraUI {
         /// </summary>
         public override void Update() {
             if(Focused) {
-                Input.Keys[] oldPressed = KeyboardUtils.LastState.GetPressedKeys();
-                Input.Keys[] newPressed = KeyboardUtils.State.GetPressedKeys();
-
-                bool shift = false;
-                bool capsLock = false;
-                bool numLock = false;
                 bool skip = false;
 
                 if(Text.Length > 0) {
@@ -118,22 +111,10 @@ namespace TerraUI {
                         rightArrow--;
                         skip = true;
                     }
-                    else if(KeyboardUtils.HeldDown(Input.Keys.Back)) {
-                        if(backSpace == 0) {
-                            if(SelectionStart > 0) {
-                                Text = Text.Remove(SelectionStart - 1, 1);
-                                SelectionStart--;
-                            }
-                            backSpace = frameDelay;
-                        }
-                        backSpace--;
-                        skip = true;
-                    }
                     else if(KeyboardUtils.JustPressed(Input.Keys.Delete) || KeyboardUtils.HeldDown(Input.Keys.Delete)) {
                         if(delete == 0) {
                             if(SelectionStart < Text.Length) {
                                 Text = Text.Remove(SelectionStart, 1);
-                                //SelectionStart--;
                             }
                             delete = frameDelay;
                         }
@@ -141,7 +122,6 @@ namespace TerraUI {
                         skip = true;
                     }
                     else {
-                        backSpace = 0;
                         leftArrow = 0;
                         rightArrow = 0;
                         delete = 0;
@@ -149,39 +129,32 @@ namespace TerraUI {
                 }
 
                 if(!skip) {
-                    if(KeyboardUtils.HeldDown(Input.Keys.LeftShift) || KeyboardUtils.HeldDown(Input.Keys.RightShift)) {
-                        shift = true;
-                    }
+                    int oldLength = Text.Length;
+                    string substring = Text.Substring(0, SelectionStart);
+                    string input = Main.GetInputText(substring);
 
-                    if(Control.IsKeyLocked(Keys.CapsLock)) {
-                        capsLock = true;
-                    }
+                    // first, we check if the length of the string has changed, indicating
+                    // text has been added or removed
+                    if(input.Length != substring.Length) {
+                        // we remove the old text and replace it with the new, storing it
+                        // in a temporary variable
+                        string newText = Text.Remove(0, SelectionStart).Insert(0, input);
 
-                    if(Control.IsKeyLocked(Keys.NumLock)) {
-                        numLock = true;
-                    }
+                        // now if the text is smaller than previously or if not, the string is
+                        // an appropriate size,
+                        if(newText.Length < Text.Length || Font.MeasureString(newText).X < Size.X - 12) {
+                            // we set the old text to the new text
+                            Text = newText;
 
-                    for(int i = 0; i < newPressed.Length; i++) {
-                        if(newPressed[i] == Input.Keys.Back) {
-                            skip = true;
-                        }
-
-                        if(!skip) {
-                            bool doTranslate = true;
-
-                            for(int k = 0; k < oldPressed.Length; k++) {
-                                if(newPressed[i] == oldPressed[k]) {
-                                    doTranslate = false;
-                                }
+                            // if the length of the text is now longer,
+                            if(Text.Length > oldLength) {
+                                // adjust the selection start accordingly
+                                SelectionStart += (Text.Length - oldLength);
                             }
-
-                            if(Font.MeasureString(Text).X >= this.Size.X - 12) {
-                                doTranslate = false;
-                            }
-
-                            if(doTranslate) {
-                                Text = Text.Insert(SelectionStart, UIUtils.TranslateChar(newPressed[i], shift, capsLock, numLock));
-                                SelectionStart++;
+                            // or if the length of the text is now shorter
+                            else if(Text.Length < oldLength) {
+                                // adjust the selection start accordingly
+                                SelectionStart -= (oldLength - Text.Length);
                             }
                         }
                     }
