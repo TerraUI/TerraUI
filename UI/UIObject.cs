@@ -54,7 +54,7 @@ namespace TerraUI {
         public Vector2 RelativePosition {
             get {
                 if(Parent != null) {
-                    return Position + Parent.Position;
+                    return Position + Parent.RelativePosition;
                 }
                 else {
                     return Position;
