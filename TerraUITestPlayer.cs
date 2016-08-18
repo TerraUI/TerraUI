@@ -10,6 +10,7 @@ namespace TerraUITest {
         UITextBox tb;
         UIButton btn;
         UIProgressBar bar;
+        UIPanel pnl1;
         //UIScrollbar scrl;
 
         public override bool Autoload(ref string name) {
@@ -17,9 +18,18 @@ namespace TerraUITest {
         }
 
         public override void Initialize() {
-            tb = new UITextBox(new Vector2(500, 500), new Vector2(100, 22), Main.fontItemStack, "Test text");
-            btn = new UIButton(new Vector2(500, 550), new Vector2(100, 22), DoClick, Main.fontItemStack, "Click Here");
-            bar = new UIProgressBar(new Vector2(500, 600), new Vector2(100, 22));
+            int width = 100;
+            int height = 22;
+            int margin = 10;
+            int y = margin;
+            int x = 10;
+
+            pnl1 = new UIPanel(new Vector2(500, 500), new Vector2(width + (x * 2), (3 * height) + (4 * y)));
+            tb = new UITextBox(new Vector2(x, y), new Vector2(width, height), Main.fontItemStack, "Test text", pnl1);
+            y += height + margin;
+            btn = new UIButton(new Vector2(x, y), new Vector2(width, height), DoClick, Main.fontItemStack, "Click Here", parent: pnl1);
+            y += height + margin;
+            bar = new UIProgressBar(new Vector2(x, y), new Vector2(width, height), parent: pnl1);
             //scrl = new UIScrollbar(new Vector2(500, 600), new Vector2(100, 22), Orientations.Horizontal);
 
             btn.ClickBackColor = Color.Red;
@@ -42,17 +52,20 @@ namespace TerraUITest {
         }
 
         public void DrawUI(SpriteBatch spriteBatch) {
-            if(tb != null) {
-                tb.Draw(spriteBatch);
-            }
+            if(pnl1 != null)
+                pnl1.Draw(spriteBatch);
 
-            if(btn != null) {
-                btn.Draw(spriteBatch);
-            }
+            //if(tb != null) {
+            //    tb.Draw(spriteBatch);
+            //}
 
-            if(bar != null) {
-                bar.Draw(spriteBatch);
-            }
+            //if(btn != null) {
+            //    btn.Draw(spriteBatch);
+            //}
+
+            //if(bar != null) {
+            //    bar.Draw(spriteBatch);
+            //}
 
             //if(scrl != null) {
             //    scrl.Draw(spriteBatch);
@@ -60,12 +73,16 @@ namespace TerraUITest {
         }
 
         public void UpdateUI() {
-            if(tb != null) {
-                tb.Update();
-            }
+            //if(tb != null) {
+            //    tb.Update();
+            //}
 
-            if(btn != null) {
-                btn.Update();
+            //if(btn != null) {
+            //    btn.Update();
+            //}
+
+            if(pnl1 != null) {
+                pnl1.Update();
             }
 
             if(bar != null) {
