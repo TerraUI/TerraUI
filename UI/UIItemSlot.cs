@@ -121,17 +121,11 @@ namespace TerraUI {
         /// </summary>
         /// <param name="spriteBatch">drawing SpriteBatch</param>
         public override void Draw(SpriteBatch spriteBatch) {
-            Vector2 position = Position;
             Point mouse = new Point(Main.mouseX, Main.mouseY);
-
-            if(Parent != null) {
-                position += Parent.Position;
-            }
-
-            Rectangle = new Rectangle((int)position.X, (int)position.Y, (int)Size.X, (int)Size.Y);
+            Rectangle = new Rectangle((int)RelativePosition.X, (int)RelativePosition.Y, (int)Size.X, (int)Size.Y);
 
             if(DrawAsNormalItemSlot) {
-                ItemSlot.Draw(spriteBatch, ref item, (int)Context, position);
+                ItemSlot.Draw(spriteBatch, ref item, (int)Context, RelativePosition);
             }
             else {
                 if(DrawBackground != null) {

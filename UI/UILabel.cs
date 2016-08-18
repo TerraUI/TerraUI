@@ -51,21 +51,16 @@ namespace TerraUI {
         /// </summary>
         /// <param name="spriteBatch">drawing SpriteBatch</param>
         public override void Draw(SpriteBatch spriteBatch) {
-            Vector2 position = Position;
-
-            if(Parent != null) {
-                position += Parent.Position;
-            }
-
-            Rectangle = new Rectangle((int)position.X, (int)position.Y, (int)Size.X, (int)Size.Y);
+            Rectangle = new Rectangle((int)RelativePosition.X, (int)RelativePosition.Y, (int)Size.X, (int)Size.Y);
 
             string text = WrapText(Font, Text, Size.X);
 
             if(DrawBorder) {
-                Terraria.Utils.DrawBorderStringFourWay(spriteBatch, Font, text, position.X, position.Y, TextColor, BorderColor, Vector2.Zero, 1f);
+                Terraria.Utils.DrawBorderStringFourWay(spriteBatch, Font, text, RelativePosition.X, RelativePosition.Y,
+                    TextColor, BorderColor, Vector2.Zero, 1f);
             }
             else {
-                spriteBatch.DrawString(Font, text, position, TextColor);
+                spriteBatch.DrawString(Font, text, RelativePosition, TextColor);
             }
 
             base.Draw(spriteBatch);

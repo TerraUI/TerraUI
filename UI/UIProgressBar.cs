@@ -178,14 +178,8 @@ namespace TerraUI {
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
-            Vector2 position = Position;
-
-            if(Parent != null) {
-                position += Parent.Position;
-            }
-
-            Rectangle = new Rectangle((int)position.X, (int)position.Y, (int)Size.X, (int)Size.Y);
-            Rectangle barRectangle = new Rectangle((int)(position.X + BarMargin.X), (int)(position.Y + BarMargin.Y),
+            Rectangle = new Rectangle((int)RelativePosition.X, (int)RelativePosition.Y, (int)Size.X, (int)Size.Y);
+            Rectangle barRectangle = new Rectangle((int)(RelativePosition.X + BarMargin.X), (int)(RelativePosition.Y + BarMargin.Y),
                                                    (int)(Size.X - BarMargin.X * 2), (int)(Size.Y - BarMargin.Y * 2));
             
             barRectangle.Width = (int)((Size.X * Percent) - BarMargin.X * 2);

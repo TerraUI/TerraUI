@@ -104,13 +104,7 @@ namespace TerraUI {
         /// </summary>
         /// <param name="spriteBatch">drawing SpriteBatch</param>
         public override void Draw(SpriteBatch spriteBatch) {
-            Vector2 position = Position;
-
-            if(Parent != null) {
-                Position += Parent.Position;
-            }
-
-            Rectangle = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
+            Rectangle = new Rectangle((int)RelativePosition.X, (int)RelativePosition.Y, (int)Size.X, (int)Size.Y);
 
             Color borderColor = BorderColor;
             Color backColor = BackColor;

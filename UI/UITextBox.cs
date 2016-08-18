@@ -165,21 +165,15 @@ namespace TerraUI {
         }
 
         public override void Draw(SpriteBatch sb) {
-            Vector2 position = Position;
-
-            if(Parent != null) {
-                position += Parent.Position;
-            }
-
-            Rectangle = new Rectangle((int)position.X, (int)position.Y, (int)Size.X, (int)Size.Y);
+            Rectangle = new Rectangle((int)RelativePosition.X, (int)RelativePosition.Y, (int)Size.X, (int)Size.Y);
 
             if(Focused) {
                 BaseTextureDrawing.DrawRectangleBox(sb, FocusedBorderColor, FocusedBackColor, Rectangle, 2);
-                sb.DrawString(Font, Text.Insert(SelectionStart, "|"), position + new Vector2(2), FocusedTextColor);
+                sb.DrawString(Font, Text.Insert(SelectionStart, "|"), RelativePosition + new Vector2(2), FocusedTextColor);
             }
             else {
                 BaseTextureDrawing.DrawRectangleBox(sb, BorderColor, BackColor, Rectangle, 2);
-                sb.DrawString(Font, Text, position + new Vector2(2), TextColor);
+                sb.DrawString(Font, Text, RelativePosition + new Vector2(2), TextColor);
             }
 
             base.Draw(sb);
