@@ -51,25 +51,36 @@
   <ItemGroup>
     <Compile Include="TerraUITest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TerraUI\UI\BaseTextureDrawing.cs" />
+    <Compile Include="TerraUI\Enums\Contexts.cs" />
+    <Compile Include="TerraUI\Enums\MouseButtons.cs" />
+    <Compile Include="TerraUI\Enums\Sounds.cs" />
     <Compile Include="TerraUI\UI\UIButton.cs" />
     <Compile Include="TerraUI\UI\UIItemSlot.cs" />
     <Compile Include="TerraUI\UI\UILabel.cs" />
     <Compile Include="TerraUI\UI\UIObject.cs" />
     <Compile Include="TerraUI\UI\UIPanel.cs" />
     <Compile Include="TerraUI\UI\UITextBox.cs" />
-    <Compile Include="TerraUI\Utils\Contexts.cs" />
+    <Compile Include="TerraUI\UI\UIWindows\ExampleWindow.cs" />
+    <Compile Include="TerraUI\Utils\BaseTextureDrawing.cs" />
     <Compile Include="TerraUI\Utils\Events.cs" />
     <Compile Include="TerraUI\Utils\KeyboardUtils.cs" />
-    <Compile Include="TerraUI\Utils\MouseButtons.cs" />
     <Compile Include="TerraUI\Utils\MouseUtils.cs" />
-    <Compile Include="TerraUI\Utils\Sounds.cs" />
     <Compile Include="TerraUI\Utils\UIColors.cs" />
     <Compile Include="TerraUI\Utils\UIUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.txt" />
     <Content Include="description.txt" />
+    <Content Include="TerraUI\Textures\1x1.png" />
+    <Content Include="TerraUI\Textures\Background.png" />
+    <Content Include="TerraUI\Textures\BackgroundSolid.png" />
+    <Content Include="TerraUI\Textures\Buttons\Cross.png" />
+    <Content Include="TerraUI\Textures\Buttons\Enter.png" />
+    <Content Include="TerraUI\Textures\Buttons\Integrate.png" />
+    <Content Include="TerraUI\Textures\Corner.png" />
+    <Content Include="TerraUI\Textures\CornerSolid.png" />
+    <Content Include="TerraUI\Textures\Side.png" />
+    <Content Include="TerraUI\Textures\SideSolid.png" />
     <Content Include="Textures\1x1.png" />
     <Content Include="Textures\Background.png" />
     <Content Include="Textures\BackgroundSolid.png" />
