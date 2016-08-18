@@ -60,6 +60,7 @@
     <Compile Include="TerraUI\UI\UILabel.cs" />
     <Compile Include="TerraUI\UI\UIObject.cs" />
     <Compile Include="TerraUI\UI\UIPanel.cs" />
+    <Compile Include="TerraUI\UI\UIProgressBar.cs" />
     <Compile Include="TerraUI\UI\UITextBox.cs" />
     <Compile Include="TerraUI\UI\UIWindows\ExampleWindow.cs" />
     <Compile Include="TerraUI\Utils\BaseTextureDrawing.cs" />
