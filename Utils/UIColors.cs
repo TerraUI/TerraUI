@@ -26,10 +26,15 @@ namespace TerraUI {
             public static readonly Color BorderColor = Color.Black;
         }
 
+        public static class CheckBox {
+            public static readonly Color BoxColor = Color.White;
+            public static readonly Color TextColor = Color.White;
+            public static readonly Color TickColor = Color.Black;
+        }
+
         public static class ProgressBar {
             public static readonly Color BackColor = UIColors.BackColor;
             public static readonly Color BarColor = Color.White;
-            public static readonly Color FinishedBarColor = Color.White;
             public static readonly Color BorderColor = Color.White;
         }
 

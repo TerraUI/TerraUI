@@ -131,8 +131,7 @@ namespace TerraUI {
             Maximum = maximum;
             StepAmount = stepAmount;
             BackColor = UIColors.ProgressBar.BackColor;
-            BarColor = UIColors.ProgressBar.BarColor;
-            FinishedBarColor = UIColors.ProgressBar.FinishedBarColor;
+            BarColor = FinishedBarColor = UIColors.ProgressBar.BarColor;
             BorderColor = UIColors.ProgressBar.BorderColor;
             BorderWidth = 1;
             BarMargin = Vector2.Zero;
