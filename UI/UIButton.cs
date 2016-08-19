@@ -23,10 +23,6 @@ namespace TerraUI {
         /// </summary>
         public Texture2D BackTexture { get; set; }
         /// <summary>
-        /// The method that is called when the button is clicked.
-        /// </summary>
-        public Action Action { get; set; }
-        /// <summary>
         /// The width of the button's border.
         /// </summary>
         public byte BorderWidth { get; set; }
@@ -72,15 +68,13 @@ namespace TerraUI {
         /// </summary>
         /// <param name="position">position of button in pixels</param>
         /// <param name="size">size of button in pixels</param>
-        /// <param name="action">method to call when button is clicked</param>
         /// <param name="font">font used for button text</param>
         /// <param name="text">text displayed on button</param>
         /// <param name="borderWidth">width of button border</param>
         /// <param name="backTexture">texture used to draw back of button</param>
         /// <param name="parent">parent UIObject</param>
-        public UIButton(Vector2 position, Vector2 size, Action action, SpriteFont font, string text = "",
-            byte borderWidth = 1, Texture2D backTexture = null, UIObject parent = null) : base(position, size, parent, false) {
-            Action = action;
+        public UIButton(Vector2 position, Vector2 size, SpriteFont font, string text = "", byte borderWidth = 1,
+            Texture2D backTexture = null, UIObject parent = null) : base(position, size, parent, false) {
             Font = font;
             Text = text;
             BackTexture = backTexture;
@@ -90,13 +84,6 @@ namespace TerraUI {
             HoverBackColor = ClickBackColor = UIColors.LightBackColorTransparent;
             BorderColor = HoverBorderColor = ClickBorderColor = UIColors.Button.BorderColor;
             TextColor = HoverTextColor = ClickTextColor = UIColors.Button.TextColor;
-        }
-
-        /// <summary>
-        /// The default left click action.
-        /// </summary>
-        public override void DefaultLeftClick() {
-            Action();
         }
 
         /// <summary>
