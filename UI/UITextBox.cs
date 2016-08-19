@@ -109,6 +109,9 @@ namespace TerraUI {
                         delete--;
                         skip = true;
                     }
+                    else if(KeyboardUtils.JustPressed(Input.Keys.Enter)) {
+                        Unfocus();
+                    }
                     else {
                         leftArrow = 0;
                         rightArrow = 0;
