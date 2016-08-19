@@ -39,10 +39,21 @@ namespace TerraUITest {
             tb.GotFocus += tb_GotFocus;
             tb.LostFocus += tb_LostFocus;
 
+            pnl1.MouseEnter += pnl1_MouseEnter;
+            pnl1.MouseLeave += pnl1_MouseLeave;
+
             bar.Maximum = 100;
             bar.BarMargin = new Vector2(0, 5);
 
             base.Initialize();
+        }
+
+        private void pnl1_MouseLeave(UIObject sender, MouseEventArgs e) {
+            ((UIPanel)sender).BackColor = UIColors.BackColorTransparent;
+        }
+
+        private void pnl1_MouseEnter(UIObject sender, MouseEventArgs e) {
+            ((UIPanel)sender).BackColor = UIColors.LightBackColorTransparent;
         }
 
         private void tb_LostFocus(UIObject sender) {
