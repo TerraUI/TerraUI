@@ -31,37 +31,13 @@ namespace TerraUI {
         /// </summary>
         public Color BackColor { get; set; }
         /// <summary>
-        /// The background color when the mouse cursor is over the button.
-        /// </summary>
-        public Color HoverBackColor { get; set; }
-        /// <summary>
-        /// The background color when the button is clicked.
-        /// </summary>
-        public Color ClickBackColor { get; set; }
-        /// <summary>
         /// The normal border color.
         /// </summary>
         public Color BorderColor { get; set; }
         /// <summary>
-        /// The border color when the mouse cursor is over the button.
-        /// </summary>
-        public Color HoverBorderColor { get; set; }
-        /// <summary>
-        /// The border color when the button is clicked.
-        /// </summary>
-        public Color ClickBorderColor { get; set; }
-        /// <summary>
         /// The normal text color.
         /// </summary>
         public Color TextColor { get; set; }
-        /// <summary>
-        /// The text color when the mouse cursor is over the button.
-        /// </summary>
-        public Color HoverTextColor { get; set; }
-        /// <summary>
-        /// The text color when the button is clicked.
-        /// </summary>
-        public Color ClickTextColor { get; set; }
 
         /// <summary>
         /// Create a new UIButton.
@@ -81,9 +57,8 @@ namespace TerraUI {
             BorderWidth = borderWidth;
 
             BackColor = UIColors.DarkBackColorTransparent;
-            HoverBackColor = ClickBackColor = UIColors.LightBackColorTransparent;
-            BorderColor = HoverBorderColor = ClickBorderColor = UIColors.Button.BorderColor;
-            TextColor = HoverTextColor = ClickTextColor = UIColors.Button.TextColor;
+            BorderColor = UIColors.Button.BorderColor;
+            TextColor = UIColors.Button.TextColor;
         }
 
         /// <summary>
@@ -93,30 +68,8 @@ namespace TerraUI {
         public override void Draw(SpriteBatch spriteBatch) {
             Rectangle = new Rectangle((int)RelativePosition.X, (int)RelativePosition.Y, (int)Size.X, (int)Size.Y);
 
-            Color borderColor = BorderColor;
-            Color backColor = BackColor;
-            Color textColor = TextColor;
-
-            if(MouseUtils.Rectangle.Intersects(Rectangle)) {
-                if(MouseUtils.State.LeftButton == ButtonState.Pressed) {
-                    borderColor = ClickBorderColor;
-                    backColor = ClickBackColor;
-                    textColor = ClickTextColor;
-                }
-                else {
-                    borderColor = HoverBorderColor;
-                    backColor = HoverBackColor;
-                    textColor = HoverTextColor;
-                }
-            }
-            else {
-                borderColor = BorderColor;
-                backColor = BackColor;
-                textColor = TextColor;
-            }
-
             if(BackTexture == null) {
-                BaseTextureDrawing.DrawRectangleBox(spriteBatch, borderColor, backColor, Rectangle, BorderWidth);
+                BaseTextureDrawing.DrawRectangleBox(spriteBatch, BorderColor, BackColor, Rectangle, BorderWidth);
             }
             else {
                 spriteBatch.Draw(BackTexture, Rectangle, Color.White);
@@ -130,7 +83,7 @@ namespace TerraUI {
                 textPos.X += (Rectangle.Width / 2);
                 textPos.Y += (Rectangle.Height / 2) + (measure.Y / 8);
 
-                spriteBatch.DrawString(Font, Text, textPos, textColor, 0f, origin, 1f, SpriteEffects.None, 0f);
+                spriteBatch.DrawString(Font, Text, textPos, TextColor, 0f, origin, 1f, SpriteEffects.None, 0f);
             }
 
             base.Draw(spriteBatch);

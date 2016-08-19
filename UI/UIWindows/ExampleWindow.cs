@@ -21,11 +21,16 @@ namespace TerraUI {
                 true);
 
             // Window.Children.Add(something);
-            Window.LeftClick += Window_LeftClick;
+            Window.Click += Window_Click;
         }
 
-        private bool Window_LeftClick(UIObject sender, ClickEventArgs e) {
-            return false; // perform default left click function
+        private bool Window_Click(UIObject sender, MouseButtonEventArgs e) {
+            if(e.Button == MouseButtons.Left) {
+                // do something
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>

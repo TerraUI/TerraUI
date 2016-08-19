@@ -1,49 +1,43 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Terraria;
-using System;
 using Terraria.GameInput;
 
 namespace TerraUI {
     public class UIObject {
         protected bool acceptsKeyboardInput = false;
         protected UIObject parent = null;
+        protected bool mouseEnter = false;
 
         /// <summary>
-        /// Fires when the object is clicked with the left button. Return true if click handled;
-        /// return false to perform default left click.
+        /// Fires when the object is clicked.
         /// </summary>
-        public event ClickHandler LeftClick;
+        public event MouseClickEventHandler Click;
         /// <summary>
-        /// Fires when the object is clicked with the middle button. Return true if click handled;
-        /// return false to perform default middle click.
+        /// Fires when a mouse button is pressed while the cursor is over the UIObject.
         /// </summary>
-        public event ClickHandler MiddleClick;
+        public event MouseButtonEventHandler MouseDown;
         /// <summary>
-        /// Fires when the object is clicked with the right button. Return true if click handled;
-        /// return false to perform default right click.
+        /// Fires when a mouse button is released while the cursor is over the UIObject.
         /// </summary>
-        public event ClickHandler RightClick;
+        public event MouseButtonEventHandler MouseUp;
         /// <summary>
-        /// Fires when the object is clicked with the XButton1 button. Return true if click handled;
-        /// return false to perform default XButton1 click.
+        /// Fires when the mouse cursor enters the UIObject.
         /// </summary>
-        public event ClickHandler XButton1Click;
+        public event MouseEventHandler MouseEnter;
         /// <summary>
-        /// Fires when the object is clicked with the XButton2 button. Return true if click handled;
-        /// return false to perform default XButton2 click.
+        /// Fires when the mouse cursor leaves the UIObject.
         /// </summary>
-        public event ClickHandler XButton2Click;
+        public event MouseEventHandler MouseLeave;
         /// <summary>
         /// Fires when the object loses focus.
         /// </summary>
-        public event FocusHandler LostFocus;
+        public event UIEventHandler LostFocus;
         /// <summary>
         /// Fires when the object gains focus.
         /// </summary>
-        public event FocusHandler GotFocus;
+        public event UIEventHandler GotFocus;
         /// <summary>
         /// The X and Y position of the object.
         /// </summary>
@@ -98,7 +92,7 @@ namespace TerraUI {
         /// </summary>
         public UIObject Parent {
             get {
-                return parent;       
+                return parent;
             }
             set {
                 if(parent != null) {
@@ -135,9 +129,20 @@ namespace TerraUI {
             if(!PlayerInput.IgnoreMouseInterface) {
                 if(MouseUtils.Rectangle.Intersects(Rectangle)) {
                     Main.player[Main.myPlayer].mouseInterface = true;
+
+                    if(MouseEnter != null && !mouseEnter) {
+                        mouseEnter = true;
+                        MouseEnter(this, new MouseEventArgs(MouseUtils.Position));
+                    }
+
                     Handle();
                 }
                 else {
+                    if(mouseEnter && MouseLeave != null) {
+                        mouseEnter = false;
+                        MouseLeave(this, new MouseEventArgs(MouseUtils.Position));
+                    }
+
                     if(MouseUtils.AnyButtonPressed()) {
                         Unfocus();
                     }
@@ -153,34 +158,39 @@ namespace TerraUI {
         /// Handle the mouse click events.
         /// </summary>
         public virtual void Handle() {
-            if(MouseUtils.JustPressed(MouseButtons.Left)) {
-                if(LeftClick == null || !LeftClick(this, new ClickEventArgs(MouseUtils.Position))) {
+            MouseButtons button = MouseButtons.None;
+
+            if(MouseUtils.AnyButtonPressed(out button)) {
+                if(MouseDown != null) {
+                    MouseDown(this, new MouseButtonEventArgs(button, MouseUtils.Position));
+                }
+
+                if(Click == null || !Click(this, new MouseButtonEventArgs(button, MouseUtils.Position))) {
                     Focus();
-                    DefaultLeftClick();
+
+                    switch(button) {
+                        case MouseButtons.Left:
+                            DefaultLeftClick();
+                            break;
+                        case MouseButtons.Middle:
+                            DefaultMiddleClick();
+                            break;
+                        case MouseButtons.Right:
+                            DefaultRightClick();
+                            break;
+                        case MouseButtons.XButton1:
+                            DefaultXButton1Click();
+                            break;
+                        case MouseButtons.XButton2:
+                            DefaultXButton2Click();
+                            break;
+                    }
                 }
             }
-            else if(MouseUtils.JustPressed(MouseButtons.Middle)) {
-                if(MiddleClick == null || !MiddleClick(this, new ClickEventArgs(MouseUtils.Position))) {
-                    Focus();
-                    DefaultMiddleClick();
-                }
-            }
-            else if(MouseUtils.JustPressed(MouseButtons.Right)) {
-                if(RightClick == null || !RightClick(this, new ClickEventArgs(MouseUtils.Position))) {
-                    Focus();
-                    DefaultRightClick();
-                }
-            }
-            else if(MouseUtils.JustPressed(MouseButtons.XButton1)) {
-                if(XButton1Click == null || !XButton1Click(this, new ClickEventArgs(MouseUtils.Position))) {
-                    Focus();
-                    DefaultXButton1Click();
-                }
-            }
-            else if(MouseUtils.JustPressed(MouseButtons.XButton2)) {
-                if(XButton2Click == null || !XButton2Click(this, new ClickEventArgs(MouseUtils.Position))) {
-                    Focus();
-                    DefaultXButton2Click();
+
+            if(MouseUtils.AnyButtonReleased(out button)) {
+                if(MouseUp != null) {
+                    MouseUp(this, new MouseButtonEventArgs(button, MouseUtils.Position));
                 }
             }
         }

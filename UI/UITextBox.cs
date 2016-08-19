@@ -24,25 +24,13 @@ namespace TerraUI {
         /// </summary>
         public Color BorderColor { get; set; }
         /// <summary>
-        /// The focused border color.
-        /// </summary>
-        public Color FocusedBorderColor { get; set; }
-        /// <summary>
         /// The default background color.
         /// </summary>
         public Color BackColor { get; set; }
         /// <summary>
-        /// The focused background color.
-        /// </summary>
-        public Color FocusedBackColor { get; set; }
-        /// <summary>
         /// The default text color.
         /// </summary>
         public Color TextColor { get; set; }
-        /// <summary>
-        /// The focused text color.
-        /// </summary>
-        public Color FocusedTextColor { get; set; }
         /// <summary>
         /// The index where the selection in the UITextBox begins.
         /// </summary>
@@ -74,9 +62,9 @@ namespace TerraUI {
             Text = text;
             Focused = false;
             Font = font;
-            BorderColor = FocusedBorderColor = UIColors.TextBox.BorderColor;
-            BackColor = FocusedBackColor = UIColors.TextBox.BackColor;
-            TextColor = FocusedTextColor = UIColors.TextBox.TextColor;
+            BorderColor = UIColors.TextBox.BorderColor;
+            BackColor = UIColors.TextBox.BackColor;
+            TextColor = UIColors.TextBox.TextColor;
         }
 
         /// <summary>
@@ -164,19 +152,23 @@ namespace TerraUI {
             base.Update();
         }
 
-        public override void Draw(SpriteBatch sb) {
+        /// <summary>
+        /// Draw the UITextBox.
+        /// </summary>
+        /// <param name="spriteBatch">drawing SpriteBatch</param>
+        public override void Draw(SpriteBatch spriteBatch) {
             Rectangle = new Rectangle((int)RelativePosition.X, (int)RelativePosition.Y, (int)Size.X, (int)Size.Y);
 
+            BaseTextureDrawing.DrawRectangleBox(spriteBatch, BorderColor, BackColor, Rectangle, 2);
+
             if(Focused) {
-                BaseTextureDrawing.DrawRectangleBox(sb, FocusedBorderColor, FocusedBackColor, Rectangle, 2);
-                sb.DrawString(Font, Text.Insert(SelectionStart, "|"), RelativePosition + new Vector2(2), FocusedTextColor);
+                spriteBatch.DrawString(Font, Text.Insert(SelectionStart, "|"), RelativePosition + new Vector2(2), TextColor);
             }
             else {
-                BaseTextureDrawing.DrawRectangleBox(sb, BorderColor, BackColor, Rectangle, 2);
-                sb.DrawString(Font, Text, RelativePosition + new Vector2(2), TextColor);
+                spriteBatch.DrawString(Font, Text, RelativePosition + new Vector2(2), TextColor);
             }
 
-            base.Draw(sb);
+            base.Draw(spriteBatch);
         }
     }
 }

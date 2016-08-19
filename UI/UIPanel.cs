@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -13,14 +8,6 @@ namespace TerraUI {
         /// Background color of the panel.
         /// </summary>
         public Color BackColor { get; set; }
-        /// <summary>
-        /// Background color when the mouse cursor is over the panel.
-        /// </summary>
-        public Color HoverBackColor { get; set; }
-        /// <summary>
-        /// Background color when the panel is clicked.
-        /// </summary>
-        public Color ClickBackColor { get; set; }
         /// <summary>
         /// Background texture of the panel.
         /// </summary>
@@ -33,14 +20,6 @@ namespace TerraUI {
         /// Border color of the UIPanel if DrawStyledBox is false.
         /// </summary>
         public Color BorderColor { get; set; }
-        /// <summary>
-        /// Border color if the mouse cursor is over the panel and DrawStyledBox is false.
-        /// </summary>
-        public Color HoverBorderColor { get; set; }
-        /// <summary>
-        /// Border color if the panel is clicked and DrawStyledBox is false.
-        /// </summary>
-        public Color ClickBorderColor { get; set; }
         /// <summary>
         /// The border width if DrawStyledBox is false.
         /// </summary>
@@ -60,8 +39,7 @@ namespace TerraUI {
             DrawStyledBox = drawStyledBox;
 
             BackColor = UIColors.BackColorTransparent;
-            HoverBackColor = ClickBackColor = UIColors.LightBackColorTransparent;
-            BorderColor = HoverBorderColor = ClickBorderColor = UIColors.Panel.BorderColor;
+            BorderColor = UIColors.Panel.BorderColor;
             BorderWidth = 1;
         }
 
@@ -71,30 +49,16 @@ namespace TerraUI {
         /// <param name="spriteBatch">drawing SpriteBatch</param>
         public override void Draw(SpriteBatch spriteBatch) {
             Rectangle = new Rectangle((int)RelativePosition.X, (int)RelativePosition.Y, (int)Size.X, (int)Size.Y);
-
-            Color backColor = BackColor;
-            Color borderColor = BorderColor;
-
-            if(MouseUtils.Rectangle.Intersects(Rectangle)) {
-                if(MouseUtils.State.LeftButton == ButtonState.Pressed) {
-                    backColor = ClickBackColor;
-                    borderColor = ClickBorderColor;
-                }
-                else {
-                    backColor = HoverBackColor;
-                    borderColor = HoverBorderColor;
-                }
-            }
-
+            
             if(BackTexture != null) {
                 spriteBatch.Draw(BackTexture, Rectangle, Color.White);
             }
             else {
                 if(DrawStyledBox) {
-                    BaseTextureDrawing.DrawTerrariaStyledBox(spriteBatch, backColor, Rectangle);
+                    BaseTextureDrawing.DrawTerrariaStyledBox(spriteBatch, BackColor, Rectangle);
                 }
                 else {
-                    BaseTextureDrawing.DrawRectangleBox(spriteBatch, borderColor, backColor, Rectangle, BorderWidth);
+                    BaseTextureDrawing.DrawRectangleBox(spriteBatch, BorderColor, BackColor, Rectangle, BorderWidth);
                 }
             }
 

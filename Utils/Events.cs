@@ -3,12 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 
 namespace TerraUI {
-    public delegate void FocusHandler(UIObject sender);
-    public delegate bool ClickHandler(UIObject sender, ClickEventArgs e);
-    public delegate void StepHandler(UIObject sender);
+    public delegate void UIEventHandler(UIObject sender);
+    public delegate bool MouseClickEventHandler(UIObject sender, MouseButtonEventArgs e);
+    public delegate void MouseButtonEventHandler(UIObject sender, MouseButtonEventArgs e);
+    public delegate void MouseEventHandler(UIObject sender, MouseEventArgs e);
     public delegate void DrawHandler(UIObject sender, SpriteBatch spriteBatch);
     public delegate bool ConditionHandler(Item item);
-    public delegate bool ValueChanged<T>(UIObject sender, ValueChangedEventArgs<T> e);
+    public delegate void ValueChangedEventHandler<T>(UIObject sender, ValueChangedEventArgs<T> e);
 
     public class ValueChangedEventArgs<T> {
         public T PreviousValue { get; private set; }
@@ -20,10 +21,20 @@ namespace TerraUI {
         }
     }
 
-    public class ClickEventArgs {
+    public class MouseButtonEventArgs {
+        public MouseButtons Button { get; private set; }
         public Vector2 Position { get; private set; }
 
-        public ClickEventArgs(Vector2 position) {
+        public MouseButtonEventArgs(MouseButtons button, Vector2 position) {
+            Button = button;
+            Position = position;
+        }
+    }
+
+    public class MouseEventArgs {
+        public Vector2 Position { get; private set; }
+
+        public MouseEventArgs(Vector2 position) {
             Position = position;
         }
     }

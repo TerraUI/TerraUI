@@ -12,11 +12,11 @@ namespace TerraUI {
         /// <summary>
         /// Fires when the value of the UIProgressBar is changed.
         /// </summary>
-        public event StepHandler ProgressChanged;
+        public event ValueChangedEventHandler<uint> ProgressChanged;
         /// <summary>
         /// Fires when the value of the UIProgressBar is equal to the maximum value.
         /// </summary>
-        public event StepHandler ProgressFinished;
+        public event UIEventHandler ProgressFinished;
         /// <summary>
         /// The maximum value of the UIProgressBar.
         /// </summary>
@@ -100,10 +100,6 @@ namespace TerraUI {
         /// </summary>
         public Color BarColor { get; set; }
         /// <summary>
-        /// The color of the progress bar when it's finished.
-        /// </summary>
-        public Color FinishedBarColor { get; set; }
-        /// <summary>
         /// The color of the border around the UIProgressBar.
         /// </summary>
         public Color BorderColor { get; set; }
@@ -131,7 +127,7 @@ namespace TerraUI {
             Maximum = maximum;
             StepAmount = stepAmount;
             BackColor = UIColors.ProgressBar.BackColor;
-            BarColor = FinishedBarColor = UIColors.ProgressBar.BarColor;
+            BarColor = UIColors.ProgressBar.BarColor;
             BorderColor = UIColors.ProgressBar.BorderColor;
             BorderWidth = 1;
             BarMargin = Vector2.Zero;
@@ -145,7 +141,7 @@ namespace TerraUI {
                 Value += StepAmount;
 
                 if(ProgressChanged != null) {
-                    ProgressChanged(this);
+                    ProgressChanged(this, new ValueChangedEventArgs<uint>(Value - StepAmount, Value));
                 }
             }
             else {
