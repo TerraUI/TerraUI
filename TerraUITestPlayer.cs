@@ -30,10 +30,14 @@ namespace TerraUITest {
             y += height + margin;
             bar = new UIProgressBar(new Vector2(x, y), new Vector2(width, height), parent: pnl1);
             
-            btn.ClickBackColor = Color.Red;
-            btn.ClickBorderColor = Color.Blue;
-            btn.ClickTextColor = Color.Green;
-            btn.LeftClick += btn_LeftClick;
+            btn.Click += btn_Click;
+            btn.MouseEnter += btn_MouseEnter;
+            btn.MouseLeave += btn_MouseLeave;
+            btn.MouseDown += btn_MouseDown;
+            btn.MouseUp += btn_MouseUp;
+
+            tb.GotFocus += tb_GotFocus;
+            tb.LostFocus += tb_LostFocus;
 
             bar.Maximum = 100;
             bar.BarMargin = new Vector2(0, 5);
@@ -41,9 +45,37 @@ namespace TerraUITest {
             base.Initialize();
         }
 
-        private bool btn_LeftClick(UIObject sender, ClickEventArgs e) {
-            Main.NewText("Clicked!");
-            return true;
+        private void tb_LostFocus(UIObject sender) {
+            ((UITextBox)sender).BackColor = UIColors.TextBox.BackColor;
+        }
+
+        private void tb_GotFocus(UIObject sender) {
+            ((UITextBox)sender).BackColor = Color.LightGoldenrodYellow;
+        }
+
+        private void btn_MouseUp(UIObject sender, MouseButtonEventArgs e) {
+            ((UIButton)sender).BackColor = UIColors.LightBackColor;
+        }
+
+        private void btn_MouseDown(UIObject sender, MouseButtonEventArgs e) {
+            ((UIButton)sender).BackColor = UIColors.DarkBackColor;
+        }
+
+        private void btn_MouseLeave(UIObject sender, MouseEventArgs e) {
+            ((UIButton)sender).BackColor = UIColors.BackColor;
+        }
+
+        private void btn_MouseEnter(UIObject sender, MouseEventArgs e) {
+            ((UIButton)sender).BackColor = UIColors.LightBackColor;
+        }
+
+        private bool btn_Click(UIObject sender, MouseButtonEventArgs e) {
+            if(e.Button == MouseButtons.Left) {
+                Main.NewText("Clicked!");
+                return true;
+            }
+
+            return false;
         }
 
         public override void PreUpdate() {
