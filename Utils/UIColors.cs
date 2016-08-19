@@ -30,6 +30,7 @@ namespace TerraUI {
             public static readonly Color BoxColor = Color.White;
             public static readonly Color TextColor = Color.White;
             public static readonly Color TickColor = Color.Black;
+            public static readonly Color BoxBorderColor = Color.Black;
         }
 
         public static class ProgressBar {
