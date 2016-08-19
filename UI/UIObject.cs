@@ -9,6 +9,7 @@ namespace TerraUI {
         protected bool acceptsKeyboardInput = false;
         protected UIObject parent = null;
         protected bool mouseEnter = false;
+        protected bool allowFocus = true;
 
         /// <summary>
         /// Fires when the object is clicked.
@@ -114,11 +115,13 @@ namespace TerraUI {
         /// <param name="size">size of the object in pixels</param>
         /// <param name="parent">parent UIObject</param>
         /// <param name="acceptsKeyboardInput">whether the object should capture keyboard input</param>
-        public UIObject(Vector2 position, Vector2 size, UIObject parent = null, bool acceptsKeyboardInput = false) {
+        public UIObject(Vector2 position, Vector2 size, UIObject parent = null, bool allowFocus = true,
+            bool acceptsKeyboardInput = false) {
             Position = position;
             Size = size;
             Children = new List<UIObject>();
             Parent = parent;
+            this.allowFocus = allowFocus;
             this.acceptsKeyboardInput = acceptsKeyboardInput;
         }
 
@@ -230,7 +233,7 @@ namespace TerraUI {
         /// Give the object focus.
         /// </summary>
         public virtual void Focus() {
-            if(!Focused) {
+            if(!Focused && allowFocus) {
                 Focused = true;
                 if(acceptsKeyboardInput) {
                     Main.blockInput = true;
@@ -246,7 +249,7 @@ namespace TerraUI {
         /// Take focus from the object.
         /// </summary>
         protected virtual void Unfocus() {
-            if(Focused) {
+            if(Focused && allowFocus) {
                 Focused = false;
                 if(acceptsKeyboardInput) {
                     Main.blockInput = false;
