@@ -9,7 +9,7 @@ namespace TerraUI {
         protected bool acceptsKeyboardInput = false;
         protected UIObject parent = null;
         protected bool mouseEnter = false;
-        protected bool allowFocus = true;
+        protected bool allowFocus = false;
 
         /// <summary>
         /// Fires when the object is clicked.
@@ -115,7 +115,7 @@ namespace TerraUI {
         /// <param name="size">size of the object in pixels</param>
         /// <param name="parent">parent UIObject</param>
         /// <param name="acceptsKeyboardInput">whether the object should capture keyboard input</param>
-        public UIObject(Vector2 position, Vector2 size, UIObject parent = null, bool allowFocus = true,
+        public UIObject(Vector2 position, Vector2 size, UIObject parent = null, bool allowFocus = false,
             bool acceptsKeyboardInput = false) {
             Position = position;
             Size = size;
