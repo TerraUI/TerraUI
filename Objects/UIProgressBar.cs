@@ -1,7 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using TerraUI.Utilities;
 
-namespace TerraUI {
+namespace TerraUI.Objects {
     public class UIProgressBar : UIObject {
         private uint value = 0;
         private uint maximum = 100;
@@ -176,7 +177,7 @@ namespace TerraUI {
             Rectangle = new Rectangle((int)RelativePosition.X, (int)RelativePosition.Y, (int)Size.X, (int)Size.Y);
             Rectangle barRectangle = new Rectangle((int)(RelativePosition.X + BarMargin.X), (int)(RelativePosition.Y + BarMargin.Y),
                                                    (int)(Size.X - BarMargin.X * 2), (int)(Size.Y - BarMargin.Y * 2));
-            
+
             barRectangle.Width = (int)((Size.X * Percent) - BarMargin.X * 2);
 
             BaseTextureDrawing.DrawRectangleBox(spriteBatch, BorderColor, BackColor, Rectangle, BorderWidth);

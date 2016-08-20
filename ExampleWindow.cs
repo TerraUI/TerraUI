@@ -2,6 +2,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Terraria;
+using TerraUI.Objects;
+using TerraUI.Panels;
+using TerraUI.Utilities;
 
 namespace TerraUI {
     public class ExampleWindow {

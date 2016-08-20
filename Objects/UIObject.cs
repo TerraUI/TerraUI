@@ -3,8 +3,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameInput;
+using TerraUI.Utilities;
 
-namespace TerraUI {
+namespace TerraUI.Objects {
     public class UIObject {
         protected bool acceptsKeyboardInput = false;
         protected UIObject parent = null;

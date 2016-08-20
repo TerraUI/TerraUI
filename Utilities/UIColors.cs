@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace TerraUI {
+namespace TerraUI.Utilities {
     public static class UIColors {
         public static class TextBox {
             public static readonly Color BorderColor = Color.DarkGray;

@@ -1,8 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using TerraUI.Objects;
+using TerraUI.Utilities;
 
-namespace TerraUI {
+namespace TerraUI.Panels {
     public class UIPanel : UIObject {
         /// <summary>
         /// Background color of the panel.
@@ -49,7 +50,7 @@ namespace TerraUI {
         /// <param name="spriteBatch">drawing SpriteBatch</param>
         public override void Draw(SpriteBatch spriteBatch) {
             Rectangle = new Rectangle((int)RelativePosition.X, (int)RelativePosition.Y, (int)Size.X, (int)Size.Y);
-            
+
             if(BackTexture != null) {
                 spriteBatch.Draw(BackTexture, Rectangle, Color.White);
             }

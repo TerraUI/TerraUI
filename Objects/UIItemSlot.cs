@@ -3,8 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.UI;
+using TerraUI.Utilities;
 
-namespace TerraUI {
+namespace TerraUI.Objects {
     public class UIItemSlot : UIObject {
         protected Item item;
         protected const int defaultSize = 52;

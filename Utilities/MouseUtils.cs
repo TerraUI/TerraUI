@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Terraria;
 
-namespace TerraUI {
+namespace TerraUI.Utilities {
     public static class MouseUtils {
         private static MouseState lastState;
         private static MouseState state;
@@ -161,7 +161,7 @@ namespace TerraUI {
             releasedButton = MouseButtons.None;
             return false;
         }
-        
+
         /// <summary>
         /// Check if any button has been held down.
         /// </summary>

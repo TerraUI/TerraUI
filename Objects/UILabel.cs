@@ -2,8 +2,9 @@
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using TerraUI.Utilities;
 
-namespace TerraUI {
+namespace TerraUI.Objects {
     public class UILabel : UIObject {
         /// <summary>
         /// Text displayed in the label.
@@ -37,7 +38,7 @@ namespace TerraUI {
         /// <param name="borderColor">border color for text</param>
         /// <param name="drawBorder">whether to draw text with border</param>
         /// <param name="parent">parent UIObject</param>
-        public UILabel(Vector2 position, Vector2 size, string text, SpriteFont font, bool drawBorder = true, UIObject parent = null) 
+        public UILabel(Vector2 position, Vector2 size, string text, SpriteFont font, bool drawBorder = true, UIObject parent = null)
             : base(position, size, parent, false) {
             Text = text;
             Font = font;

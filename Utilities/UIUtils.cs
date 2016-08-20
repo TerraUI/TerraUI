@@ -3,8 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Terraria;
 using Terraria.ModLoader;
+using TerraUI.Objects;
 
-namespace TerraUI {
+namespace TerraUI.Utilities {
     public static class UIUtils {
         /// <summary>
         /// The mod that uses TerraUI.

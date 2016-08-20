@@ -1,9 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using TerraUI.Utilities;
 using Input = Microsoft.Xna.Framework.Input;
 
-namespace TerraUI {
+namespace TerraUI.Objects {
     public class UITextBox : UIObject {
         private const int frameDelay = 9;
         private int selectionStart = 0;

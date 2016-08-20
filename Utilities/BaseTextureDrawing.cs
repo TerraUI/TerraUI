@@ -1,9 +1,8 @@
 ﻿using System;
-using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TerraUI {
+namespace TerraUI.Utilities {
     public static class BaseTextureDrawing {
         public static void DrawRectangleBox(SpriteBatch spriteBatch, Color borderColour, Color backColour, Rectangle rect, int borderWidth) {
             Texture2D texture = UIUtils.Mod.GetTexture(UIUtils.Subdirectory + "/Textures/1x1");
