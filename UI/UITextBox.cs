@@ -58,7 +58,7 @@ namespace TerraUI {
         /// <param name="text">displayed text</param>
         /// <param name="parent">parent object</param>
         public UITextBox(Vector2 position, Vector2 size, SpriteFont font, string text = "", UIObject parent = null)
-            : base(position, size, parent, true) {
+            : base(position, size, parent, true, true) {
             Text = text;
             Focused = false;
             Font = font;
