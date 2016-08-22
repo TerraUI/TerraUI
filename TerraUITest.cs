@@ -7,7 +7,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
-using TerraUI;
+using TerraUI.Utilities;
 
 namespace TerraUITest {
     public class TerraUITest : Mod {

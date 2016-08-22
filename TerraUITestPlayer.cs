@@ -1,15 +1,19 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
 using TerraUI;
+using TerraUI.Objects;
+using TerraUI.Panels;
+using TerraUI.Utilities;
 
 namespace TerraUITest {
     public class TerraUITestPlayer : ModPlayer {
         UITextBox tb;
         UIButton btn;
         UIProgressBar bar;
+        //UICheckBox chk;
+
         UIPanel pnl1;
 
         public override bool Autoload(ref string name) {
@@ -17,19 +21,22 @@ namespace TerraUITest {
         }
 
         public override void Initialize() {
-            int width = 100;
+            byte objects = 4;
+            int width = 300;
             int height = 22;
             int margin = 10;
             int y = margin;
             int x = 10;
 
-            pnl1 = new UIPanel(new Vector2(500, 500), new Vector2(width + (x * 2), (3 * height) + (4 * y)));
+            pnl1 = new UIPanel(new Vector2(500, 500), new Vector2(width + (x * 2), (objects * height) + ((objects + 1) * y + 30)));
             tb = new UITextBox(new Vector2(x, y), new Vector2(width, height), Main.fontItemStack, "Test text", pnl1);
             y += height + margin;
             btn = new UIButton(new Vector2(x, y), new Vector2(width, height), Main.fontItemStack, "Click Here", parent: pnl1);
             y += height + margin;
             bar = new UIProgressBar(new Vector2(x, y), new Vector2(width, height), parent: pnl1);
-            
+            y += height + margin;
+            //chk = new UICheckBox(new Vector2(x, y), width, 20, Main.fontItemStack, "Check this", parent: pnl1);
+
             btn.Click += btn_Click;
             btn.MouseEnter += btn_MouseEnter;
             btn.MouseLeave += btn_MouseLeave;
