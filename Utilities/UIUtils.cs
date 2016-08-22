@@ -17,6 +17,28 @@ namespace TerraUI.Utilities {
         /// Example: Addons/TerraUI
         /// </summary>
         public static string Subdirectory { get; set; }
+        
+        /// <summary>
+        /// Returns a Texture2D with the specified name from the Textures directory.
+        /// </summary>
+        /// <param name="texture">texture name without extension</param>
+        /// <returns>Texture2D</returns>
+        public static Texture2D GetTexture(string texture) {
+            string tex = "";
+            string subdir = Subdirectory.Replace(@"\", "/");
+
+            if(!string.IsNullOrWhiteSpace(subdir)) {
+                tex += subdir;
+
+                if(!subdir.Substring(subdir.Length - 1, 1).Equals("/")) {
+                    tex += "/";
+                }
+            }
+
+            tex += "Textures/" + texture;
+
+            return Mod.GetTexture(tex);
+        }
 
         public static bool NoChildrenIntersect(UIObject obj, Rectangle rect) {
             bool flag = true;
