@@ -233,7 +233,7 @@ namespace TerraUI.Objects {
         }
 
         /// <summary>
-        /// 
+        /// Draws the visibility tick in the slot.
         /// </summary>
         /// <param name="spriteBatch"></param>
         public void DrawTick(SpriteBatch spriteBatch) {
