@@ -141,6 +141,37 @@ namespace TerraUI.Utilities {
         }
 
         /// <summary>
+        /// Get the hover text of a slot based on its context and the current language.
+        /// </summary>
+        /// <param name="context">context of the slot</param>
+        /// <returns>text in current language</returns>
+        public static string GetHoverText(Contexts context) {
+            switch(context) {
+                case Contexts.EquipAccessory:
+                case Contexts.EquipAccessoryVanity:
+                    return Lang.inter[9];
+                case Contexts.EquipDye:
+                    return Lang.inter[57];
+                case Contexts.EquipGrapple:
+                    return Lang.inter[90];
+                case Contexts.EquipLight:
+                    return Lang.inter[94];
+                case Contexts.EquipMinecart:
+                    return Lang.inter[93];
+                case Contexts.EquipMount:
+                    return Lang.inter[91];
+                case Contexts.EquipPet:
+                    return Lang.inter[92];
+                case Contexts.InventoryAmmo:
+                    return Lang.inter[27];
+                case Contexts.InventoryCoin:
+                    return Lang.inter[26];
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
         /// Switch two items.
         /// </summary>
         /// <param name="item1">first item</param>
