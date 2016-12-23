@@ -148,8 +148,9 @@ namespace TerraUI.Utilities {
         public static string GetHoverText(Contexts context) {
             switch(context) {
                 case Contexts.EquipAccessory:
-                case Contexts.EquipAccessoryVanity:
                     return Lang.inter[9];
+                case Contexts.EquipAccessoryVanity:
+                    return Lang.inter[11] + " " + Lang.inter[9];
                 case Contexts.EquipDye:
                     return Lang.inter[57];
                 case Contexts.EquipGrapple:
