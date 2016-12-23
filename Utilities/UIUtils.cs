@@ -40,6 +40,12 @@ namespace TerraUI.Utilities {
             return Mod.GetTexture(tex);
         }
 
+        /// <summary>
+        /// Check if any children of the object intersect a chosen rectangle.
+        /// </summary>
+        /// <param name="obj">parent object</param>
+        /// <param name="rect">intersection rectangle</param>
+        /// <returns>true if no children intersect the rectangle</returns>
         public static bool NoChildrenIntersect(UIObject obj, Rectangle rect) {
             bool flag = true;
 
@@ -54,6 +60,13 @@ namespace TerraUI.Utilities {
             return flag;
         }
 
+        /// <summary>
+        /// Play a game sound.
+        /// </summary>
+        /// <param name="type">sound</param>
+        /// <param name="x">x position</param>
+        /// <param name="y">y position</param>
+        /// <param name="style">style</param>
         public static void PlaySound(Sounds type, int x = -1, int y = -1, int style = 1) {
             Main.PlaySound((int)type, x, y, style);
         }
@@ -67,6 +80,12 @@ namespace TerraUI.Utilities {
             KeyboardUtils.UpdateState();
         }
 
+        /// <summary>
+        /// Get the state of a button.
+        /// </summary>
+        /// <param name="mouseButton">mouse button</param>
+        /// <param name="mouseState">mouse state</param>
+        /// <returns>state of given mouse button</returns>
         public static ButtonState GetButtonState(MouseButtons mouseButton, MouseState mouseState) {
             switch(mouseButton) {
                 case MouseButtons.Left:
@@ -84,6 +103,11 @@ namespace TerraUI.Utilities {
             }
         }
 
+        /// <summary>
+        /// Get the texture of a slot based on its context.
+        /// </summary>
+        /// <param name="context">slot context</param>
+        /// <returns>texture of the slot</returns>
         public static Texture2D GetContextTexture(Contexts context) {
             switch(context) {
                 case Contexts.EquipAccessory:
@@ -116,6 +140,11 @@ namespace TerraUI.Utilities {
             }
         }
 
+        /// <summary>
+        /// Switch two items.
+        /// </summary>
+        /// <param name="item1">first item</param>
+        /// <param name="item2">second item</param>
         public static void SwitchItems(ref Item item1, ref Item item2) {
             if((item1.type == 0 || item1.stack < 1) && (item2.type != 0 || item2.stack > 0)) //if item2 is mouseitem, then if item slot is empty and item is picked up
             {
@@ -137,6 +166,14 @@ namespace TerraUI.Utilities {
             }
         }
 
+        /// <summary>
+        /// Translate a keypress into a character.
+        /// </summary>
+        /// <param name="key">key</param>
+        /// <param name="shift">whether shift is pressed</param>
+        /// <param name="capsLock">whether capslock is enabled</param>
+        /// <param name="numLock">whether numlock is enabled</param>
+        /// <returns>translated character</returns>
         public static string TranslateChar(Keys key, bool shift, bool capsLock, bool numLock) {
             switch(key) {
                 case Keys.A:
@@ -299,9 +336,14 @@ namespace TerraUI.Utilities {
             }
             return "";
         }
-
-        //This is stolen from a forum somewhere but who cares it works and I love it
-
+        
+        /// <summary>
+        /// Helper function for TranslateChar().
+        /// </summary>
+        /// <param name="baseChar">original character</param>
+        /// <param name="shift">whether shift is pressed</param>
+        /// <param name="capsLock">whether capslock is enabled</param>
+        /// <returns>translated character</returns>
         public static string TranslateAlphabetic(char baseChar, bool shift, bool capsLock) {
             return (capsLock ^ shift) ? string.Concat(char.ToUpper(baseChar)) : string.Concat(baseChar);
         }
