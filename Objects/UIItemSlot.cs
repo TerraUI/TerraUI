@@ -163,17 +163,7 @@ namespace TerraUI.Objects {
                     DrawBackground(this, spriteBatch);
                 }
                 else {
-                    Texture2D backTex = UIUtils.GetContextTexture(Context);
-                    spriteBatch.Draw(
-                        backTex,
-                        Rectangle.TopLeft(),
-                        null,
-                        Color.White,
-                        0f,
-                        Vector2.Zero,
-                        (ScaleToInventory ? Main.inventoryScale : 1f),
-                        SpriteEffects.None,
-                        0f);
+                    DefaultDrawBackground(spriteBatch);
                 }
 
                 if(item.type > 0) {
@@ -181,30 +171,7 @@ namespace TerraUI.Objects {
                         DrawItem(this, spriteBatch);
                     }
                     else {
-                        Texture2D texture2D = Main.itemTexture[item.type];
-                        Rectangle rectangle;
-                        float scale = (ScaleToInventory ? Main.inventoryScale : 1f);
-
-                        if(Main.itemAnimations[item.type] != null) {
-                            rectangle = Main.itemAnimations[item.type].GetFrame(texture2D);
-                        }
-                        else {
-                            rectangle = texture2D.Frame(1, 1, 0, 0);
-                        }
-
-                        Vector2 origin = texture2D.Size() / 2f * scale;
-                        Vector2 position = Rectangle.TopLeft();
-
-                        spriteBatch.Draw(
-                            texture2D,
-                            position + (Rectangle.Size() / 2f) - (origin / 2f),
-                            new Rectangle?(rectangle),
-                            Color.White,
-                            0f,
-                            origin,
-                            scale,
-                            SpriteEffects.None,
-                            0f);
+                        DefaultDrawItem(spriteBatch);
                     }
                 }
             }
@@ -214,18 +181,75 @@ namespace TerraUI.Objects {
             }
             else {
                 if(HasTick() && !DrawAsNormalItemSlot) {
-                    Texture2D tickTexture = Main.inventoryTickOnTexture;
-
-                    if(!ItemVisible) {
-                        tickTexture = Main.inventoryTickOffTexture;
-                    }
-
-                    tickRect = new Rectangle(Rectangle.Left + 34, Rectangle.Top - 2, tickTexture.Width, tickTexture.Height);
-                    spriteBatch.Draw(tickTexture, tickRect, Color.White * 0.7f);
+                    DrawTick(spriteBatch);
                 }
             }
 
             base.Draw(spriteBatch);
+        }
+
+        /// <summary>
+        /// The default DrawBackground function.
+        /// </summary>
+        /// <param name="spriteBatch">drawing SpriteBatch</param>
+        public void DefaultDrawBackground(SpriteBatch spriteBatch) {
+            Texture2D backTex = UIUtils.GetContextTexture(Context);
+            spriteBatch.Draw(
+                backTex,
+                Rectangle.TopLeft(),
+                null,
+                Color.White,
+                0f,
+                Vector2.Zero,
+                (ScaleToInventory ? Main.inventoryScale : 1f),
+                SpriteEffects.None,
+                0f);
+        }
+
+        /// <summary>
+        /// The default DrawItem function.
+        /// </summary>
+        /// <param name="spriteBatch">drawing SpriteBatch</param>
+        public void DefaultDrawItem(SpriteBatch spriteBatch) {
+            Texture2D texture2D = Main.itemTexture[item.type];
+            Rectangle rectangle;
+            float scale = (ScaleToInventory ? Main.inventoryScale : 1f);
+
+            if(Main.itemAnimations[item.type] != null) {
+                rectangle = Main.itemAnimations[item.type].GetFrame(texture2D);
+            }
+            else {
+                rectangle = texture2D.Frame(1, 1, 0, 0);
+            }
+
+            Vector2 origin = texture2D.Size() / 2f * scale;
+            Vector2 position = Rectangle.TopLeft();
+
+            spriteBatch.Draw(
+                texture2D,
+                position + (Rectangle.Size() / 2f) - (origin / 2f),
+                new Rectangle?(rectangle),
+                Color.White,
+                0f,
+                origin,
+                scale,
+                SpriteEffects.None,
+                0f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        public void DrawTick(SpriteBatch spriteBatch) {
+            Texture2D tickTexture = Main.inventoryTickOnTexture;
+
+            if(!ItemVisible) {
+                tickTexture = Main.inventoryTickOffTexture;
+            }
+
+            tickRect = new Rectangle(Rectangle.Left + 34, Rectangle.Top - 2, tickTexture.Width, tickTexture.Height);
+            spriteBatch.Draw(tickTexture, tickRect, Color.White * 0.7f);
         }
 
         /// <summary>
