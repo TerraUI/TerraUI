@@ -81,6 +81,18 @@ namespace TerraUI.Objects {
         /// </summary>
         public override void DefaultLeftClick() {
             ItemSlot.LeftClick(ref item, (int)Context);
+            Item = new Item();
+            Item.SetDefaults();
+            Recipe.FindRecipes();
+        }
+
+        /// <summary>
+        /// The default right click event.
+        /// </summary>
+        public override void DefaultRightClick() {
+            ItemSlot.RightClick(ref item, (int)Context);
+            Item = new Item();
+            Item.SetDefaults();
             Recipe.FindRecipes();
         }
 
@@ -108,13 +120,6 @@ namespace TerraUI.Objects {
                     base.Update();
                 }
             }
-        }
-
-        /// <summary>
-        /// The default right click event.
-        /// </summary>
-        public override void DefaultRightClick() {
-            ItemSlot.RightClick(ref item, 0);
         }
 
         /// <summary>
