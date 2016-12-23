@@ -203,7 +203,7 @@ namespace TerraUI.Objects {
                 Vector2.Zero,
                 (ScaleToInventory ? Main.inventoryScale : 1f),
                 SpriteEffects.None,
-                0f);
+                1f);
         }
 
         /// <summary>
