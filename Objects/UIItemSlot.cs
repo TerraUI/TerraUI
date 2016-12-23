@@ -116,6 +116,18 @@ namespace TerraUI.Objects {
         }
 
         /// <summary>
+        /// The default mouse hover event.
+        /// </summary>
+        public override void DefaultMouseHover() {
+            if(Item.stack > 0) {
+                Main.hoverItemName = Item.name;
+            }
+            else {
+                Main.hoverItemName = UIUtils.GetHoverText(Context);
+            }
+        }
+        
+        /// <summary>
         /// Swap this slot's item with its partner.
         /// </summary>
         public void SwapItems() {

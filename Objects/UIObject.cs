@@ -33,6 +33,10 @@ namespace TerraUI.Objects {
         /// </summary>
         public event MouseEventHandler MouseLeave;
         /// <summary>
+        /// Fires each frame the mouse cursor is hovering over the UIObject.
+        /// </summary>
+        public event MouseEventHandler MouseHover;
+        /// <summary>
         /// Fires when the object loses focus.
         /// </summary>
         public event UIEventHandler LostFocus;
@@ -142,6 +146,13 @@ namespace TerraUI.Objects {
                         DefaultMouseEnter();
                     }
 
+                    if(MouseHover != null) {
+                        MouseHover(this, new MouseEventArgs(MouseUtils.Position));
+                    }
+                    else {
+                        DefaultMouseHover();
+                    }
+
                     Handle();
                 }
                 else {
@@ -247,6 +258,10 @@ namespace TerraUI.Objects {
         /// The default MouseLeave event.
         /// </summary>
         public virtual void DefaultMouseLeave() { }
+        /// <summary>
+        /// The default MouseHover event.
+        /// </summary>
+        public virtual void DefaultMouseHover() { }
         /// <summary>
         /// The default LostFocus event.
         /// </summary>
