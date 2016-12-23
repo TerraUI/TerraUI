@@ -138,6 +138,9 @@ namespace TerraUI.Objects {
                         mouseEnter = true;
                         MouseEnter(this, new MouseEventArgs(MouseUtils.Position));
                     }
+                    else {
+                        DefaultMouseEnter();
+                    }
 
                     Handle();
                 }
@@ -145,6 +148,9 @@ namespace TerraUI.Objects {
                     if(mouseEnter && MouseLeave != null) {
                         mouseEnter = false;
                         MouseLeave(this, new MouseEventArgs(MouseUtils.Position));
+                    }
+                    else {
+                        DefaultMouseLeave();
                     }
 
                     if(MouseUtils.AnyButtonPressed()) {
@@ -167,6 +173,9 @@ namespace TerraUI.Objects {
             if(MouseUtils.AnyButtonPressed(out button)) {
                 if(MouseDown != null) {
                     MouseDown(this, new MouseButtonEventArgs(button, MouseUtils.Position));
+                }
+                else {
+                    DefaultMouseDown();
                 }
 
                 if(Click == null || !Click(this, new MouseButtonEventArgs(button, MouseUtils.Position))) {
@@ -196,6 +205,9 @@ namespace TerraUI.Objects {
                 if(MouseUp != null) {
                     MouseUp(this, new MouseButtonEventArgs(button, MouseUtils.Position));
                 }
+                else {
+                    DefaultMouseUp();
+                }
             }
         }
 
@@ -219,6 +231,30 @@ namespace TerraUI.Objects {
         /// The default XButton2 click event.
         /// </summary>
         public virtual void DefaultXButton2Click() { }
+        /// <summary>
+        /// The default MouseDown event.
+        /// </summary>
+        public virtual void DefaultMouseDown() { }
+        /// <summary>
+        /// The default MouseUp event.
+        /// </summary>
+        public virtual void DefaultMouseUp() { }
+        /// <summary>
+        /// The default MouseEnter event.
+        /// </summary>
+        public virtual void DefaultMouseEnter() { }
+        /// <summary>
+        /// The default MouseLeave event.
+        /// </summary>
+        public virtual void DefaultMouseLeave() { }
+        /// <summary>
+        /// The default LostFocus event.
+        /// </summary>
+        public virtual void DefaultLostFocus() { }
+        /// <summary>
+        /// The default GotFocus event.
+        /// </summary>
+        public virtual void DefaultGotFocus() { }
 
         /// <summary>
         /// Draw the object. Call during any Draw() function.
@@ -243,6 +279,9 @@ namespace TerraUI.Objects {
                 if(GotFocus != null) {
                     GotFocus(this);
                 }
+                else {
+                    DefaultGotFocus();
+                }
             }
         }
 
@@ -258,6 +297,9 @@ namespace TerraUI.Objects {
 
                 if(LostFocus != null) {
                     LostFocus(this);
+                }
+                else {
+                    DefaultLostFocus();
                 }
             }
         }
