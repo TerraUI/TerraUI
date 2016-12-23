@@ -88,10 +88,8 @@ namespace TerraUI.Objects {
         /// The default left click event.
         /// </summary>
         public override void DefaultLeftClick() {
-            if(Item.stack > 0) {
+            if(Item.stack > 0 || Conditions(Main.mouseItem)) {
                 ItemSlot.LeftClick(ref item, (int)Context);
-                Item = new Item();
-                Item.SetDefaults();
                 Recipe.FindRecipes();
             }
         }
