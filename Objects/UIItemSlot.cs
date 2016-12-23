@@ -112,7 +112,7 @@ namespace TerraUI.Objects {
                 Recipe.FindRecipes();
             }
         }
-        
+
         /// <summary>
         /// Swap this slot's item with its partner.
         /// </summary>
@@ -120,7 +120,7 @@ namespace TerraUI.Objects {
             UIUtils.SwitchItems(ref item, ref Partner.item);
             UIUtils.PlaySound(Sounds.Grab);
         }
-        
+
         /// <summary>
         /// Toggle the visibility of the item in the slot.
         /// </summary>
@@ -173,32 +173,33 @@ namespace TerraUI.Objects {
                     }
                     else {
                         Texture2D texture2D = Main.itemTexture[item.type];
-                        Rectangle rectangle2;
+                        Rectangle rectangle;
+                        float scale = (ScaleToInventory ? Main.inventoryScale : 1f);
 
                         if(Main.itemAnimations[item.type] != null) {
-                            rectangle2 = Main.itemAnimations[item.type].GetFrame(texture2D);
+                            rectangle = Main.itemAnimations[item.type].GetFrame(texture2D);
                         }
                         else {
-                            rectangle2 = texture2D.Frame(1, 1, 0, 0);
+                            rectangle = texture2D.Frame(1, 1, 0, 0);
                         }
 
-                        Vector2 origin = new Vector2(rectangle2.Width / 2, rectangle2.Height / 2);
+                        Vector2 origin = texture2D.Size() / 2f * scale;
+                        Vector2 position = Rectangle.TopLeft();
 
                         spriteBatch.Draw(
-                            Main.itemTexture[item.type],
-                            new Vector2(Rectangle.X + Rectangle.Width / 2,
-                                        Rectangle.Y + Rectangle.Height / 2),
-                            new Rectangle?(rectangle2),
+                            texture2D,
+                            position + (Rectangle.Size() / 2f) - (origin / 2f),
+                            new Rectangle?(rectangle),
                             Color.White,
                             0f,
                             origin,
-                            (ScaleToInventory ? Main.inventoryScale : 1f),
+                            scale,
                             SpriteEffects.None,
                             0f);
                     }
                 }
             }
-            
+
             if(PostDrawItem != null) {
                 PostDrawItem(this, spriteBatch);
             }
