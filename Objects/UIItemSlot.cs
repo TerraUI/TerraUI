@@ -164,7 +164,16 @@ namespace TerraUI.Objects {
                 }
                 else {
                     Texture2D backTex = UIUtils.GetContextTexture(Context);
-                    spriteBatch.Draw(backTex, Rectangle, Color.White);
+                    spriteBatch.Draw(
+                        backTex,
+                        Rectangle.TopLeft(),
+                        null,
+                        Color.White,
+                        0f,
+                        Vector2.Zero,
+                        (ScaleToInventory ? Main.inventoryScale : 1f),
+                        SpriteEffects.None,
+                        0f);
                 }
 
                 if(item.type > 0) {
