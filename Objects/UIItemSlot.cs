@@ -8,6 +8,7 @@ using TerraUI.Utilities;
 namespace TerraUI.Objects {
     public class UIItemSlot : UIObject {
         protected Item item;
+        protected UIItemSlot partner;
         protected const int defaultSize = 52;
         protected Rectangle tickRect;
 
@@ -50,6 +51,13 @@ namespace TerraUI.Objects {
             get { return item; }
             set { item = value; }
         }
+        /// <summary>
+        /// The slot to swap items with if this slot is right-clicked.
+        /// </summary>
+        public UIItemSlot Partner {
+            get { return partner; }
+            set { partner = value; }
+        }
 
         /// <summary>
         /// Create a new UIItemSlot.
@@ -91,15 +99,30 @@ namespace TerraUI.Objects {
         /// </summary>
         public override void DefaultRightClick() {
             ItemSlot.RightClick(ref item, (int)Context);
-            Item = new Item();
-            Item.SetDefaults();
+
+            if(Partner != null) {
+                SwapItems();
+            }
+            else {
+                Item = new Item();
+                Item.SetDefaults();
+            }
+
             Recipe.FindRecipes();
         }
 
         /// <summary>
+        /// Swap this slot's item with its partner.
+        /// </summary>
+        public void SwapItems() {
+            UIUtils.SwitchItems(ref item, ref Partner.item);
+            UIUtils.PlaySound(Sounds.Grab);
+        }
+        
+        /// <summary>
         /// Toggle the visibility of the item in the slot.
         /// </summary>
-        protected void ToggleVisibility() {
+        public void ToggleVisibility() {
             ItemVisible = !ItemVisible;
             UIUtils.PlaySound(Sounds.MenuTick);
         }
@@ -193,6 +216,10 @@ namespace TerraUI.Objects {
             base.Draw(spriteBatch);
         }
 
+        /// <summary>
+        /// Checks if the slot has a context that needs a tick.
+        /// </summary>
+        /// <returns>whether the slot has a tick</returns>
         protected bool HasTick() {
             if(Context == Contexts.EquipAccessory ||
                Context == Contexts.EquipLight ||
