@@ -89,8 +89,7 @@ namespace TerraUI.Objects {
         /// </summary>
         public override void DefaultLeftClick() {
             if(Item.stack > 0 || Conditions(Main.mouseItem)) {
-                ItemSlot.LeftClick(ref item, (int)Context);
-                Recipe.FindRecipes();
+                Swap(ref item, ref Main.mouseItem);
             }
         }
 
@@ -98,27 +97,23 @@ namespace TerraUI.Objects {
         /// The default right click event.
         /// </summary>
         public override void DefaultRightClick() {
-            if(Item.stack > 0) {
-                ItemSlot.RightClick(ref item, (int)Context);
-
-                if(Partner != null) {
-                    SwapItems();
-                }
-                else {
-                    Item = new Item();
-                    Item.SetDefaults();
-                }
-
-                Recipe.FindRecipes();
+            if(Conditions(Main.mouseItem)) {
+                Swap(ref item, ref Main.mouseItem);
+            }
+            else if(Partner != null && (Item.stack > 0 || Partner.Item.stack > 0)) {
+                Swap(ref item, ref Partner.item);
             }
         }
 
         /// <summary>
-        /// Swap this slot's item with its partner.
+        /// Swap two items between slots or the slot and the mouse cursor.
         /// </summary>
-        public void SwapItems() {
-            UIUtils.SwitchItems(ref item, ref Partner.item);
+        /// <param name="item1">first item</param>
+        /// <param name="item2">second item</param>
+        public void Swap(ref Item item1, ref Item item2) {
+            UIUtils.SwitchItems(ref item1, ref item2);
             UIUtils.PlaySound(Sounds.Grab);
+            Recipe.FindRecipes();
         }
 
         /// <summary>
