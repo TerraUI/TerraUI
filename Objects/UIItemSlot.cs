@@ -204,7 +204,7 @@ namespace TerraUI.Objects {
                 PostDrawItem(this, spriteBatch);
             }
             else {
-                if(HasTick()) {
+                if(HasTick() && !DrawAsNormalItemSlot) {
                     Texture2D tickTexture = Main.inventoryTickOnTexture;
 
                     if(!ItemVisible) {
