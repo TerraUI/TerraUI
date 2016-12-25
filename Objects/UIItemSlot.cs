@@ -153,7 +153,7 @@ namespace TerraUI.Objects {
                     DrawBackground(this, spriteBatch);
                 }
                 else {
-                    DefaultDrawBackground(spriteBatch);
+                    OnDrawBackground(spriteBatch);
                 }
 
                 if(item.type > 0) {
@@ -161,7 +161,7 @@ namespace TerraUI.Objects {
                         DrawItem(this, spriteBatch);
                     }
                     else {
-                        DefaultDrawItem(spriteBatch);
+                        OnDrawItem(spriteBatch);
                     }
                 }
             }
@@ -182,7 +182,7 @@ namespace TerraUI.Objects {
         /// The default DrawBackground function.
         /// </summary>
         /// <param name="spriteBatch">drawing SpriteBatch</param>
-        public void DefaultDrawBackground(SpriteBatch spriteBatch) {
+        public void OnDrawBackground(SpriteBatch spriteBatch) {
             Texture2D backTex = UIUtils.GetContextTexture(Context);
             spriteBatch.Draw(
                 backTex,
@@ -200,7 +200,7 @@ namespace TerraUI.Objects {
         /// The default DrawItem function.
         /// </summary>
         /// <param name="spriteBatch">drawing SpriteBatch</param>
-        public void DefaultDrawItem(SpriteBatch spriteBatch) {
+        public void OnDrawItem(SpriteBatch spriteBatch) {
             Texture2D texture2D = Main.itemTexture[item.type];
             Rectangle rectangle;
             float scale = (ScaleToInventory ? Main.inventoryScale : 1f);
