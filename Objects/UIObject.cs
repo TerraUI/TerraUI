@@ -97,9 +97,7 @@ namespace TerraUI.Objects {
         /// The parent of the object.
         /// </summary>
         public UIObject Parent {
-            get {
-                return parent;
-            }
+            get { return parent; }
             set {
                 if(parent != null) {
                     parent.Children.Remove(this);
@@ -143,14 +141,14 @@ namespace TerraUI.Objects {
                         MouseEnter(this, new MouseEventArgs(MouseUtils.Position));
                     }
                     else {
-                        DefaultMouseEnter();
+                        OnMouseEnter();
                     }
 
                     if(MouseHover != null) {
                         MouseHover(this, new MouseEventArgs(MouseUtils.Position));
                     }
                     else {
-                        DefaultMouseHover();
+                        OnMouseHover();
                     }
 
                     Handle();
@@ -161,7 +159,7 @@ namespace TerraUI.Objects {
                         MouseLeave(this, new MouseEventArgs(MouseUtils.Position));
                     }
                     else {
-                        DefaultMouseLeave();
+                        OnMouseLeave();
                     }
 
                     if(MouseUtils.AnyButtonPressed()) {
@@ -186,7 +184,7 @@ namespace TerraUI.Objects {
                     MouseDown(this, new MouseButtonEventArgs(button, MouseUtils.Position));
                 }
                 else {
-                    DefaultMouseDown();
+                    OnMouseDown();
                 }
 
                 if(Click == null || !Click(this, new MouseButtonEventArgs(button, MouseUtils.Position))) {
@@ -194,19 +192,19 @@ namespace TerraUI.Objects {
 
                     switch(button) {
                         case MouseButtons.Left:
-                            DefaultLeftClick();
+                            OnLeftClick();
                             break;
                         case MouseButtons.Middle:
-                            DefaultMiddleClick();
+                            OnMiddleClick();
                             break;
                         case MouseButtons.Right:
-                            DefaultRightClick();
+                            OnRightClick();
                             break;
                         case MouseButtons.XButton1:
-                            DefaultXButton1Click();
+                            OnXButton1Click();
                             break;
                         case MouseButtons.XButton2:
-                            DefaultXButton2Click();
+                            OnXButton2Click();
                             break;
                     }
                 }
@@ -217,7 +215,7 @@ namespace TerraUI.Objects {
                     MouseUp(this, new MouseButtonEventArgs(button, MouseUtils.Position));
                 }
                 else {
-                    DefaultMouseUp();
+                    OnMouseUp();
                 }
             }
         }
@@ -225,51 +223,51 @@ namespace TerraUI.Objects {
         /// <summary>
         /// The default left click event.
         /// </summary>
-        public virtual void DefaultLeftClick() { }
+        public virtual void OnLeftClick() { }
         /// <summary>
         /// The default middle click event.
         /// </summary>
-        public virtual void DefaultMiddleClick() { }
+        public virtual void OnMiddleClick() { }
         /// <summary>
         /// The default right click event.
         /// </summary>
-        public virtual void DefaultRightClick() { }
+        public virtual void OnRightClick() { }
         /// <summary>
         /// The default XButton1 click event.
         /// </summary>
-        public virtual void DefaultXButton1Click() { }
+        public virtual void OnXButton1Click() { }
         /// <summary>
         /// The default XButton2 click event.
         /// </summary>
-        public virtual void DefaultXButton2Click() { }
+        public virtual void OnXButton2Click() { }
         /// <summary>
         /// The default MouseDown event.
         /// </summary>
-        public virtual void DefaultMouseDown() { }
+        public virtual void OnMouseDown() { }
         /// <summary>
         /// The default MouseUp event.
         /// </summary>
-        public virtual void DefaultMouseUp() { }
+        public virtual void OnMouseUp() { }
         /// <summary>
         /// The default MouseEnter event.
         /// </summary>
-        public virtual void DefaultMouseEnter() { }
+        public virtual void OnMouseEnter() { }
         /// <summary>
         /// The default MouseLeave event.
         /// </summary>
-        public virtual void DefaultMouseLeave() { }
+        public virtual void OnMouseLeave() { }
         /// <summary>
         /// The default MouseHover event.
         /// </summary>
-        public virtual void DefaultMouseHover() { }
+        public virtual void OnMouseHover() { }
         /// <summary>
         /// The default LostFocus event.
         /// </summary>
-        public virtual void DefaultLostFocus() { }
+        public virtual void OnLostFocus() { }
         /// <summary>
         /// The default GotFocus event.
         /// </summary>
-        public virtual void DefaultGotFocus() { }
+        public virtual void OnGotFocus() { }
 
         /// <summary>
         /// Draw the object. Call during any Draw() function.
@@ -295,7 +293,7 @@ namespace TerraUI.Objects {
                     GotFocus(this);
                 }
                 else {
-                    DefaultGotFocus();
+                    OnGotFocus();
                 }
             }
         }
@@ -314,7 +312,7 @@ namespace TerraUI.Objects {
                     LostFocus(this);
                 }
                 else {
-                    DefaultLostFocus();
+                    OnLostFocus();
                 }
             }
         }

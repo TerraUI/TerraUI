@@ -8,7 +8,6 @@ using TerraUI.Utilities;
 namespace TerraUI.Objects {
     public class UIItemSlot : UIObject {
         protected Item item;
-        protected UIItemSlot partner;
         protected const int defaultSize = 52;
         protected Rectangle tickRect;
 
@@ -35,7 +34,7 @@ namespace TerraUI.Objects {
         /// <summary>
         /// Whether to draw the slot as a normal item slot.
         /// </summary>
-        public bool DrawAsNormalItemSlot { get; set; }
+        public bool DrawAsNormalSlot { get; set; }
         /// <summary>
         /// The context for the slot.
         /// </summary>
@@ -54,10 +53,7 @@ namespace TerraUI.Objects {
         /// <summary>
         /// The slot to swap items with if this slot is right-clicked.
         /// </summary>
-        public UIItemSlot Partner {
-            get { return partner; }
-            set { partner = value; }
-        }
+        public UIItemSlot Partner { get; set; }
 
         /// <summary>
         /// Create a new UIItemSlot.
@@ -70,10 +66,10 @@ namespace TerraUI.Objects {
         /// <param name="drawBackground">run when slot background is drawn; if null, slot is drawn with background texture</param>
         /// <param name="drawItem">run when item in slot is drawn; if null, item is drawn in center of slot</param>
         /// <param name="postDrawItem">run after item in slot is drawn; use to draw elements over the item</param>
-        /// <param name="drawAsNormalItemSlot">draw as a normal inventory ItemSlot</param>
+        /// <param name="drawAsNormalSlot">draw as a normal inventory ItemSlot</param>
         public UIItemSlot(Vector2 position, int size = 52, Contexts context = Contexts.InventoryItem, UIObject parent = null,
                           ConditionHandler conditions = null, DrawHandler drawBackground = null, DrawHandler drawItem = null,
-                          DrawHandler postDrawItem = null, bool drawAsNormalItemSlot = false, bool scaleToInventory = false)
+                          DrawHandler postDrawItem = null, bool drawAsNormalSlot = false, bool scaleToInventory = false)
             : base(position, new Vector2(size), parent, false) {
             Item = new Item();
             Context = context;
@@ -81,13 +77,13 @@ namespace TerraUI.Objects {
             DrawBackground = drawBackground;
             DrawItem = drawItem;
             PostDrawItem = postDrawItem;
-            DrawAsNormalItemSlot = drawAsNormalItemSlot;
+            DrawAsNormalSlot = drawAsNormalSlot;
         }
 
         /// <summary>
         /// The default left click event.
         /// </summary>
-        public override void DefaultLeftClick() {
+        public override void OnLeftClick() {
             if(Item.stack > 0 || Conditions(Main.mouseItem)) {
                 Swap(ref item, ref Main.mouseItem);
             }
@@ -96,7 +92,7 @@ namespace TerraUI.Objects {
         /// <summary>
         /// The default right click event.
         /// </summary>
-        public override void DefaultRightClick() {
+        public override void OnRightClick() {
             if(Conditions(Main.mouseItem)) {
                 Swap(ref item, ref Main.mouseItem);
             }
@@ -149,7 +145,7 @@ namespace TerraUI.Objects {
         public override void Draw(SpriteBatch spriteBatch) {
             Rectangle = new Rectangle((int)RelativePosition.X, (int)RelativePosition.Y, (int)Size.X, (int)Size.Y);
 
-            if(DrawAsNormalItemSlot) {
+            if(DrawAsNormalSlot) {
                 ItemSlot.Draw(spriteBatch, ref item, (int)Context, RelativePosition);
             }
             else {
@@ -174,7 +170,7 @@ namespace TerraUI.Objects {
                 PostDrawItem(this, spriteBatch);
             }
             else {
-                if(HasTick() && !DrawAsNormalItemSlot) {
+                if(HasTick() && !DrawAsNormalSlot) {
                     DrawTick(spriteBatch);
                 }
             }
