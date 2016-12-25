@@ -147,7 +147,6 @@ namespace TerraUI.Objects {
         /// </summary>
         /// <param name="spriteBatch">drawing SpriteBatch</param>
         public override void Draw(SpriteBatch spriteBatch) {
-            Point mouse = new Point(Main.mouseX, Main.mouseY);
             Rectangle = new Rectangle((int)RelativePosition.X, (int)RelativePosition.Y, (int)Size.X, (int)Size.Y);
 
             if(DrawAsNormalItemSlot) {
