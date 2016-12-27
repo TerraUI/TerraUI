@@ -215,7 +215,6 @@ namespace TerraUI.Objects {
             Vector2 origin = rectangle.Size() / 2f;
             Vector2 position = new Rectangle(Rectangle.X, Rectangle.Y, (int)(Rectangle.Width * Scale(false)),
                 (int)(Rectangle.Height * Scale(false))).Center.ToVector2();
-            //Vector2 position = Rectangle.Center.ToVector2();
 
             spriteBatch.Draw(
                 texture2D,
