@@ -212,7 +212,7 @@ namespace TerraUI.Objects {
                 rectangle = texture2D.Frame(1, 1, 0, 0);
             }
 
-            Vector2 origin = texture2D.Size() / 2f * scale;
+            Vector2 origin = rectangle.Size() / 2f * scale;
             Vector2 position = Rectangle.TopLeft();
 
             spriteBatch.Draw(
