@@ -78,6 +78,7 @@ namespace TerraUI.Objects {
             DrawItem = drawItem;
             PostDrawItem = postDrawItem;
             DrawAsNormalSlot = drawAsNormalSlot;
+            ScaleToInventory = scaleToInventory;
         }
 
         /// <summary>
