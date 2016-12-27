@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.UI;
+using Terraria.UI.Chat;
 using TerraUI.Utilities;
 
 namespace TerraUI.Objects {
@@ -226,6 +227,20 @@ namespace TerraUI.Objects {
                 Scale(true),
                 SpriteEffects.None,
                 0f);
+
+            if(Item.stack > 1) {
+                ChatManager.DrawColorCodedStringWithShadow(
+                    spriteBatch,
+                    Main.fontItemStack,
+                    Item.stack.ToString(),
+                    RelativePosition + new Vector2(9f, 22f) * Scale(false),
+                    Color.White,
+                    0f,
+                    Vector2.Zero,
+                    new Vector2(Scale(true)),
+                    -1f,
+                    Scale(false));
+            }
         }
 
         /// <summary>
