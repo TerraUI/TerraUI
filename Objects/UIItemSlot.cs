@@ -192,7 +192,7 @@ namespace TerraUI.Objects {
                 Color.White,
                 0f,
                 Vector2.Zero,
-                (Size.X / defaultSize) * (ScaleToInventory ? Main.inventoryScale : 1f),
+                Scale(true),
                 SpriteEffects.None,
                 1f);
         }
@@ -204,7 +204,6 @@ namespace TerraUI.Objects {
         public void OnDrawItem(SpriteBatch spriteBatch) {
             Texture2D texture2D = Main.itemTexture[item.type];
             Rectangle rectangle;
-            float scale = (ScaleToInventory ? Main.inventoryScale : 1f);
 
             if(Main.itemAnimations[item.type] != null) {
                 rectangle = Main.itemAnimations[item.type].GetFrame(texture2D);
@@ -213,17 +212,19 @@ namespace TerraUI.Objects {
                 rectangle = texture2D.Frame(1, 1, 0, 0);
             }
 
-            Vector2 origin = rectangle.Size() / 2f * scale;
-            Vector2 position = Rectangle.TopLeft();
+            Vector2 origin = rectangle.Size() / 2f;
+            Vector2 position = new Rectangle(Rectangle.X, Rectangle.Y, (int)(Rectangle.Width * Scale(false)),
+                (int)(Rectangle.Height * Scale(false))).Center.ToVector2();
+            //Vector2 position = Rectangle.Center.ToVector2();
 
             spriteBatch.Draw(
                 texture2D,
-                position + (Rectangle.Size() / 2f) - (origin / 2f),
+                position,
                 new Rectangle?(rectangle),
                 Color.White,
                 0f,
                 origin,
-                scale,
+                Scale(true),
                 SpriteEffects.None,
                 0f);
         }
@@ -239,7 +240,7 @@ namespace TerraUI.Objects {
                 tickTexture = Main.inventoryTickOffTexture;
             }
 
-            tickRect = new Rectangle(Rectangle.Left + 34, Rectangle.Top - 2, tickTexture.Width, tickTexture.Height);
+            tickRect = new Rectangle(Rectangle.Right - 18, Rectangle.Top - 2, tickTexture.Width, tickTexture.Height);
             spriteBatch.Draw(tickTexture, tickRect, Color.White * 0.7f);
         }
 
@@ -255,6 +256,21 @@ namespace TerraUI.Objects {
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Gets the scale of the UIItemSlot.
+        /// </summary>
+        /// <param name="scaleForSlot">whether to also scale for the slot size</param>
+        /// <returns>scale</returns>
+        protected float Scale(bool scaleForSlot) {
+            float scale = (ScaleToInventory ? Main.inventoryScale : 1f);
+
+            if(scaleForSlot) {
+                scale *= (Size.X / defaultSize);
+            }
+
+            return scale;
         }
     }
 }
