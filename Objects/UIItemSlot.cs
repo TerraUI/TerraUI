@@ -157,7 +157,7 @@ namespace TerraUI.Objects {
                     OnDrawBackground(spriteBatch);
                 }
 
-                if(item.type > 0) {
+                if(Item.type > 0) {
                     if(DrawItem != null) {
                         DrawItem(this, spriteBatch);
                     }
@@ -202,11 +202,11 @@ namespace TerraUI.Objects {
         /// </summary>
         /// <param name="spriteBatch">drawing SpriteBatch</param>
         public void OnDrawItem(SpriteBatch spriteBatch) {
-            Texture2D texture2D = Main.itemTexture[item.type];
+            Texture2D texture2D = Main.itemTexture[Item.type];
             Rectangle rectangle;
 
-            if(Main.itemAnimations[item.type] != null) {
-                rectangle = Main.itemAnimations[item.type].GetFrame(texture2D);
+            if(Main.itemAnimations[Item.type] != null) {
+                rectangle = Main.itemAnimations[Item.type].GetFrame(texture2D);
             }
             else {
                 rectangle = texture2D.Frame(1, 1, 0, 0);
