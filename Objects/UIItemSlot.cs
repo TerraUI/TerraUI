@@ -192,7 +192,7 @@ namespace TerraUI.Objects {
                 Color.White,
                 0f,
                 Vector2.Zero,
-                (ScaleToInventory ? Main.inventoryScale : 1f),
+                (Size.X / defaultSize) * (ScaleToInventory ? Main.inventoryScale : 1f),
                 SpriteEffects.None,
                 1f);
         }
