@@ -247,7 +247,7 @@ namespace TerraUI.Objects {
         /// Checks if the slot has a context that needs a tick.
         /// </summary>
         /// <returns>whether the slot has a tick</returns>
-        protected bool HasTick() {
+        public bool HasTick() {
             if(Context == Contexts.EquipAccessory ||
                Context == Contexts.EquipLight ||
                Context == Contexts.EquipPet) {
@@ -262,7 +262,7 @@ namespace TerraUI.Objects {
         /// </summary>
         /// <param name="scaleForSlot">whether to also scale for the slot size</param>
         /// <returns>scale</returns>
-        protected float Scale(bool scaleForSlot) {
+        public float Scale(bool scaleForSlot) {
             float scale = (ScaleToInventory ? Main.inventoryScale : 1f);
 
             if(scaleForSlot) {
