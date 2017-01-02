@@ -26,7 +26,7 @@ namespace TerraUI.Utilities {
         /// <returns>Texture2D</returns>
         public static Texture2D GetTexture(string texture) {
             string tex = "";
-            string subdir = Subdirectory.Replace(@"\", "/");
+            string subdir = (string.IsNullOrEmpty(Subdirectory) ? "" : Subdirectory.Replace(@"\", "/"));
 
             if(!string.IsNullOrWhiteSpace(subdir)) {
                 tex += subdir;
