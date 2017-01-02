@@ -102,8 +102,12 @@ namespace TerraUI.Objects {
         /// The default left click event.
         /// </summary>
         public override void OnLeftClick() {
-            if(Item.stack > 0 || Conditions(Main.mouseItem)) {
+            if(Item.stack == 0 || Main.mouseItem.stack == 0 || ShouldSwap(Item, Main.mouseItem)) {
                 Swap(ref item, ref Main.mouseItem);
+            }
+            else if(Item.type == Main.mouseItem.type) {
+                Item.stack = UIUtils.Clamp(Item.stack + Main.mouseItem.stack, 1, Item.maxStack);
+                Main.mouseItem.SetDefaults();
             }
         }
 
@@ -111,29 +115,52 @@ namespace TerraUI.Objects {
         /// The default right click event.
         /// </summary>
         public override void OnRightClick() {
-            if(ShouldSwap(Item, Main.mouseItem)) {
-                Swap(ref item, ref Main.mouseItem);
-            }
-            else if(Partner != null &&
+            if(Partner != null &&
                     ShouldSwap(Item, Partner.Item) &&
                     Partner.ShouldSwap(Partner.Item, Item)) {
                 Swap(ref item, ref Partner.item);
             }
-            else {
-                if(Main.mouseItem.stack == 0) {
-                    Main.mouseItem = Item.Clone();
-                    Main.mouseItem.stack = 1;
-                    Item.stack--;
-                }
-                else if(Main.mouseItem.type == Item.type) {
-                    Main.mouseItem.stack++;
-                    Item.stack--;
-                }
+            else if(Item.stack > 0) {
+                MousePickup(ref item);
             }
         }
 
+        /// <summary>
+        /// Move an item to the mouse cursor.
+        /// </summary>
+        /// <param name="item">item to move</param>
+        private void MousePickup(ref Item item) {
+            bool grab = false;
+
+            if(Main.mouseItem.type == item.type) {
+                Main.mouseItem.stack++;
+                grab = true;
+            }
+            else if(Main.mouseItem.stack == 0) {
+                Main.mouseItem = item.Clone();
+                Main.mouseItem.stack = 1;
+                grab = true;
+            }
+
+            if(grab) {
+                item.stack--;
+                UIUtils.PlaySound(Sounds.Grab);
+                Recipe.FindRecipes();
+            }
+
+            if(item.stack == 0) {
+                item.SetDefaults();
+            }
+        }
+
+        /// <summary>
+        /// Whether to swap two items.
+        /// </summary>
+        /// <param name="oldItem">item in the slot</param>
+        /// <param name="newItem">item going into the slot</param>
+        /// <returns>whether to swap the items</returns>
         private bool ShouldSwap(Item oldItem, Item newItem) {
-            if(Conditions(newItem) && (oldItem.maxStack == 1 || newItem.maxStack == 1)) {
+            if(Conditions(newItem) && oldItem.type != newItem.type) {
                 return true;
             }
 
