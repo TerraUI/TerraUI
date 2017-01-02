@@ -111,12 +111,33 @@ namespace TerraUI.Objects {
         /// The default right click event.
         /// </summary>
         public override void OnRightClick() {
-            if(Conditions(Main.mouseItem)) {
+            if(ShouldSwap(Item, Main.mouseItem)) {
                 Swap(ref item, ref Main.mouseItem);
             }
-            else if(Partner != null && (Item.stack > 0 || Partner.Item.stack > 0)) {
+            else if(Partner != null &&
+                    ShouldSwap(Item, Partner.Item) &&
+                    Partner.ShouldSwap(Partner.Item, Item)) {
                 Swap(ref item, ref Partner.item);
             }
+            else {
+                if(Main.mouseItem.stack == 0) {
+                    Main.mouseItem = Item.Clone();
+                    Main.mouseItem.stack = 1;
+                    Item.stack--;
+                }
+                else if(Main.mouseItem.type == Item.type) {
+                    Main.mouseItem.stack++;
+                    Item.stack--;
+                }
+            }
+        }
+
+        private bool ShouldSwap(Item oldItem, Item newItem) {
+            if(Conditions(newItem) && (oldItem.maxStack == 1 || newItem.maxStack == 1)) {
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
