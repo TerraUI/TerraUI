@@ -9,8 +9,8 @@ using TerraUI.Utilities;
 namespace TerraUI.Objects {
     public class UIItemSlot : UIObject {
         protected Item item;
-        protected float backOpacity;
-        protected float itemOpacity;
+        protected float backOpacity = 1f;
+        protected float itemOpacity = 1f;
         protected const int defaultSize = 52;
         protected Rectangle tickRect;
 
