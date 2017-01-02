@@ -270,7 +270,7 @@ namespace TerraUI.Objects {
                     spriteBatch,
                     Main.fontItemStack,
                     Item.stack.ToString(),
-                    RelativePosition + new Vector2(9f, 22f) * Scale(false),
+                    RelativePosition + new Vector2(9f, 25f) * Scale(true),
                     Color.White,
                     0f,
                     Vector2.Zero,
