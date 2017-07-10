@@ -4,7 +4,7 @@ using ReLogic.Graphics;
 using TerraUI.Utilities;
 
 namespace TerraUI.Objects {
-    public class UIButton : UIBorderedObject {
+    public class UIButton : UIObjectBordered {
         /// <summary>
         /// The font used for the text on the button.
         /// </summary>

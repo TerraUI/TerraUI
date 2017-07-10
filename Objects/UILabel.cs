@@ -6,7 +6,7 @@ using ReLogic.Graphics;
 using TerraUI.Utilities;
 
 namespace TerraUI.Objects {
-    public class UILabel : UIBorderedObject {
+    public class UILabel : UIObjectBordered {
         /// <summary>
         /// Text displayed in the label.
         /// </summary>

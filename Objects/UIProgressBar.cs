@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using TerraUI.Utilities;
 
 namespace TerraUI.Objects {
-    public class UIProgressBar : UIBorderedObject {
+    public class UIProgressBar : UIObjectBordered {
         private uint value = 0;
         private uint maximum = 100;
         private uint minimum = 0;

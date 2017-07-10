@@ -2,7 +2,7 @@
 using TerraUI.Utilities;
 
 namespace TerraUI.Objects {
-    public class UIBorderedObject : UIObject {
+    public class UIObjectBordered : UIObject {
         /// <summary>
         /// The color of the border.
         /// </summary>
@@ -12,7 +12,7 @@ namespace TerraUI.Objects {
         /// </summary>
         public byte BorderWidth { get; set; }
 
-        public UIBorderedObject(Vector2 position, Vector2 size, byte borderWidth = 1, UIObject parent = null,
+        public UIObjectBordered(Vector2 position, Vector2 size, byte borderWidth = 1, UIObject parent = null,
             bool allowFocus = false, bool acceptsKeyboardInput = false)
             : base(position, size, parent, allowFocus, acceptsKeyboardInput) {
             BorderWidth = borderWidth;
