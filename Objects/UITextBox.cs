@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Text.RegularExpressions;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using Terraria;
@@ -47,6 +48,10 @@ namespace TerraUI.Objects {
                 }
             }
         }
+        /// <summary>
+        /// Regex string specifying characters to strip from the TextBox text.
+        /// </summary>
+        public string Strip { get; set; }
 
         /// <summary>
         /// Create a new UITextBox.
@@ -57,11 +62,12 @@ namespace TerraUI.Objects {
         /// <param name="text">displayed text</param>
         /// <param name="borderWidth">border width around box</param>
         /// <param name="parent">parent object</param>
-        public UITextBox(Vector2 position, Vector2 size, DynamicSpriteFont font, string text = "", byte borderWidth = 2,
-            UIObject parent = null) : base(position, size, borderWidth, parent, true, true) {
+        public UITextBox(Vector2 position, Vector2 size, DynamicSpriteFont font, string text = "", string strip = "",
+            byte borderWidth = 2, UIObject parent = null) : base(position, size, borderWidth, parent, true, true) {
             Text = text;
             Focused = false;
             Font = font;
+            Strip = strip;
             BorderColor = UIColors.TextBox.BorderColor;
             BackColor = UIColors.TextBox.BackColor;
             TextColor = UIColors.TextBox.TextColor;
@@ -124,7 +130,7 @@ namespace TerraUI.Objects {
                     string substring = Text.Substring(0, SelectionStart);
 
                     PlayerInput.WritingText = true;
-                    string input = Main.GetInputText(substring);
+                    string input = Regex.Replace(Main.GetInputText(substring), Strip, "");
 
                     // first, we check if the length of the string has changed, indicating
                     // text has been added or removed
