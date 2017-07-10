@@ -65,6 +65,7 @@
     <Compile Include="TerraUI\Objects\UILabel.cs" />
     <Compile Include="TerraUI\Objects\UINumberBox.cs" />
     <Compile Include="TerraUI\Objects\UIObject.cs" />
+    <Compile Include="TerraUI\Objects\UIObjectBordered.cs" />
     <Compile Include="TerraUI\Objects\UIProgressBar.cs" />
     <Compile Include="TerraUI\Objects\UITextBox.cs" />
     <Compile Include="TerraUI\Panels\UIPanel.cs" />
