@@ -60,6 +60,7 @@
     <Compile Include="TerraUI\Enums\Sounds.cs" />
     <Compile Include="TerraUI\ExampleWindow.cs" />
     <Compile Include="TerraUI\Objects\UIButton.cs" />
+    <Compile Include="TerraUI\Objects\UICheckBox.cs" />
     <Compile Include="TerraUI\Objects\UIItemSlot.cs" />
     <Compile Include="TerraUI\Objects\UILabel.cs" />
     <Compile Include="TerraUI\Objects\UIObject.cs" />
@@ -86,6 +87,7 @@
     <Content Include="TerraUI\Textures\CornerSolid.png" />
     <Content Include="TerraUI\Textures\Side.png" />
     <Content Include="TerraUI\Textures\SideSolid.png" />
+    <Content Include="TerraUI\Textures\Tick.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
