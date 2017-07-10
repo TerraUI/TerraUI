@@ -27,6 +27,10 @@ namespace TerraUI.Objects {
         /// </summary>
         public Color BorderColor { get; set; }
         /// <summary>
+        /// The width of the UITextBox's border.
+        /// </summary>
+        public int BorderWidth { get; set; }
+        /// <summary>
         /// The default background color.
         /// </summary>
         public Color BackColor { get; set; }
@@ -60,11 +64,12 @@ namespace TerraUI.Objects {
         /// <param name="font">text font</param>
         /// <param name="text">displayed text</param>
         /// <param name="parent">parent object</param>
-        public UITextBox(Vector2 position, Vector2 size, DynamicSpriteFont font, string text = "", UIObject parent = null)
-            : base(position, size, parent, true, true) {
+        public UITextBox(Vector2 position, Vector2 size, DynamicSpriteFont font, string text = "", int borderWidth = 2,
+            UIObject parent = null) : base(position, size, parent, true, true) {
             Text = text;
             Focused = false;
             Font = font;
+            BorderWidth = borderWidth;
             BorderColor = UIColors.TextBox.BorderColor;
             BackColor = UIColors.TextBox.BackColor;
             TextColor = UIColors.TextBox.TextColor;
@@ -167,7 +172,7 @@ namespace TerraUI.Objects {
         public override void Draw(SpriteBatch spriteBatch) {
             Rectangle = new Rectangle((int)RelativePosition.X, (int)RelativePosition.Y, (int)Size.X, (int)Size.Y);
 
-            BaseTextureDrawing.DrawRectangleBox(spriteBatch, BorderColor, BackColor, Rectangle, 2);
+            BaseTextureDrawing.DrawRectangleBox(spriteBatch, BorderColor, BackColor, Rectangle, BorderWidth);
 
             if(Focused) {
                 spriteBatch.DrawString(Font, Text.Insert(SelectionStart, "|"), RelativePosition + new Vector2(2), TextColor);
