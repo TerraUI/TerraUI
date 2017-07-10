@@ -35,7 +35,7 @@ namespace TerraUI.Objects {
         /// </summary>
         public int SelectionStart {
             get { return selectionStart; }
-            private set {
+            set {
                 if(value < 0) {
                     selectionStart = 0;
                 }
