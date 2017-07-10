@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Graphics;
 using Terraria;
 using TerraUI.Utilities;
 using Input = Microsoft.Xna.Framework.Input;
@@ -19,7 +20,7 @@ namespace TerraUI.Objects {
         /// <summary>
         /// The font used in the UITextBox.
         /// </summary>
-        public SpriteFont Font { get; set; }
+        public DynamicSpriteFont Font { get; set; }
         /// <summary>
         /// The default border color.
         /// </summary>
@@ -58,7 +59,7 @@ namespace TerraUI.Objects {
         /// <param name="font">text font</param>
         /// <param name="text">displayed text</param>
         /// <param name="parent">parent object</param>
-        public UITextBox(Vector2 position, Vector2 size, SpriteFont font, string text = "", UIObject parent = null)
+        public UITextBox(Vector2 position, Vector2 size, DynamicSpriteFont font, string text = "", UIObject parent = null)
             : base(position, size, parent, true, true) {
             Text = text;
             Focused = false;

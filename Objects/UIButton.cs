@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Graphics;
 using TerraUI.Utilities;
 
 namespace TerraUI.Objects {
@@ -7,7 +8,7 @@ namespace TerraUI.Objects {
         /// <summary>
         /// The font used for the text on the button.
         /// </summary>
-        public SpriteFont Font { get; set; }
+        public DynamicSpriteFont Font { get; set; }
         /// <summary>
         /// The text displayed on the button.
         /// </summary>
@@ -43,7 +44,7 @@ namespace TerraUI.Objects {
         /// <param name="borderWidth">width of button border</param>
         /// <param name="backTexture">texture used to draw back of button</param>
         /// <param name="parent">parent UIObject</param>
-        public UIButton(Vector2 position, Vector2 size, SpriteFont font, string text = "", byte borderWidth = 1,
+        public UIButton(Vector2 position, Vector2 size, DynamicSpriteFont font, string text = "", byte borderWidth = 1,
             Texture2D backTexture = null, UIObject parent = null) : base(position, size, parent, false) {
             Font = font;
             Text = text;
