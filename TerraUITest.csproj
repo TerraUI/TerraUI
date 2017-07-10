@@ -63,6 +63,7 @@
     <Compile Include="TerraUI\Objects\UICheckBox.cs" />
     <Compile Include="TerraUI\Objects\UIItemSlot.cs" />
     <Compile Include="TerraUI\Objects\UILabel.cs" />
+    <Compile Include="TerraUI\Objects\UINumberBox.cs" />
     <Compile Include="TerraUI\Objects\UIObject.cs" />
     <Compile Include="TerraUI\Objects\UIProgressBar.cs" />
     <Compile Include="TerraUI\Objects\UITextBox.cs" />
@@ -85,9 +86,11 @@
     <Content Include="TerraUI\Textures\Buttons\Integrate.png" />
     <Content Include="TerraUI\Textures\Corner.png" />
     <Content Include="TerraUI\Textures\CornerSolid.png" />
+    <Content Include="TerraUI\Textures\DownArrow.png" />
     <Content Include="TerraUI\Textures\Side.png" />
     <Content Include="TerraUI\Textures\SideSolid.png" />
     <Content Include="TerraUI\Textures\Tick.png" />
+    <Content Include="TerraUI\Textures\UpArrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

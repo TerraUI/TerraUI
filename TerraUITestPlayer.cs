@@ -13,6 +13,7 @@ namespace TerraUITest {
         UIButton btn;
         UIProgressBar bar;
         UICheckBox chk;
+        UINumberBox num;
 
         UIPanel pnl1;
 
@@ -21,7 +22,7 @@ namespace TerraUITest {
         }
 
         public override void Initialize() {
-            byte objects = 4;
+            byte objects = 5;
             int width = 300;
             int height = 22;
             int margin = 10;
@@ -34,6 +35,8 @@ namespace TerraUITest {
             bar = new UIProgressBar(new Vector2(x, y), new Vector2(width, height), parent: pnl1);
             y += height + margin;
             chk = new UICheckBox(new Vector2(x, y), width, 20, Main.fontItemStack, "Check this", parent: pnl1);
+            y += height + margin;
+            num = new UINumberBox(new Vector2(x, y), new Vector2(width, height), Main.fontItemStack, parent: pnl1);
             y += height + margin;
             btn = new UIButton(new Vector2(x, y), new Vector2(width, height), Main.fontItemStack, "Click Here", parent: pnl1);
 
