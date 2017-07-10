@@ -51,6 +51,7 @@ namespace TerraUITest {
 
             bar.Maximum = 100;
             bar.BarMargin = new Vector2(0, 5);
+            bar.StepAmount = 10;
 
             base.Initialize();
         }
@@ -96,6 +97,13 @@ namespace TerraUITest {
                 Main.NewText("Right clicked!");
                 return true;
             }
+            else if(e.Button == MouseButtons.Middle) {
+                bar.Step();
+
+                if(bar.Value >= bar.Maximum) {
+                    bar.Reset();
+                }
+            }
 
             return false;
         }
@@ -113,14 +121,6 @@ namespace TerraUITest {
         public void UpdateUI() {
             if(pnl1 != null) {
                 pnl1.Update();
-            }
-
-            if(bar != null) {
-                bar.Step();
-
-                if(bar.Value == bar.Maximum) {
-                    bar.Reset();
-                }
             }
 
             UIUtils.UpdateInput();
