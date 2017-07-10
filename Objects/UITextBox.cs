@@ -29,7 +29,7 @@ namespace TerraUI.Objects {
         /// <summary>
         /// The width of the UITextBox's border.
         /// </summary>
-        public int BorderWidth { get; set; }
+        public byte BorderWidth { get; set; }
         /// <summary>
         /// The default background color.
         /// </summary>
@@ -64,7 +64,7 @@ namespace TerraUI.Objects {
         /// <param name="font">text font</param>
         /// <param name="text">displayed text</param>
         /// <param name="parent">parent object</param>
-        public UITextBox(Vector2 position, Vector2 size, DynamicSpriteFont font, string text = "", int borderWidth = 2,
+        public UITextBox(Vector2 position, Vector2 size, DynamicSpriteFont font, string text = "", byte borderWidth = 2,
             UIObject parent = null) : base(position, size, parent, true, true) {
             Text = text;
             Focused = false;
