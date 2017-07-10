@@ -4,7 +4,7 @@ using ReLogic.Graphics;
 using TerraUI.Utilities;
 
 namespace TerraUI.Objects {
-    public class UIButton : UIObject {
+    public class UIButton : UIBorderedObject {
         /// <summary>
         /// The font used for the text on the button.
         /// </summary>
@@ -22,17 +22,9 @@ namespace TerraUI.Objects {
         /// </summary>
         public bool BackTextureReplaces { get; set; }
         /// <summary>
-        /// The width of the button's border.
-        /// </summary>
-        public byte BorderWidth { get; set; }
-        /// <summary>
         /// The normal background color.
         /// </summary>
         public Color BackColor { get; set; }
-        /// <summary>
-        /// The normal border color.
-        /// </summary>
-        public Color BorderColor { get; set; }
         /// <summary>
         /// The normal text color.
         /// </summary>
@@ -50,7 +42,7 @@ namespace TerraUI.Objects {
         /// <param name="parent">parent UIObject</param>
         public UIButton(Vector2 position, Vector2 size, DynamicSpriteFont font, string text = "", byte borderWidth = 1,
             Texture2D backTexture = null, bool backTextureReplaces = true, UIObject parent = null)
-            : base(position, size, parent, false) {
+            : base(position, size, borderWidth, parent, false) {
             Font = font;
             Text = text;
             BackTexture = backTexture;

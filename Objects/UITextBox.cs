@@ -7,7 +7,7 @@ using TerraUI.Utilities;
 using Input = Microsoft.Xna.Framework.Input;
 
 namespace TerraUI.Objects {
-    public class UITextBox : UIObject {
+    public class UITextBox : UIBorderedObject {
         private const int frameDelay = 11;
         private int selectionStart = 0;
         private int leftArrow = 0;
@@ -22,14 +22,6 @@ namespace TerraUI.Objects {
         /// The font used in the UITextBox.
         /// </summary>
         public DynamicSpriteFont Font { get; set; }
-        /// <summary>
-        /// The default border color.
-        /// </summary>
-        public Color BorderColor { get; set; }
-        /// <summary>
-        /// The width of the UITextBox's border.
-        /// </summary>
-        public byte BorderWidth { get; set; }
         /// <summary>
         /// The default background color.
         /// </summary>
@@ -63,13 +55,13 @@ namespace TerraUI.Objects {
         /// <param name="size">size of object in pixels</param>
         /// <param name="font">text font</param>
         /// <param name="text">displayed text</param>
+        /// <param name="borderWidth">border width around box</param>
         /// <param name="parent">parent object</param>
         public UITextBox(Vector2 position, Vector2 size, DynamicSpriteFont font, string text = "", byte borderWidth = 2,
-            UIObject parent = null) : base(position, size, parent, true, true) {
+            UIObject parent = null) : base(position, size, borderWidth, parent, true, true) {
             Text = text;
             Focused = false;
             Font = font;
-            BorderWidth = borderWidth;
             BorderColor = UIColors.TextBox.BorderColor;
             BackColor = UIColors.TextBox.BackColor;
             TextColor = UIColors.TextBox.TextColor;

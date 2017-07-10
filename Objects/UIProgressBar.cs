@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using TerraUI.Utilities;
 
 namespace TerraUI.Objects {
-    public class UIProgressBar : UIObject {
+    public class UIProgressBar : UIBorderedObject {
         private uint value = 0;
         private uint maximum = 100;
         private uint minimum = 0;
@@ -101,14 +101,6 @@ namespace TerraUI.Objects {
         /// </summary>
         public Color BarColor { get; set; }
         /// <summary>
-        /// The color of the border around the UIProgressBar.
-        /// </summary>
-        public Color BorderColor { get; set; }
-        /// <summary>
-        /// The width of the border around the UIProgressBar.
-        /// </summary>
-        public byte BorderWidth { get; set; }
-        /// <summary>
         /// The margin around the progress bar inside the UIProgressBar.
         /// </summary>
         public Vector2 BarMargin { get; set; }
@@ -123,7 +115,7 @@ namespace TerraUI.Objects {
         /// <param name="stepAmount">amount progress changes with each step</param>
         /// <param name="parent">parent UIObject</param>
         public UIProgressBar(Vector2 position, Vector2 size, uint minimum = 0, uint maximum = 100, uint stepAmount = 1,
-            UIObject parent = null) : base(position, size, parent, false) {
+            byte borderWidth = 1, UIObject parent = null) : base(position, size, borderWidth, parent, false) {
             Minimum = minimum;
             Maximum = maximum;
             StepAmount = stepAmount;

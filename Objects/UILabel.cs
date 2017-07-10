@@ -6,7 +6,7 @@ using ReLogic.Graphics;
 using TerraUI.Utilities;
 
 namespace TerraUI.Objects {
-    public class UILabel : UIObject {
+    public class UILabel : UIBorderedObject {
         /// <summary>
         /// Text displayed in the label.
         /// </summary>
@@ -15,14 +15,6 @@ namespace TerraUI.Objects {
         /// Color of the text.
         /// </summary>
         public Color TextColor { get; set; }
-        /// <summary>
-        /// Color of the border around the text.
-        /// </summary>
-        public Color BorderColor { get; set; }
-        /// <summary>
-        /// Whether to draw a border around the text.
-        /// </summary>
-        public bool DrawBorder { get; set; }
         /// <summary>
         /// Font used to draw the text.
         /// </summary>
@@ -39,13 +31,12 @@ namespace TerraUI.Objects {
         /// <param name="borderColor">border color for text</param>
         /// <param name="drawBorder">whether to draw text with border</param>
         /// <param name="parent">parent UIObject</param>
-        public UILabel(Vector2 position, Vector2 size, string text, DynamicSpriteFont font, bool drawBorder = true,
-            UIObject parent = null) : base(position, size, parent, false) {
+        public UILabel(Vector2 position, Vector2 size, string text, DynamicSpriteFont font, byte borderWidth = 0,
+            UIObject parent = null) : base(position, size, borderWidth, parent, false) {
             Text = text;
             Font = font;
             TextColor = UIColors.Label.TextColor;
             BorderColor = UIColors.Label.BorderColor;
-            DrawBorder = drawBorder;
         }
 
         /// <summary>
@@ -57,7 +48,7 @@ namespace TerraUI.Objects {
 
             string text = WrapText(Font, Text, Size.X);
 
-            if(DrawBorder) {
+            if(BorderWidth > 0) {
                 Terraria.Utils.DrawBorderStringFourWay(spriteBatch, Font, text, RelativePosition.X, RelativePosition.Y,
                     TextColor, BorderColor, Vector2.Zero, 1f);
             }
