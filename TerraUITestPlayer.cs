@@ -92,6 +92,10 @@ namespace TerraUITest {
                 Main.NewText("Clicked!");
                 return true;
             }
+            else if(e.Button == MouseButtons.Right) {
+                Main.NewText("Right clicked!");
+                return true;
+            }
 
             return false;
         }
