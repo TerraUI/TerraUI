@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using Terraria;
+using Terraria.GameInput;
 using TerraUI.Utilities;
 using Input = Microsoft.Xna.Framework.Input;
 
@@ -124,6 +125,8 @@ namespace TerraUI.Objects {
                 if(!skip) {
                     int oldLength = Text.Length;
                     string substring = Text.Substring(0, SelectionStart);
+
+                    PlayerInput.WritingText = true;
                     string input = Main.GetInputText(substring);
 
                     // first, we check if the length of the string has changed, indicating
