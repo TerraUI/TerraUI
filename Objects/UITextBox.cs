@@ -8,7 +8,7 @@ using Input = Microsoft.Xna.Framework.Input;
 
 namespace TerraUI.Objects {
     public class UITextBox : UIObject {
-        private const int frameDelay = 9;
+        private const int frameDelay = 11;
         private int selectionStart = 0;
         private int leftArrow = 0;
         private int rightArrow = 0;
