@@ -30,7 +30,7 @@ namespace TerraUITest {
             int x = 10;
 
             pnl1 = new UIPanel(new Vector2(500, 500), new Vector2(width + (x * 2), (objects * height) + ((objects + 1) * y + 30)));
-            tb = new UITextBox(new Vector2(x, y), new Vector2(width, height), Main.fontItemStack, "Test text", pnl1);
+            tb = new UITextBox(new Vector2(x, y), new Vector2(width, height), Main.fontItemStack, "Test text", parent: pnl1);
             y += height + margin;
             bar = new UIProgressBar(new Vector2(x, y), new Vector2(width, height), parent: pnl1);
             y += height + margin;
