@@ -45,7 +45,7 @@ namespace TerraUITest {
 
             tb.GotFocus += tb_GotFocus;
             tb.LostFocus += tb_LostFocus;
-
+            
             pnl1.MouseEnter += pnl1_MouseEnter;
             pnl1.MouseLeave += pnl1_MouseLeave;
 
@@ -89,7 +89,7 @@ namespace TerraUITest {
 
         private bool btn_Click(UIObject sender, MouseButtonEventArgs e) {
             if(e.Button == MouseButtons.Left) {
-                Main.NewText("Clicked!");
+                Main.NewText("You entered: " + tb.Text);
                 return true;
             }
             else if(e.Button == MouseButtons.Right) {
