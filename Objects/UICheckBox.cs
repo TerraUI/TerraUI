@@ -83,7 +83,6 @@ namespace TerraUI.Objects {
         /// <param name="defaultValue">default value of the check box</param>
         /// <param name="parent">parent UIObject</param>
         public UICheckBox(Vector2 position, int width, int boxHeight, DynamicSpriteFont font, string text = "", bool defaultValue = false,
-            //UIObject parent = null) : base(position, new Vector2(width, (boxHeight < MINIMUM_BOX_SIZE ? MINIMUM_BOX_SIZE : boxHeight)),
             UIObject parent = null) : base(position, new Vector2(width, boxHeight), parent, false, true) {
             Checked = defaultValue;
             Text = text;
