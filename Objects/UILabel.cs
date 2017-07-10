@@ -2,6 +2,7 @@
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Graphics;
 using TerraUI.Utilities;
 
 namespace TerraUI.Objects {
@@ -25,7 +26,7 @@ namespace TerraUI.Objects {
         /// <summary>
         /// Font used to draw the text.
         /// </summary>
-        public SpriteFont Font { get; set; }
+        public DynamicSpriteFont Font { get; set; }
 
         /// <summary>
         /// Create a new UILabel.
@@ -38,8 +39,8 @@ namespace TerraUI.Objects {
         /// <param name="borderColor">border color for text</param>
         /// <param name="drawBorder">whether to draw text with border</param>
         /// <param name="parent">parent UIObject</param>
-        public UILabel(Vector2 position, Vector2 size, string text, SpriteFont font, bool drawBorder = true, UIObject parent = null)
-            : base(position, size, parent, false) {
+        public UILabel(Vector2 position, Vector2 size, string text, DynamicSpriteFont font, bool drawBorder = true,
+            UIObject parent = null) : base(position, size, parent, false) {
             Text = text;
             Font = font;
             TextColor = UIColors.Label.TextColor;
@@ -75,7 +76,7 @@ namespace TerraUI.Objects {
         /// <param name="text">text to wrap</param>
         /// <param name="maxLineWidth">max line width in pixels</param>
         /// <returns>formatted text</returns>
-        public string WrapText(SpriteFont font, string text, float maxLineWidth) {
+        public string WrapText(DynamicSpriteFont font, string text, float maxLineWidth) {
             string[] words = text.Split(' ');
             StringBuilder builder = new StringBuilder();
             float lineWidth = 0f;
