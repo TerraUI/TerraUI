@@ -18,6 +18,10 @@ namespace TerraUI.Objects {
         /// </summary>
         public Texture2D BackTexture { get; set; }
         /// <summary>
+        /// Whether to draw the BackTexture over the background or replace the background.
+        /// </summary>
+        public bool BackTextureReplaces { get; set; }
+        /// <summary>
         /// The width of the button's border.
         /// </summary>
         public byte BorderWidth { get; set; }
@@ -45,11 +49,13 @@ namespace TerraUI.Objects {
         /// <param name="backTexture">texture used to draw back of button</param>
         /// <param name="parent">parent UIObject</param>
         public UIButton(Vector2 position, Vector2 size, DynamicSpriteFont font, string text = "", byte borderWidth = 1,
-            Texture2D backTexture = null, UIObject parent = null) : base(position, size, parent, false) {
+            Texture2D backTexture = null, bool backTextureReplaces = true, UIObject parent = null)
+            : base(position, size, parent, false) {
             Font = font;
             Text = text;
             BackTexture = backTexture;
             BorderWidth = borderWidth;
+            BackTextureReplaces = backTextureReplaces;
 
             BackColor = UIColors.DarkBackColorTransparent;
             BorderColor = UIColors.Button.BorderColor;
@@ -63,10 +69,11 @@ namespace TerraUI.Objects {
         public override void Draw(SpriteBatch spriteBatch) {
             Rectangle = new Rectangle((int)RelativePosition.X, (int)RelativePosition.Y, (int)Size.X, (int)Size.Y);
 
-            if(BackTexture == null) {
+            if(BackTexture == null || !BackTextureReplaces) {
                 BaseTextureDrawing.DrawRectangleBox(spriteBatch, BorderColor, BackColor, Rectangle, BorderWidth);
             }
-            else {
+
+            if(BackTexture != null) {
                 spriteBatch.Draw(BackTexture, Rectangle, Color.White);
             }
 
