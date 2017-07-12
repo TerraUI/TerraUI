@@ -65,5 +65,29 @@ namespace TerraUI.Utilities {
 
             return false;
         }
+
+        /// <summary>
+        /// Check if shift is currently pressed.
+        /// </summary>
+        /// <returns>whether shift is pressed</returns>
+        public static bool Shift() {
+            return (state.IsKeyDown(Keys.LeftShift) || state.IsKeyDown(Keys.RightShift));
+        }
+
+        /// <summary>
+        /// Check if control is currently pressed.
+        /// </summary>
+        /// <returns>whether control is pressed</returns>
+        public static bool Control() {
+            return (state.IsKeyDown(Keys.LeftControl) || state.IsKeyDown(Keys.RightControl));
+        }
+
+        /// <summary>
+        /// Check if alt is currently pressed.
+        /// </summary>
+        /// <returns>whether alt is pressed</returns>
+        public static bool Alt() {
+            return (state.IsKeyDown(Keys.LeftAlt) || state.IsKeyDown(Keys.RightAlt));
+        }
     }
 }
