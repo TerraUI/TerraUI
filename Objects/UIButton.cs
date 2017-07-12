@@ -65,7 +65,7 @@ namespace TerraUI.Objects {
         /// Fires when the mouse leaves the UIButton.
         /// </summary>
         public override void OnMouseLeave() {
-            BackColor = UIColors.BackColorTransparent;
+            BackColor = UIColors.DarkBackColorTransparent;
         }
 
         /// <summary>
