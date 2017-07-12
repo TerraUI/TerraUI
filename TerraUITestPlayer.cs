@@ -106,6 +106,7 @@ namespace TerraUITest {
                 else {
                     Main.NewText("You entered: " + tb.Text);
                 }
+
                 return true;
             }
             else if(e.Button == MouseButtons.Right) {
@@ -118,6 +119,8 @@ namespace TerraUITest {
                 if(bar.Value >= bar.Maximum) {
                     bar.Reset();
                 }
+
+                return true;
             }
 
             return false;
