@@ -88,10 +88,10 @@ namespace TerraUITest {
 
         private bool btn_Click(UIObject sender, MouseButtonEventArgs e) {
             if(e.Button == MouseButtons.Left) {
-                if(KeyboardUtils.Shift()) {
+                if(KeyboardUtils.Shift) {
                     Main.NewText("CheckBox is " + (chk.Checked ? "checked" : "not checked"));
                 }
-                else if(KeyboardUtils.Control()) {
+                else if(KeyboardUtils.Control) {
                     Main.NewText("NumberBox value is " + num.Value);
                 }
                 else {
