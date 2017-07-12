@@ -14,7 +14,12 @@ namespace TerraUI.Objects {
         private int leftArrow = 0;
         private int rightArrow = 0;
         private int delete = 0;
+        private string text = string.Empty;
 
+        /// <summary>
+        /// Fires when the text value is changed.
+        /// </summary>
+        public event ValueChangedEventHandler<string> TextChanged;
         /// <summary>
         /// The text displayed in the UITextBox.
         /// </summary>
@@ -139,7 +144,7 @@ namespace TerraUI.Objects {
                         // in a temporary variable
                         string newText = Text.Remove(0, SelectionStart).Insert(0, input);
 
-                        // now if the text is smaller than previously or if not, the string is
+                        // now if the text is smaller than previously or, if not, the string is
                         // an appropriate size,
                         if(newText.Length < Text.Length || Font.MeasureString(newText).X < Size.X - 12) {
                             // we set the old text to the new text
@@ -162,7 +167,7 @@ namespace TerraUI.Objects {
 
             base.Update();
         }
-
+        
         /// <summary>
         /// Draw the UITextBox.
         /// </summary>
