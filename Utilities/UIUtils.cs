@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Terraria;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using TerraUI.Objects;
 
@@ -149,25 +150,25 @@ namespace TerraUI.Utilities {
         public static string GetHoverText(Contexts context) {
             switch(context) {
                 case Contexts.EquipAccessory:
-                    return Lang.inter[9].Value;
+                    return Language.GetTextValue("LegacyInterface.9");
                 case Contexts.EquipAccessoryVanity:
-                    return Lang.inter[11].Value + " " + Lang.inter[9].Value;
+                    return Language.GetTextValue("LegacyInterface.11") + " " + Language.GetTextValue("LegacyInterface.9");
                 case Contexts.EquipDye:
-                    return Lang.inter[57].Value;
+                    return Language.GetTextValue("LegacyInterface.57");
                 case Contexts.EquipGrapple:
-                    return Lang.inter[90].Value;
+                    return Language.GetTextValue("LegacyInterface.90");
                 case Contexts.EquipLight:
-                    return Lang.inter[94].Value;
+                    return Language.GetTextValue("LegacyInterface.94");
                 case Contexts.EquipMinecart:
-                    return Lang.inter[93].Value;
+                    return Language.GetTextValue("LegacyInterface.93");
                 case Contexts.EquipMount:
-                    return Lang.inter[91].Value;
+                    return Language.GetTextValue("LegacyInterface.91");
                 case Contexts.EquipPet:
-                    return Lang.inter[92].Value;
+                    return Language.GetTextValue("LegacyInterface.92");
                 case Contexts.InventoryAmmo:
-                    return Lang.inter[27].Value;
+                    return Language.GetTextValue("LegacyInterface.27");
                 case Contexts.InventoryCoin:
-                    return Lang.inter[26].Value;
+                    return Language.GetTextValue("LegacyInterface.26");
             }
 
             return string.Empty;
