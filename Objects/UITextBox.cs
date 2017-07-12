@@ -23,7 +23,23 @@ namespace TerraUI.Objects {
         /// <summary>
         /// The text displayed in the UITextBox.
         /// </summary>
-        public string Text { get; set; }
+        public string Text {
+            get { return text; }
+            set {
+                string oldText = text;
+
+                if(!string.IsNullOrEmpty(Strip)) {
+                    text = Regex.Replace(value, Strip, "");
+                }
+                else {
+                    text = value;
+                }
+
+                if(!text.Equals(oldText) && TextChanged != null) {
+                    TextChanged(this, new ValueChangedEventArgs<string>(oldText, text));
+                }
+            }
+        }
         /// <summary>
         /// The font used in the UITextBox.
         /// </summary>
