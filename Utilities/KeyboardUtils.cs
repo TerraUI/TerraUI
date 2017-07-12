@@ -11,12 +11,29 @@ namespace TerraUI.Utilities {
         public static KeyboardState State {
             get { return state; }
         }
-
         /// <summary>
         /// The keyboard state the last time Update() was called.
         /// </summary>
         public static KeyboardState LastState {
             get { return lastState; }
+        }
+        /// <summary>
+        /// Whether the shift key is pressed.
+        /// </summary>
+        public static bool Shift {
+            get { return (state.IsKeyDown(Keys.LeftShift) || state.IsKeyDown(Keys.RightShift)); }
+        }
+        /// <summary>
+        /// Whether the control key is pressed.
+        /// </summary>
+        public static bool Control {
+            get { return (state.IsKeyDown(Keys.LeftControl) || state.IsKeyDown(Keys.RightControl)); }
+        }
+        /// <summary>
+        /// Whether the alt key is pressed.
+        /// </summary>
+        public static bool Alt {
+            get { return (state.IsKeyDown(Keys.LeftAlt) || state.IsKeyDown(Keys.RightAlt)); }
         }
 
         /// <summary>
@@ -64,30 +81,6 @@ namespace TerraUI.Utilities {
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Check if shift is currently pressed.
-        /// </summary>
-        /// <returns>whether shift is pressed</returns>
-        public static bool Shift() {
-            return (state.IsKeyDown(Keys.LeftShift) || state.IsKeyDown(Keys.RightShift));
-        }
-
-        /// <summary>
-        /// Check if control is currently pressed.
-        /// </summary>
-        /// <returns>whether control is pressed</returns>
-        public static bool Control() {
-            return (state.IsKeyDown(Keys.LeftControl) || state.IsKeyDown(Keys.RightControl));
-        }
-
-        /// <summary>
-        /// Check if alt is currently pressed.
-        /// </summary>
-        /// <returns>whether alt is pressed</returns>
-        public static bool Alt() {
-            return (state.IsKeyDown(Keys.LeftAlt) || state.IsKeyDown(Keys.RightAlt));
         }
     }
 }
