@@ -10,14 +10,13 @@ using TerraUI.Utilities;
 
 namespace TerraUITest {
     public class TerraUITestPlayer : ModPlayer {
+        UIPanel pnl1;
         UITextBox tb;
         UIButton btn;
         UIProgressBar bar;
         UICheckBox chk;
         UINumberBox num;
-
-        UIPanel pnl1;
-
+        
         public override bool Autoload(ref string name) {
             return true;
         }
@@ -31,6 +30,8 @@ namespace TerraUITest {
             int x = 10;
 
             pnl1 = new UIPanel(new Vector2(500, 500), new Vector2(width + (x * 2), (objects * height) + ((objects + 1) * y + 30)));
+            
+            y += height + margin;
             tb = new UITextBox(new Vector2(x, y), new Vector2(width, height), Main.fontItemStack, "Test text", parent: pnl1);
             y += height + margin;
             bar = new UIProgressBar(new Vector2(x, y), new Vector2(width, height), parent: pnl1);
@@ -40,7 +41,7 @@ namespace TerraUITest {
             num = new UINumberBox(new Vector2(x, y), new Vector2(width, height), Main.fontItemStack, parent: pnl1);
             y += height + margin;
             btn = new UIButton(new Vector2(x, y), new Vector2(width, height), Main.fontItemStack, "Click Here", parent: pnl1);
-
+            
             tb.GotFocus += tb_GotFocus;
             tb.LostFocus += tb_LostFocus;
             
@@ -55,8 +56,6 @@ namespace TerraUITest {
             chk.TickColor = Color.Crimson;
 
             btn.Click += btn_Click;
-            btn.MouseEnter += btn_MouseEnter;
-            btn.MouseLeave += btn_MouseLeave;
             btn.MouseDown += btn_MouseDown;
             btn.MouseUp += btn_MouseUp;
 
@@ -85,14 +84,6 @@ namespace TerraUITest {
 
         private void btn_MouseDown(UIObject sender, MouseButtonEventArgs e) {
             ((UIButton)sender).BackColor = UIColors.DarkBackColor;
-        }
-
-        private void btn_MouseLeave(UIObject sender, MouseEventArgs e) {
-            ((UIButton)sender).BackColor = UIColors.BackColor;
-        }
-
-        private void btn_MouseEnter(UIObject sender, MouseEventArgs e) {
-            ((UIButton)sender).BackColor = UIColors.LightBackColor;
         }
 
         private bool btn_Click(UIObject sender, MouseButtonEventArgs e) {
