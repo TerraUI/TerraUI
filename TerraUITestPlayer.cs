@@ -95,16 +95,12 @@ namespace TerraUITest {
                     Main.NewText("NumberBox value is " + num.Value);
                 }
                 else {
-                    Main.NewText("You entered: " + tb.Text);
+                    Main.NewText("You entered " + tb.Text);
                 }
 
                 return true;
             }
             else if(e.Button == MouseButtons.Right) {
-                Main.NewText("Right clicked!");
-                return true;
-            }
-            else if(e.Button == MouseButtons.Middle) {
                 bar.Step();
 
                 if(bar.Value >= bar.Maximum) {
