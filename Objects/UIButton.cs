@@ -55,6 +55,20 @@ namespace TerraUI.Objects {
         }
 
         /// <summary>
+        /// Fires when the mouse enters the UIButton.
+        /// </summary>
+        public override void OnMouseEnter() {
+            BackColor = UIColors.LightBackColorTransparent;
+        }
+
+        /// <summary>
+        /// Fires when the mouse leaves the UIButton.
+        /// </summary>
+        public override void OnMouseLeave() {
+            BackColor = UIColors.BackColorTransparent;
+        }
+
+        /// <summary>
         /// Draw the UIButton.
         /// </summary>
         /// <param name="spriteBatch">drawing SpriteBatch</param>
