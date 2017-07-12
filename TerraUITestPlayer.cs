@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Terraria;
 using Terraria.ModLoader;
 using TerraUI;
@@ -96,8 +97,11 @@ namespace TerraUITest {
 
         private bool btn_Click(UIObject sender, MouseButtonEventArgs e) {
             if(e.Button == MouseButtons.Left) {
-                if(KeyboardUtils.State.PressingShift()) {
+                if(KeyboardUtils.Shift()) {
                     Main.NewText("CheckBox is " + (chk.Checked ? "checked" : "not checked"));
+                }
+                else if(KeyboardUtils.Control()) {
+                    Main.NewText("NumberBox value is " + num.Value);
                 }
                 else {
                     Main.NewText("You entered: " + tb.Text);
