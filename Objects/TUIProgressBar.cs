@@ -4,11 +4,10 @@ using Terraria.UI;
 using TerraUI.Utils;
 
 namespace TerraUI.Objects {
-    public class TUIProgressBar : TUIObject {
+    public class TUIProgressBar : TUIBorderedObject {
         private float _target = 100;
         private float _value = 0;
         private bool _callFinished = true;
-        private byte _borderWidth = 1;
 
         /// <summary>
         /// Fires when the value of the UIProgressBar is equal to the maximum value.
@@ -67,24 +66,6 @@ namespace TerraUI.Objects {
         /// The margin around the progress bar inside the UIProgressBar.
         /// </summary>
         public Padding BarMargin { get; set; }
-        /// <summary>
-        /// The color of the border.
-        /// </summary>
-        public Color BorderColor { get; set; }
-        /// <summary>
-        /// The width of the border.
-        /// </summary>
-        public byte BorderWidth {
-            get { return _borderWidth; }
-            set {
-                if(value < 0) {
-                    _borderWidth = 0;
-                }
-                else {
-                    _borderWidth = value;
-                }
-            }
-        }
 
         /// <summary>
         /// Create a new UIProgressBar.
@@ -92,7 +73,7 @@ namespace TerraUI.Objects {
         /// <param name="location">location of the object in pixels</param>
         /// <param name="size">size of the object in pixels</param>
         /// <param name="parent">parent UIObject</param>
-        public TUIProgressBar(StylePoint location = default(StylePoint), StylePoint size = default(StylePoint)) : base(location, size) {
+        public TUIProgressBar(StylePoint location, StylePoint size) : base(location, size) {
             BackColor = TUIColors.ProgressBar.BackColor;
             BorderColor = TUIColors.ProgressBar.BorderColor;
             BarColor = TUIColors.ProgressBar.BarColor;
@@ -134,10 +115,10 @@ namespace TerraUI.Objects {
         protected override void DrawSelf(SpriteBatch spriteBatch) {
             CalculatedStyle dim = GetDimensions();
             Rectangle rect = new Rectangle(
-                    (int)(dim.X + BarMargin.Left + _borderWidth),
-                    (int)(dim.Y + BarMargin.Top + _borderWidth),
-                    (int)((dim.Width * Percent) - BarMargin.Left - BarMargin.Right - (_borderWidth * 2)),
-                    (int)(dim.Height - BarMargin.Top - BarMargin.Bottom - (_borderWidth * 2)));
+                    (int)(dim.X + BarMargin.Left + BorderWidth),
+                    (int)(dim.Y + BarMargin.Top + BorderWidth),
+                    (int)((dim.Width * Percent) - BarMargin.Left - BarMargin.Right - (BorderWidth * 2)),
+                    (int)(dim.Height - BarMargin.Top - BarMargin.Bottom - (BorderWidth * 2)));
 
             TDrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BackColor, GetDimensions().ToRectangle(), BorderWidth);
             TDrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BarColor, rect, 0);
