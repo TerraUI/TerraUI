@@ -1,9 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using Terraria;
-using Terraria.UI;
-using TerraUI.Utils;
+﻿using Terraria.UI;
 
 namespace TerraUI.Objects {
     public class TUIObject : UIElement {
@@ -122,7 +117,7 @@ namespace TerraUI.Objects {
                 MarginRight = value.Right;
             }
         }
-        
+
         /// <summary>
         /// Create a new object.
         /// </summary>
@@ -132,7 +127,7 @@ namespace TerraUI.Objects {
             Location = location;
             Size = size;
         }
-        
+
         /// <summary>
         /// Call the OnMiddleClick event.
         /// </summary>
@@ -143,7 +138,7 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if(Parent.GetType() == typeof(TUIObject)) {
+                if((Parent as TUIObject) != null) {
                     ((TUIObject)Parent).MiddleClick(evt);
                 }
                 else {
@@ -151,7 +146,7 @@ namespace TerraUI.Objects {
                 }
             }
         }
-        
+
         /// <summary>
         /// Call the OnMiddleDoubleClick event.
         /// </summary>
@@ -162,7 +157,7 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if(Parent.GetType() == typeof(TUIObject)) {
+                if((Parent as TUIObject) != null) {
                     ((TUIObject)Parent).MiddleDoubleClick(evt);
                 }
                 else {
@@ -181,7 +176,7 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if(Parent.GetType() == typeof(TUIObject)) {
+                if((Parent as TUIObject) != null) {
                     ((TUIObject)Parent).MiddleMouseUp(evt);
                 }
                 else {
@@ -189,7 +184,7 @@ namespace TerraUI.Objects {
                 }
             }
         }
-        
+
         /// <summary>
         /// Call the OnMiddleMouseDown event.
         /// </summary>
@@ -200,7 +195,7 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if(Parent.GetType() == typeof(TUIObject)) {
+                if((Parent as TUIObject) != null) {
                     ((TUIObject)Parent).MiddleMouseDown(evt);
                 }
                 else {
@@ -219,7 +214,7 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if(Parent.GetType() == typeof(TUIObject)) {
+                if((Parent as TUIObject) != null) {
                     ((TUIObject)Parent).XButton1Click(evt);
                 }
                 else {
@@ -238,7 +233,7 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if(Parent.GetType() == typeof(TUIObject)) {
+                if((Parent as TUIObject) != null) {
                     ((TUIObject)Parent).XButton1DoubleClick(evt);
                 }
                 else {
@@ -257,7 +252,7 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if(Parent.GetType() == typeof(TUIObject)) {
+                if((Parent as TUIObject) != null) {
                     ((TUIObject)Parent).XButton1MouseUp(evt);
                 }
                 else {
@@ -276,7 +271,7 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if(Parent.GetType() == typeof(TUIObject)) {
+                if((Parent as TUIObject) != null) {
                     ((TUIObject)Parent).XButton1MouseDown(evt);
                 }
                 else {
@@ -295,7 +290,7 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if(Parent.GetType() == typeof(TUIObject)) {
+                if((Parent as TUIObject) != null) {
                     ((TUIObject)Parent).XButton2Click(evt);
                 }
                 else {
@@ -314,7 +309,7 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if(Parent.GetType() == typeof(TUIObject)) {
+                if((Parent as TUIObject) != null) {
                     ((TUIObject)Parent).XButton2DoubleClick(evt);
                 }
                 else {
@@ -322,7 +317,7 @@ namespace TerraUI.Objects {
                 }
             }
         }
-        
+
         /// <summary>
         /// Call the OnXButton2MouseUp event.
         /// </summary>
@@ -333,7 +328,7 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if(Parent.GetType() == typeof(TUIObject)) {
+                if((Parent as TUIObject) != null) {
                     ((TUIObject)Parent).XButton2MouseUp(evt);
                 }
                 else {
@@ -352,7 +347,7 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if(Parent.GetType() == typeof(TUIObject)) {
+                if((Parent as TUIObject) != null) {
                     ((TUIObject)Parent).XButton2MouseDown(evt);
                 }
                 else {
