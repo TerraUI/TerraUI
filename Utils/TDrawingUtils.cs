@@ -8,8 +8,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.UI;
 
-namespace TerraUI.Utilities {
-    public class DrawingUtils {
+namespace TerraUI.Utils {
+    public class TDrawingUtils {
         public static void DrawRectangleBox(SpriteBatch spriteBatch, Color borderColour, Color backColour, Rectangle rect,
             int borderWidth) {
             Texture2D texture = Main.magicPixel;

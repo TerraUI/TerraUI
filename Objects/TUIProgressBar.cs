@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.UI;
-using TerraUI.Utilities;
+using TerraUI.Utils;
 
 namespace TerraUI.Objects {
-    public class UIProgressBar : UIObject {
+    public class TUIProgressBar : TUIObject {
         private float _target = 100;
         private float _value = 0;
         private bool _callFinished = true;
@@ -92,10 +92,10 @@ namespace TerraUI.Objects {
         /// <param name="location">location of the object in pixels</param>
         /// <param name="size">size of the object in pixels</param>
         /// <param name="parent">parent UIObject</param>
-        public UIProgressBar(StylePoint location = default(StylePoint), StylePoint size = default(StylePoint)) : base(location, size) {
-            BackColor = UIColors.ProgressBar.BackColor;
-            BorderColor = UIColors.ProgressBar.BorderColor;
-            BarColor = UIColors.ProgressBar.BarColor;
+        public TUIProgressBar(StylePoint location = default(StylePoint), StylePoint size = default(StylePoint)) : base(location, size) {
+            BackColor = TUIColors.ProgressBar.BackColor;
+            BorderColor = TUIColors.ProgressBar.BorderColor;
+            BarColor = TUIColors.ProgressBar.BarColor;
             BorderWidth = 1;
             BarMargin = default(Padding);
         }
@@ -139,8 +139,8 @@ namespace TerraUI.Objects {
                     (int)((dim.Width * Percent) - BarMargin.Left - BarMargin.Right - (_borderWidth * 2)),
                     (int)(dim.Height - BarMargin.Top - BarMargin.Bottom - (_borderWidth * 2)));
 
-            DrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BackColor, GetDimensions().ToRectangle(), BorderWidth);
-            DrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BarColor, rect, 0);
+            TDrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BackColor, GetDimensions().ToRectangle(), BorderWidth);
+            TDrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BarColor, rect, 0);
         }
     }
 }

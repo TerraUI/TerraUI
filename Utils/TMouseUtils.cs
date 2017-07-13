@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Terraria;
 
-namespace TerraUI.Utilities {
-    public static class MouseUtils {
+namespace TerraUI.Utils {
+    public static class TMouseUtils {
         private static MouseState lastState;
         private static MouseState state;
         private static int[] framesHeld = { 0, 0, 0, 0, 0 };
@@ -62,8 +62,8 @@ namespace TerraUI.Utilities {
         /// <param name="mouseButton">button to check</param>
         /// <returns>whether button was just pressed</returns>
         public static bool JustPressed(MouseButtons mouseButton) {
-            if(UIUtils.GetButtonState(mouseButton, lastState) == ButtonState.Released &&
-               UIUtils.GetButtonState(mouseButton, state) == ButtonState.Pressed) {
+            if(TUIUtils.GetButtonState(mouseButton, lastState) == ButtonState.Released &&
+               TUIUtils.GetButtonState(mouseButton, state) == ButtonState.Pressed) {
                 return true;
             }
 
@@ -76,8 +76,8 @@ namespace TerraUI.Utilities {
         /// <param name="mouseButton">button to check</param>
         /// <returns>whether button was just released</returns>
         public static bool JustReleased(MouseButtons mouseButton) {
-            if(UIUtils.GetButtonState(mouseButton, lastState) == ButtonState.Pressed &&
-               UIUtils.GetButtonState(mouseButton, state) == ButtonState.Released) {
+            if(TUIUtils.GetButtonState(mouseButton, lastState) == ButtonState.Pressed &&
+               TUIUtils.GetButtonState(mouseButton, state) == ButtonState.Released) {
                 return true;
             }
 
@@ -91,8 +91,8 @@ namespace TerraUI.Utilities {
         /// <param name="frames">how many frames the button must be held down before returning true</param>
         /// <returns>whether button is held down</returns>
         public static bool HeldDown(MouseButtons mouseButton) {
-            if(UIUtils.GetButtonState(mouseButton, lastState) == ButtonState.Pressed &&
-               UIUtils.GetButtonState(mouseButton, state) == ButtonState.Pressed &&
+            if(TUIUtils.GetButtonState(mouseButton, lastState) == ButtonState.Pressed &&
+               TUIUtils.GetButtonState(mouseButton, state) == ButtonState.Pressed &&
                framesHeld[(int)mouseButton] > 1) {
                 return true;
             }

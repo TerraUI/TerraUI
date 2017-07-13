@@ -5,8 +5,8 @@ using Terraria;
 using Terraria.Localization;
 using TerraUI.Objects;
 
-namespace TerraUI.Utilities {
-    public static class UIUtils {
+namespace TerraUI.Utils {
+    public static class TUIUtils {
         /// <summary>
         /// Play a game sound.
         /// </summary>
@@ -24,8 +24,8 @@ namespace TerraUI.Utilities {
         /// Call after all UIObjects have been updated.
         /// </summary>
         public static void UpdateInput() {
-            MouseUtils.UpdateState();
-            KeyboardUtils.UpdateState();
+            TMouseUtils.UpdateState();
+            TKeyboardUtils.UpdateState();
         }
 
         /// <summary>

@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TerraUI.Objects;
 
-namespace TerraUI.Utilities {
-    public delegate void UIEventHandler(UIObject sender);
-    public delegate void ValueChangedEventHandler<T>(UIObject sender, ValueChangedEventArgs<T> e);
+namespace TerraUI.Utils {
+    public delegate void UIEventHandler(TUIObject sender);
+    public delegate void ValueChangedEventHandler<T>(TUIObject sender, ValueChangedEventArgs<T> e);
 
     public class ValueChangedEventArgs<T> {
         public T PreviousValue { get; private set; }

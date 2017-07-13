@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Input;
 
-namespace TerraUI.Utilities {
-    public static class KeyboardUtils {
+namespace TerraUI.Utils {
+    public static class TKeyboardUtils {
         private static KeyboardState lastState;
         private static KeyboardState state;
 

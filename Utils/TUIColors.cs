@@ -1,9 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace TerraUI.Utilities {
-    public static class UIColors {
+namespace TerraUI.Utils {
+    public static class TUIColors {
+        public static class TextBox {
+            public static readonly Color BorderColor = Color.DarkGray;
+            public static readonly Color BackColor = Color.White;
+            public static readonly Color TextColor = Color.Black;
+        }
+
         public static class ProgressBar {
-            public static readonly Color BackColor = UIColors.BackColor;
+            public static readonly Color BackColor = TUIColors.BackColor;
             public static readonly Color BarColor = Color.White;
             public static readonly Color BorderColor = Color.White;
         }
