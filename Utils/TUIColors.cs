@@ -8,6 +8,12 @@ namespace TerraUI.Utils {
             public static readonly Color TextColor = Color.Black;
         }
 
+        public static class Button {
+            public static readonly Color BorderColor = Color.Black;
+            public static readonly Color TextColor = Color.White;
+            public static readonly Color BackColor = DarkBackColorTransparent;
+        }
+
         public static class ProgressBar {
             public static readonly Color BackColor = TUIColors.BackColor;
             public static readonly Color BarColor = Color.White;
