@@ -1,54 +1,34 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria.UI;
 using TerraUI.Utilities;
 
 namespace TerraUI.Objects {
-    public class UIProgressBar : UIObjectBordered {
-        private uint value = 0;
-        private uint maximum = 100;
-        private uint minimum = 0;
-        private uint stepAmount = 1;
-        private bool callFinished = true;
+    public class UIProgressBar : UIObject {
+        private float _target = 100;
+        private float _value = 0;
+        private bool _callFinished = true;
+        private byte _borderWidth = 1;
 
-        /// <summary>
-        /// Fires when the value of the UIProgressBar is changed.
-        /// </summary>
-        public event ValueChangedEventHandler<uint> ProgressChanged;
         /// <summary>
         /// Fires when the value of the UIProgressBar is equal to the maximum value.
         /// </summary>
-        public event UIEventHandler ProgressFinished;
+        public event UIEventHandler OnProgressFinished;
         /// <summary>
-        /// The maximum value of the UIProgressBar.
+        /// The target value of the UIProgressBar.
         /// </summary>
-        public uint Maximum {
-            get { return maximum; }
+        public float Target {
+            get { return _target; }
             set {
-                if(value < 0) {
-                    maximum = 1;
-                }
-                else if(value <= Minimum) {
-                    maximum = Minimum + 1;
+                if(value < 1) {
+                    _target = 1;
                 }
                 else {
-                    maximum = value;
+                    _target = value;
                 }
-            }
-        }
-        /// <summary>
-        /// The minimum value of the UIProgressBar.
-        /// </summary>
-        public uint Minimum {
-            get { return minimum; }
-            set {
-                if(value < 0) {
-                    minimum = 0;
-                }
-                else if(value >= Maximum) {
-                    minimum = Maximum - 1;
-                }
-                else {
-                    minimum = value;
+
+                if(Value > value) {
+                    Value = value;
                 }
             }
         }
@@ -56,39 +36,22 @@ namespace TerraUI.Objects {
         /// The current filled percent of the UIProgressBar (between 0 and 1).
         /// </summary>
         public float Percent {
-            get { return (float)value / Maximum; }
+            get { return Value / Target; }
         }
         /// <summary>
         /// The current value of the UIProgressBar.
         /// </summary>
-        public uint Value {
-            get { return value; }
+        public float Value {
+            get { return _value; }
             set {
                 if(value < 0) {
-                    this.value = value;
+                    _value = 0;
                 }
-                else if(value > Maximum) {
-                    this.value = Maximum;
-                }
-                else {
-                    this.value = value;
-                }
-            }
-        }
-        /// <summary>
-        /// The amount that the progress of the UIProgressBar changes with each Step() call.
-        /// </summary>
-        public uint StepAmount {
-            get { return stepAmount; }
-            set {
-                if(value < 1) {
-                    stepAmount = 1;
-                }
-                else if(value > Maximum) {
-                    stepAmount = Maximum;
+                else if(value >= Target) {
+                    Finish();
                 }
                 else {
-                    stepAmount = value;
+                    _value = value;
                 }
             }
         }
@@ -103,79 +66,81 @@ namespace TerraUI.Objects {
         /// <summary>
         /// The margin around the progress bar inside the UIProgressBar.
         /// </summary>
-        public Vector2 BarMargin { get; set; }
+        public Padding BarMargin { get; set; }
+        /// <summary>
+        /// The color of the border.
+        /// </summary>
+        public Color BorderColor { get; set; }
+        /// <summary>
+        /// The width of the border.
+        /// </summary>
+        public byte BorderWidth {
+            get { return _borderWidth; }
+            set {
+                if(value < 0) {
+                    _borderWidth = 0;
+                }
+                else {
+                    _borderWidth = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Create a new UIProgressBar.
         /// </summary>
-        /// <param name="position">position of the object in pixels</param>
-        /// <param name="size">size of the object</param>
-        /// <param name="minimum">minimum progress value</param>
-        /// <param name="maximum">maximum progress value</param>
-        /// <param name="stepAmount">amount progress changes with each step</param>
+        /// <param name="location">location of the object in pixels</param>
+        /// <param name="size">size of the object in pixels</param>
         /// <param name="parent">parent UIObject</param>
-        public UIProgressBar(Vector2 position, Vector2 size, uint minimum = 0, uint maximum = 100, uint stepAmount = 1,
-            byte borderWidth = 1, UIObject parent = null) : base(position, size, borderWidth, parent, false) {
-            Minimum = minimum;
-            Maximum = maximum;
-            StepAmount = stepAmount;
+        public UIProgressBar(StylePoint location = default(StylePoint), StylePoint size = default(StylePoint)) : base(location, size) {
             BackColor = UIColors.ProgressBar.BackColor;
-            BarColor = UIColors.ProgressBar.BarColor;
             BorderColor = UIColors.ProgressBar.BorderColor;
+            BarColor = UIColors.ProgressBar.BarColor;
             BorderWidth = 1;
-            BarMargin = Vector2.Zero;
-        }
-
-        /// <summary>
-        /// Perform a step.
-        /// </summary>
-        public void Step() {
-            if(Value < Maximum) {
-                Value += StepAmount;
-
-                if(ProgressChanged != null) {
-                    ProgressChanged(this, new ValueChangedEventArgs<uint>(Value - StepAmount, Value));
-                }
-            }
-            else {
-                if(ProgressFinished != null && callFinished) {
-                    ProgressFinished(this);
-                    callFinished = false;
-                }
-            }
+            BarMargin = default(Padding);
         }
 
         /// <summary>
         /// Reset the UIProgressBar's progress.
         /// </summary>
         public void Reset() {
-            Value = Minimum;
-            callFinished = true;
+            _value = 0;
+            _callFinished = true;
         }
 
         /// <summary>
         /// Finish the UIProgressBar's progress.
         /// </summary>
         public void Finish() {
-            Value = Maximum;
+            _value = _target;
 
-            if(ProgressFinished != null && callFinished) {
-                ProgressFinished(this);
-                callFinished = false;
+            if(OnProgressFinished != null && _callFinished) {
+                OnProgressFinished(this);
+                _callFinished = false;
             }
         }
 
-        public override void Draw(SpriteBatch spriteBatch) {
-            Rectangle = new Rectangle((int)RelativePosition.X, (int)RelativePosition.Y, (int)Size.X, (int)Size.Y);
-            Rectangle barRectangle = new Rectangle((int)(RelativePosition.X + BarMargin.X), (int)(RelativePosition.Y + BarMargin.Y),
-                                                   (int)(Size.X - BarMargin.X * 2), (int)(Size.Y - BarMargin.Y * 2));
+        /// <summary>
+        /// Fires when the progress bar finishes.
+        /// </summary>
+        /// <param name="e"></param>
+        public virtual void ProgressFinished() {
+            if(OnProgressFinished != null) {
+                OnProgressFinished(this);
+                _callFinished = false;
+            }
+        }
 
-            barRectangle.Width = (int)((Size.X * Percent) - BarMargin.X * 2);
+        protected override void DrawSelf(SpriteBatch spriteBatch) {
+            CalculatedStyle dim = GetDimensions();
+            Rectangle rect = new Rectangle(
+                    (int)(dim.X + BarMargin.Left + _borderWidth),
+                    (int)(dim.Y + BarMargin.Top + _borderWidth),
+                    (int)((dim.Width * Percent) - BarMargin.Left - BarMargin.Right - (_borderWidth * 2)),
+                    (int)(dim.Height - BarMargin.Top - BarMargin.Bottom - (_borderWidth * 2)));
 
-            BaseTextureDrawing.DrawRectangleBox(spriteBatch, BorderColor, BackColor, Rectangle, BorderWidth);
-            BaseTextureDrawing.DrawRectangleBox(spriteBatch, Color.Transparent, BarColor, barRectangle, 0);
-
-            base.Draw(spriteBatch);
+            DrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BackColor, GetDimensions().ToRectangle(), BorderWidth);
+            DrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BarColor, rect, 0);
         }
     }
 }

@@ -1,318 +1,278 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Terraria;
-using Terraria.GameInput;
+using Terraria.UI;
 using TerraUI.Utilities;
 
 namespace TerraUI.Objects {
-    public class UIObject {
-        protected bool acceptsKeyboardInput = false;
-        protected UIObject parent = null;
-        protected bool mouseEnter = false;
-        protected bool allowFocus = false;
+    public class UIObject : UIElement {
+        public event MouseEvent OnMiddleClick;
+        public event MouseEvent OnMiddleDoubleClick;
+        public event MouseEvent OnMiddleMouseDown;
+        public event MouseEvent OnMiddleMouseUp;
+
+        public event MouseEvent OnXButton1Click;
+        public event MouseEvent OnXButton1DoubleClick;
+        public event MouseEvent OnXButton1MouseDown;
+        public event MouseEvent OnXButton1MouseUp;
+
+        public event MouseEvent OnXButton2Click;
+        public event MouseEvent OnXButton2DoubleClick;
+        public event MouseEvent OnXButton2MouseDown;
+        public event MouseEvent OnXButton2MouseUp;
 
         /// <summary>
-        /// Fires when the object is clicked.
+        /// The X and Y location of the object.
         /// </summary>
-        public event MouseClickEventHandler Click;
-        /// <summary>
-        /// Fires when a mouse button is pressed while the cursor is over the UIObject.
-        /// </summary>
-        public event MouseButtonEventHandler MouseDown;
-        /// <summary>
-        /// Fires when a mouse button is released while the cursor is over the UIObject.
-        /// </summary>
-        public event MouseButtonEventHandler MouseUp;
-        /// <summary>
-        /// Fires when the mouse cursor enters the UIObject.
-        /// </summary>
-        public event MouseEventHandler MouseEnter;
-        /// <summary>
-        /// Fires when the mouse cursor leaves the UIObject.
-        /// </summary>
-        public event MouseEventHandler MouseLeave;
-        /// <summary>
-        /// Fires each frame the mouse cursor is hovering over the UIObject.
-        /// </summary>
-        public event MouseEventHandler MouseHover;
-        /// <summary>
-        /// Fires when the object loses focus.
-        /// </summary>
-        public event UIEventHandler LostFocus;
-        /// <summary>
-        /// Fires when the object gains focus.
-        /// </summary>
-        public event UIEventHandler GotFocus;
-        /// <summary>
-        /// The X and Y position of the object.
-        /// </summary>
-        public Vector2 Position { get; set; }
-        /// <summary>
-        /// The X and Y position of the object relative to its parent.
-        /// </summary>
-        public Vector2 RelativePosition {
-            get {
-                if(Parent != null) {
-                    return Position + Parent.RelativePosition;
-                }
-                else {
-                    return Position;
-                }
-            }
-        }
-        /// <summary>
-        /// The X and Y position of the object on the screen, accounting for all its parent objects.
-        /// </summary>
-        public Vector2 ScreenPosition {
-            get {
-                UIObject obj = Parent;
-                Vector2 position = Position;
-
-                while(obj != null) {
-                    position += obj.Position;
-                    obj = obj.Parent;
-                }
-
-                return position;
+        public StylePoint Location {
+            get { return new StylePoint(Left, Top); }
+            set {
+                Left = value.X;
+                Top = value.Y;
             }
         }
         /// <summary>
         /// The width and height of the object on the screen.
         /// </summary>
-        public Vector2 Size { get; set; }
-        /// <summary>
-        /// The rectangle used to draw the object.
-        /// </summary>
-        public Rectangle Rectangle { get; protected set; }
-        /// <summary>
-        /// Whether the object has focus.
-        /// </summary>
-        public bool Focused { get; protected set; }
-        /// <summary>
-        /// The children of the object.
-        /// </summary>
-        public List<UIObject> Children { get; protected set; }
-        /// <summary>
-        /// The parent of the object.
-        /// </summary>
-        public UIObject Parent {
-            get { return parent; }
+        public StylePoint Size {
+            get { return new StylePoint(Width, Height); }
             set {
-                if(parent != null) {
-                    parent.Children.Remove(this);
-                }
-
-                parent = value;
-
-                if(parent != null) {
-                    parent.Children.Add(this);
-                }
+                Width = value.X;
+                Height = value.Y;
             }
         }
-
+        /// <summary>
+        /// The minimum size of the object.
+        /// </summary>
+        public StylePoint MinSize {
+            get { return new StylePoint(MinWidth, MinHeight); }
+            set {
+                MinWidth = value.X;
+                MinHeight = value.Y;
+            }
+        }
+        /// <summary>
+        /// The maximum size of the object.
+        /// </summary>
+        public StylePoint MaxSize {
+            get { return new StylePoint(MaxWidth, MaxHeight); }
+            set {
+                MaxWidth = value.X;
+                MaxHeight = value.Y;
+            }
+        }
+        /// <summary>
+        /// The padding around the object.
+        /// </summary>
+        public Padding Padding {
+            get { return new Padding(PaddingTop, PaddingLeft, PaddingBottom, PaddingRight); }
+            set {
+                PaddingTop = value.Top;
+                PaddingLeft = value.Left;
+                PaddingBottom = value.Bottom;
+                PaddingRight = value.Right;
+            }
+        }
+        /// <summary>
+        /// The margin around an object.
+        /// </summary>
+        public Padding Margin {
+            get { return new Padding(MarginTop, MarginLeft, MarginBottom, MarginRight); }
+            set {
+                MarginTop = value.Top;
+                MarginLeft = value.Left;
+                MarginBottom = value.Bottom;
+                MarginRight = value.Right;
+            }
+        }
+        
         /// <summary>
         /// Create a new UIObject.
         /// </summary>
-        /// <param name="position">position of the object in pixels</param>
+        /// <param name="location">location of the object in pixels</param>
         /// <param name="size">size of the object in pixels</param>
-        /// <param name="parent">parent UIObject</param>
-        /// <param name="acceptsKeyboardInput">whether the object should capture keyboard input</param>
-        public UIObject(Vector2 position, Vector2 size, UIObject parent = null, bool allowFocus = false,
-            bool acceptsKeyboardInput = false) {
-            Position = position;
+        public UIObject(StylePoint location = default(StylePoint), StylePoint size = default(StylePoint)) {
+            Location = location;
             Size = size;
-            Children = new List<UIObject>();
-            Parent = parent;
-            this.allowFocus = allowFocus;
-            this.acceptsKeyboardInput = acceptsKeyboardInput;
         }
-
-        /// <summary>
-        /// Update the object. Call during any PreUpdate() function.
-        /// </summary>
-        public virtual void Update() {
-            if(!PlayerInput.IgnoreMouseInterface) {
-                if(MouseUtils.Rectangle.Intersects(Rectangle)) {
-                    Main.player[Main.myPlayer].mouseInterface = true;
-
-                    if(MouseEnter != null && !mouseEnter) {
-                        mouseEnter = true;
-                        MouseEnter(this, new MouseEventArgs(MouseUtils.Position));
-                    }
-                    else {
-                        OnMouseEnter();
-                    }
-
-                    if(MouseHover != null) {
-                        MouseHover(this, new MouseEventArgs(MouseUtils.Position));
-                    }
-                    else {
-                        OnMouseHover();
-                    }
-
-                    Handle();
-                }
-                else {
-                    if(mouseEnter && MouseLeave != null) {
-                        mouseEnter = false;
-                        MouseLeave(this, new MouseEventArgs(MouseUtils.Position));
-                    }
-                    else {
-                        OnMouseLeave();
-                    }
-
-                    if(MouseUtils.AnyButtonPressed()) {
-                        Unfocus();
-                    }
-                }
+        
+        public virtual void MiddleClick(UIMouseEvent evt) {
+            if(OnMiddleClick != null) {
+                OnMiddleClick(evt, this);
             }
 
-            foreach(UIObject obj in Children) {
-                obj.Update();
-            }
-        }
-
-        /// <summary>
-        /// Handle the mouse click events.
-        /// </summary>
-        public virtual void Handle() {
-            MouseButtons button = MouseButtons.None;
-
-            if(MouseUtils.AnyButtonPressed(out button)) {
-                if(MouseDown != null) {
-                    MouseDown(this, new MouseButtonEventArgs(button, MouseUtils.Position));
+            if(Parent != null) {
+                if(Parent.GetType() == typeof(UIObject)) {
+                    ((UIObject)Parent).MiddleClick(evt);
                 }
                 else {
-                    OnMouseDown();
-                }
-
-                if(Click == null || !Click(this, new MouseButtonEventArgs(button, MouseUtils.Position))) {
-                    Focus();
-
-                    switch(button) {
-                        case MouseButtons.Left:
-                            OnLeftClick();
-                            break;
-                        case MouseButtons.Middle:
-                            OnMiddleClick();
-                            break;
-                        case MouseButtons.Right:
-                            OnRightClick();
-                            break;
-                        case MouseButtons.XButton1:
-                            OnXButton1Click();
-                            break;
-                        case MouseButtons.XButton2:
-                            OnXButton2Click();
-                            break;
-                    }
-                }
-            }
-
-            if(MouseUtils.AnyButtonReleased(out button)) {
-                if(MouseUp != null) {
-                    MouseUp(this, new MouseButtonEventArgs(button, MouseUtils.Position));
-                }
-                else {
-                    OnMouseUp();
+                    Parent.Click(evt);
                 }
             }
         }
 
-        /// <summary>
-        /// The default left click event.
-        /// </summary>
-        public virtual void OnLeftClick() { }
-        /// <summary>
-        /// The default middle click event.
-        /// </summary>
-        public virtual void OnMiddleClick() { }
-        /// <summary>
-        /// The default right click event.
-        /// </summary>
-        public virtual void OnRightClick() { }
-        /// <summary>
-        /// The default XButton1 click event.
-        /// </summary>
-        public virtual void OnXButton1Click() { }
-        /// <summary>
-        /// The default XButton2 click event.
-        /// </summary>
-        public virtual void OnXButton2Click() { }
-        /// <summary>
-        /// The default MouseDown event.
-        /// </summary>
-        public virtual void OnMouseDown() { }
-        /// <summary>
-        /// The default MouseUp event.
-        /// </summary>
-        public virtual void OnMouseUp() { }
-        /// <summary>
-        /// The default MouseEnter event.
-        /// </summary>
-        public virtual void OnMouseEnter() { }
-        /// <summary>
-        /// The default MouseLeave event.
-        /// </summary>
-        public virtual void OnMouseLeave() { }
-        /// <summary>
-        /// The default MouseHover event.
-        /// </summary>
-        public virtual void OnMouseHover() { }
-        /// <summary>
-        /// The default LostFocus event.
-        /// </summary>
-        public virtual void OnLostFocus() { }
-        /// <summary>
-        /// The default GotFocus event.
-        /// </summary>
-        public virtual void OnGotFocus() { }
-
-        /// <summary>
-        /// Draw the object. Call during any Draw() function.
-        /// </summary>
-        /// <param name="spriteBatch">drawing SpriteBatch</param>
-        public virtual void Draw(SpriteBatch spriteBatch) {
-            foreach(UIObject obj in Children) {
-                obj.Draw(spriteBatch);
+        public virtual void MiddleDoubleClick(UIMouseEvent evt) {
+            if(OnMiddleDoubleClick != null) {
+                OnMiddleDoubleClick(evt, this);
             }
-        }
 
-        /// <summary>
-        /// Give the object focus.
-        /// </summary>
-        public virtual void Focus() {
-            if(!Focused && allowFocus) {
-                Focused = true;
-                if(acceptsKeyboardInput) {
-                    Main.blockInput = true;
-                }
-
-                if(GotFocus != null) {
-                    GotFocus(this);
+            if(Parent != null) {
+                if(Parent.GetType() == typeof(UIObject)) {
+                    ((UIObject)Parent).MiddleDoubleClick(evt);
                 }
                 else {
-                    OnGotFocus();
+                    Parent.DoubleClick(evt);
                 }
             }
         }
 
-        /// <summary>
-        /// Take focus from the object.
-        /// </summary>
-        protected virtual void Unfocus() {
-            if(Focused && allowFocus) {
-                Focused = false;
-                if(acceptsKeyboardInput) {
-                    Main.blockInput = false;
-                }
+        public virtual void MiddleMouseUp(UIMouseEvent evt) {
+            if(OnMiddleMouseUp != null) {
+                OnMiddleMouseUp(evt, this);
+            }
 
-                if(LostFocus != null) {
-                    LostFocus(this);
+            if(Parent != null) {
+                if(Parent.GetType() == typeof(UIObject)) {
+                    ((UIObject)Parent).MiddleMouseUp(evt);
                 }
                 else {
-                    OnLostFocus();
+                    Parent.MouseUp(evt);
+                }
+            }
+        }
+
+        public virtual void MiddleMouseDown(UIMouseEvent evt) {
+            if(OnMiddleMouseDown != null) {
+                OnMiddleMouseDown(evt, this);
+            }
+
+            if(Parent != null) {
+                if(Parent.GetType() == typeof(UIObject)) {
+                    ((UIObject)Parent).MiddleMouseDown(evt);
+                }
+                else {
+                    Parent.MouseDown(evt);
+                }
+            }
+        }
+
+        public virtual void XButton1Click(UIMouseEvent evt) {
+            if(OnXButton1Click != null) {
+                OnXButton1Click(evt, this);
+            }
+
+            if(Parent != null) {
+                if(Parent.GetType() == typeof(UIObject)) {
+                    ((UIObject)Parent).XButton1Click(evt);
+                }
+                else {
+                    Parent.Click(evt);
+                }
+            }
+        }
+
+        public virtual void XButton1DoubleClick(UIMouseEvent evt) {
+            if(OnXButton1DoubleClick != null) {
+                OnXButton1DoubleClick(evt, this);
+            }
+
+            if(Parent != null) {
+                if(Parent.GetType() == typeof(UIObject)) {
+                    ((UIObject)Parent).XButton1DoubleClick(evt);
+                }
+                else {
+                    Parent.DoubleClick(evt);
+                }
+            }
+        }
+
+        public virtual void XButton1MouseUp(UIMouseEvent evt) {
+            if(OnXButton1MouseUp != null) {
+                OnXButton1MouseUp(evt, this);
+            }
+
+            if(Parent != null) {
+                if(Parent.GetType() == typeof(UIObject)) {
+                    ((UIObject)Parent).XButton1MouseUp(evt);
+                }
+                else {
+                    Parent.MouseUp(evt);
+                }
+            }
+        }
+
+        public virtual void XButton1MouseDown(UIMouseEvent evt) {
+            if(OnXButton1MouseDown != null) {
+                OnXButton1MouseDown(evt, this);
+            }
+
+            if(Parent != null) {
+                if(Parent.GetType() == typeof(UIObject)) {
+                    ((UIObject)Parent).XButton1MouseDown(evt);
+                }
+                else {
+                    Parent.MouseDown(evt);
+                }
+            }
+        }
+
+        public virtual void XButton2Click(UIMouseEvent evt) {
+            if(OnXButton2Click != null) {
+                OnXButton2Click(evt, this);
+            }
+
+            if(Parent != null) {
+                if(Parent.GetType() == typeof(UIObject)) {
+                    ((UIObject)Parent).XButton2Click(evt);
+                }
+                else {
+                    Parent.Click(evt);
+                }
+            }
+        }
+
+        public virtual void XButton2DoubleClick(UIMouseEvent evt) {
+            if(OnXButton2DoubleClick != null) {
+                OnXButton2DoubleClick(evt, this);
+            }
+
+            if(Parent != null) {
+                if(Parent.GetType() == typeof(UIObject)) {
+                    ((UIObject)Parent).XButton2DoubleClick(evt);
+                }
+                else {
+                    Parent.DoubleClick(evt);
+                }
+            }
+        }
+
+        public virtual void XButton2MouseUp(UIMouseEvent evt) {
+            if(OnXButton2MouseUp != null) {
+                OnXButton2MouseUp(evt, this);
+            }
+
+            if(Parent != null) {
+                if(Parent.GetType() == typeof(UIObject)) {
+                    ((UIObject)Parent).XButton2MouseUp(evt);
+                }
+                else {
+                    Parent.MouseUp(evt);
+                }
+            }
+        }
+
+        public virtual void XButton2MouseDown(UIMouseEvent evt) {
+            if(OnXButton2MouseDown != null) {
+                OnXButton2MouseDown(evt, this);
+            }
+
+            if(Parent != null) {
+                if(Parent.GetType() == typeof(UIObject)) {
+                    ((UIObject)Parent).XButton2MouseDown(evt);
+                }
+                else {
+                    Parent.MouseDown(evt);
                 }
             }
         }

@@ -31,9 +31,9 @@ namespace TerraUI.Utilities {
         }
 
         /// <summary>
-        /// The mouse position.
+        /// The mouse location.
         /// </summary>
-        public static Vector2 Position {
+        public static Vector2 Location {
             get { return new Vector2(Main.mouseX, Main.mouseY); }
         }
 
