@@ -8,18 +8,6 @@ using Terraria.UI;
 namespace TerraUI.Utils {
     public static class TUIUtils {
         /// <summary>
-        /// Play a game sound.
-        /// </summary>
-        /// <param name="type">sound</param>
-        /// <param name="x">x position</param>
-        /// <param name="y">y position</param>
-        /// <param name="style">style</param>
-        public static void PlaySound(Sounds type, int x = -1, int y = -1, int style = 1, float volumeScale = 1f,
-            float pitchOffset = 0f) {
-            Main.PlaySound((int)type, x, y, style, volumeScale, pitchOffset);
-        }
-
-        /// <summary>
         /// Updates the current mouse and keyboard state.
         /// Call after all UIObjects have been updated.
         /// </summary>

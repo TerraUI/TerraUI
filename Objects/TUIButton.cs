@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using Terraria;
+using Terraria.ID;
 using Terraria.UI;
 using TerraUI.Utils;
 
@@ -58,7 +59,7 @@ namespace TerraUI.Objects {
         /// </summary>
         public override void MouseOver(UIMouseEvent evt) {
             base.MouseOver(evt);
-            TUIUtils.PlaySound(Sounds.MenuTick, -1, -1, 1, 1f, 0f);
+            Main.PlaySound(SoundID.MenuTick, -1, -1, 1, 1f, 0f);
         }
 
         protected override void DrawSelf(SpriteBatch spriteBatch) {
