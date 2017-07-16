@@ -50,5 +50,14 @@ namespace TerraUI {
             X = new StyleDimension(vector.X, 0);
             Y = new StyleDimension(vector.Y, 0);
         }
+
+        /// <summary>
+        /// Create a new StylePoint.
+        /// </summary>
+        /// <param name="size">x- and y-coordinate</param>
+        public StylePoint(float size) {
+            X = new StyleDimension(size, 0);
+            Y = new StyleDimension(size, 0);
+        }
     }
 }
