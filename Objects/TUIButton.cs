@@ -66,7 +66,7 @@ namespace TerraUI.Objects {
             CalculatedStyle dim = GetDimensions();
             Rectangle rect = dim.ToRectangle();
 
-            DrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BackColor, rect, BorderWidth);
+            TUIDrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BackColor, rect, BorderWidth);
 
             if(!string.IsNullOrWhiteSpace(Text)) {
                 Vector2 measure = Font.MeasureString(Text);
