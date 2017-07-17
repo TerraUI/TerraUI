@@ -45,7 +45,7 @@ namespace TerraUI.Elements {
         }
 
         /// <summary>
-        /// Create a new object.
+        /// Create a new TUIImageButton.
         /// </summary>
         /// <param name="location">location of object</param>
         /// <param name="texture">size of object</param>
