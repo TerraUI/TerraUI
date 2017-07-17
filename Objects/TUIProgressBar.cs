@@ -74,9 +74,9 @@ namespace TerraUI.Objects {
         /// <param name="size">size of the object in pixels</param>
         /// <param name="parent">parent UIObject</param>
         public TUIProgressBar(StylePoint location, StylePoint size) : base(location, size) {
-            BackColor = Colors.ProgressBar.BackColor;
-            BorderColor = Colors.ProgressBar.BorderColor;
-            BarColor = Colors.ProgressBar.BarColor;
+            BackColor = TUIColors.ProgressBar.BackColor;
+            BorderColor = TUIColors.ProgressBar.BorderColor;
+            BarColor = TUIColors.ProgressBar.BarColor;
             BorderWidth = 1;
             BarMargin = default(Padding);
         }

@@ -43,9 +43,9 @@ namespace TerraUI {
                 UIElement elem = GetElementAt(mouse);
                 TUIElement uiObject = elem as TUIElement;
 
-                bool middle = (MouseUtils.State.MiddleButton == ButtonState.Pressed);
-                bool xButton1 = (MouseUtils.State.XButton1 == ButtonState.Pressed);
-                bool xButton2 = (MouseUtils.State.XButton2 == ButtonState.Pressed);
+                bool middle = (TUIMouseUtils.State.MiddleButton == ButtonState.Pressed);
+                bool xButton1 = (TUIMouseUtils.State.XButton1 == ButtonState.Pressed);
+                bool xButton2 = (TUIMouseUtils.State.XButton2 == ButtonState.Pressed);
 
                 _clickDisabledTimeRemaining = Math.Max(0.0, _clickDisabledTimeRemaining - time.ElapsedGameTime.TotalMilliseconds);
                 bool disabled = (_clickDisabledTimeRemaining > 0.0);
@@ -116,7 +116,7 @@ namespace TerraUI {
                 _wasMouseXButton2Down = xButton2;
             }
 
-            Utils.Utils.UpdateInput();
+            TUIUtils.UpdateInput();
         }
     }
 }

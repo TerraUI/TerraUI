@@ -50,8 +50,8 @@ namespace TerraUI.Objects {
             Text = text;
             BorderWidth = borderWidth;
 
-            BackColor = Utils.Colors.Button.BackColor;
-            TextColor = Utils.Colors.Button.TextColor;
+            BackColor = TUIColors.Button.BackColor;
+            TextColor = TUIColors.Button.TextColor;
         }
 
         /// <summary>

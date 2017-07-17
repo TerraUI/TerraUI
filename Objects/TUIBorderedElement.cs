@@ -32,7 +32,7 @@ namespace TerraUI.Objects {
         /// <param name="borderWidth">width of border around object</param>
         public TUIBorderedElement(StylePoint location, StylePoint size, byte borderWidth = 1) : base(location, size) {
             BorderWidth = borderWidth;
-            BorderColor = Colors.Button.BorderColor;
+            BorderColor = TUIColors.Button.BorderColor;
         }
     }
 }

@@ -6,14 +6,14 @@ using Terraria.Localization;
 using Terraria.UI;
 
 namespace TerraUI.Utils {
-    public static class Utils {
+    public static class TUIUtils {
         /// <summary>
         /// Updates the current mouse and keyboard state.
         /// Call after all UIObjects have been updated.
         /// </summary>
         public static void UpdateInput() {
-            MouseUtils.UpdateState();
-            KeyboardUtils.UpdateState();
+            TUIMouseUtils.UpdateState();
+            TUIKeyboardUtils.UpdateState();
         }
 
         /// <summary>
