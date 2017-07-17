@@ -71,7 +71,7 @@ namespace TerraUI.Elements {
             if(!string.IsNullOrWhiteSpace(Text)) {
                 Vector2 measure = Font.MeasureString(Text);
                 Vector2 origin = new Vector2(measure.X / 2, measure.Y / 2);
-                Vector2 textPos = new Vector2(dim.X, dim.Y);
+                Vector2 textPos = dim.Position();
 
                 textPos.X += (dim.Width / 2);
                 textPos.Y += (dim.Height / 2) + (measure.Y / 8);
