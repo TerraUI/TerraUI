@@ -59,5 +59,12 @@ namespace TerraUI {
             X = new StyleDimension(xy, 0);
             Y = new StyleDimension(xy, 0);
         }
+        
+        /// <summary>
+        /// Multiply a StylePoint by a float value.
+        /// </summary>
+        public static StylePoint operator *(StylePoint point, float value) {
+            return new StylePoint(point.X.Pixels * value, point.Y.Pixels * value);
+        }
     }
 }
