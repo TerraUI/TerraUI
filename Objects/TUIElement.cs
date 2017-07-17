@@ -1,7 +1,7 @@
 ﻿using Terraria.UI;
 
 namespace TerraUI.Objects {
-    public class TUIObject : UIElement {
+    public class TUIElement : UIElement {
         /// <summary>
         /// Fires when the middle mouse button is clicked.
         /// </summary>
@@ -123,7 +123,7 @@ namespace TerraUI.Objects {
         /// </summary>
         /// <param name="location">location of object in pixels</param>
         /// <param name="size">size of object in pixels</param>
-        public TUIObject(StylePoint location, StylePoint size) {
+        public TUIElement(StylePoint location, StylePoint size) {
             Location = location;
             Size = size;
         }
@@ -138,8 +138,8 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if((Parent as TUIObject) != null) {
-                    ((TUIObject)Parent).MiddleClick(evt);
+                if((Parent as TUIElement) != null) {
+                    ((TUIElement)Parent).MiddleClick(evt);
                 }
                 else {
                     Parent.Click(evt);
@@ -157,8 +157,8 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if((Parent as TUIObject) != null) {
-                    ((TUIObject)Parent).MiddleDoubleClick(evt);
+                if((Parent as TUIElement) != null) {
+                    ((TUIElement)Parent).MiddleDoubleClick(evt);
                 }
                 else {
                     Parent.DoubleClick(evt);
@@ -176,8 +176,8 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if((Parent as TUIObject) != null) {
-                    ((TUIObject)Parent).MiddleMouseUp(evt);
+                if((Parent as TUIElement) != null) {
+                    ((TUIElement)Parent).MiddleMouseUp(evt);
                 }
                 else {
                     Parent.MouseUp(evt);
@@ -195,8 +195,8 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if((Parent as TUIObject) != null) {
-                    ((TUIObject)Parent).MiddleMouseDown(evt);
+                if((Parent as TUIElement) != null) {
+                    ((TUIElement)Parent).MiddleMouseDown(evt);
                 }
                 else {
                     Parent.MouseDown(evt);
@@ -214,8 +214,8 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if((Parent as TUIObject) != null) {
-                    ((TUIObject)Parent).XButton1Click(evt);
+                if((Parent as TUIElement) != null) {
+                    ((TUIElement)Parent).XButton1Click(evt);
                 }
                 else {
                     Parent.Click(evt);
@@ -233,8 +233,8 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if((Parent as TUIObject) != null) {
-                    ((TUIObject)Parent).XButton1DoubleClick(evt);
+                if((Parent as TUIElement) != null) {
+                    ((TUIElement)Parent).XButton1DoubleClick(evt);
                 }
                 else {
                     Parent.DoubleClick(evt);
@@ -252,8 +252,8 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if((Parent as TUIObject) != null) {
-                    ((TUIObject)Parent).XButton1MouseUp(evt);
+                if((Parent as TUIElement) != null) {
+                    ((TUIElement)Parent).XButton1MouseUp(evt);
                 }
                 else {
                     Parent.MouseUp(evt);
@@ -271,8 +271,8 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if((Parent as TUIObject) != null) {
-                    ((TUIObject)Parent).XButton1MouseDown(evt);
+                if((Parent as TUIElement) != null) {
+                    ((TUIElement)Parent).XButton1MouseDown(evt);
                 }
                 else {
                     Parent.MouseDown(evt);
@@ -290,8 +290,8 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if((Parent as TUIObject) != null) {
-                    ((TUIObject)Parent).XButton2Click(evt);
+                if((Parent as TUIElement) != null) {
+                    ((TUIElement)Parent).XButton2Click(evt);
                 }
                 else {
                     Parent.Click(evt);
@@ -309,8 +309,8 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if((Parent as TUIObject) != null) {
-                    ((TUIObject)Parent).XButton2DoubleClick(evt);
+                if((Parent as TUIElement) != null) {
+                    ((TUIElement)Parent).XButton2DoubleClick(evt);
                 }
                 else {
                     Parent.DoubleClick(evt);
@@ -328,8 +328,8 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if((Parent as TUIObject) != null) {
-                    ((TUIObject)Parent).XButton2MouseUp(evt);
+                if((Parent as TUIElement) != null) {
+                    ((TUIElement)Parent).XButton2MouseUp(evt);
                 }
                 else {
                     Parent.MouseUp(evt);
@@ -347,8 +347,8 @@ namespace TerraUI.Objects {
             }
 
             if(Parent != null) {
-                if((Parent as TUIObject) != null) {
-                    ((TUIObject)Parent).XButton2MouseDown(evt);
+                if((Parent as TUIElement) != null) {
+                    ((TUIElement)Parent).XButton2MouseDown(evt);
                 }
                 else {
                     Parent.MouseDown(evt);

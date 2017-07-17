@@ -14,13 +14,13 @@ namespace TerraUI {
         private bool _wasMouseXButton1Down;
         private bool _wasMouseXButton2Down;
 
-        private TUIObject _lastObjectMiddleDown;
-        private TUIObject _lastObjectXButton1Down;
-        private TUIObject _lastObjectXButton2Down;
+        private TUIElement _lastObjectMiddleDown;
+        private TUIElement _lastObjectXButton1Down;
+        private TUIElement _lastObjectXButton2Down;
 
-        private TUIObject _lastObjectMiddleClicked;
-        private TUIObject _lastObjectXButton1Clicked;
-        private TUIObject _lastObjectXButton2Clicked;
+        private TUIElement _lastObjectMiddleClicked;
+        private TUIElement _lastObjectXButton1Clicked;
+        private TUIElement _lastObjectXButton2Clicked;
 
         private double _lastMouseMiddleDownTime;
         private double _lastMouseXButton1DownTime;
@@ -41,11 +41,11 @@ namespace TerraUI {
                 Vector2 mouse = Main.MouseScreen;
 
                 UIElement elem = GetElementAt(mouse);
-                TUIObject uiObject = elem as TUIObject;
+                TUIElement uiObject = elem as TUIElement;
 
-                bool middle = (TMouseUtils.State.MiddleButton == ButtonState.Pressed);
-                bool xButton1 = (TMouseUtils.State.XButton1 == ButtonState.Pressed);
-                bool xButton2 = (TMouseUtils.State.XButton2 == ButtonState.Pressed);
+                bool middle = (MouseUtils.State.MiddleButton == ButtonState.Pressed);
+                bool xButton1 = (MouseUtils.State.XButton1 == ButtonState.Pressed);
+                bool xButton2 = (MouseUtils.State.XButton2 == ButtonState.Pressed);
 
                 _clickDisabledTimeRemaining = Math.Max(0.0, _clickDisabledTimeRemaining - time.ElapsedGameTime.TotalMilliseconds);
                 bool disabled = (_clickDisabledTimeRemaining > 0.0);
@@ -62,7 +62,7 @@ namespace TerraUI {
                     _lastMouseMiddleDownTime = time.TotalGameTime.TotalMilliseconds;
                 }
                 else if(!middle && _wasMouseMiddleDown && _lastObjectMiddleDown != null && !disabled) {
-                    TUIObject lastObjectMiddleDown = _lastObjectMiddleDown;
+                    TUIElement lastObjectMiddleDown = _lastObjectMiddleDown;
 
                     if(lastObjectMiddleDown.ContainsPoint(mouse)) {
                         lastObjectMiddleDown.MiddleClick(new UIMouseEvent(lastObjectMiddleDown, mouse));
@@ -83,7 +83,7 @@ namespace TerraUI {
                     _lastMouseXButton1DownTime = time.TotalGameTime.TotalMilliseconds;
                 }
                 else if(!xButton1 && _wasMouseXButton1Down && _lastObjectXButton1Down != null && !disabled) {
-                    TUIObject lastObjectXButton1Down = _lastObjectXButton1Down;
+                    TUIElement lastObjectXButton1Down = _lastObjectXButton1Down;
                     if(lastObjectXButton1Down.ContainsPoint(mouse)) {
                         lastObjectXButton1Down.XButton1Click(new UIMouseEvent(lastObjectXButton1Down, mouse));
                         _lastObjectXButton1Clicked = _lastObjectXButton1Down;
@@ -102,7 +102,7 @@ namespace TerraUI {
                     _lastMouseXButton2DownTime = time.TotalGameTime.TotalMilliseconds;
                 }
                 else if(!xButton2 && _wasMouseXButton2Down && _lastObjectXButton2Down != null && !disabled) {
-                    TUIObject lastObjectXButton2Down = _lastObjectXButton2Down;
+                    TUIElement lastObjectXButton2Down = _lastObjectXButton2Down;
                     if(lastObjectXButton2Down.ContainsPoint(mouse)) {
                         lastObjectXButton2Down.XButton2Click(new UIMouseEvent(lastObjectXButton2Down, mouse));
                         _lastObjectXButton2Clicked = _lastObjectXButton2Down;
@@ -116,7 +116,7 @@ namespace TerraUI {
                 _wasMouseXButton2Down = xButton2;
             }
 
-            TUIUtils.UpdateInput();
+            Utils.Utils.UpdateInput();
         }
     }
 }

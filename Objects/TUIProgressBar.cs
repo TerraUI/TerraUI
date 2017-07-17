@@ -4,7 +4,7 @@ using Terraria.UI;
 using TerraUI.Utils;
 
 namespace TerraUI.Objects {
-    public class TUIProgressBar : TUIBorderedObject {
+    public class TUIProgressBar : TUIBorderedElement {
         private float _target = 100;
         private float _value = 0;
         private bool _callFinished = true;
@@ -74,9 +74,9 @@ namespace TerraUI.Objects {
         /// <param name="size">size of the object in pixels</param>
         /// <param name="parent">parent UIObject</param>
         public TUIProgressBar(StylePoint location, StylePoint size) : base(location, size) {
-            BackColor = TUIColors.ProgressBar.BackColor;
-            BorderColor = TUIColors.ProgressBar.BorderColor;
-            BarColor = TUIColors.ProgressBar.BarColor;
+            BackColor = Colors.ProgressBar.BackColor;
+            BorderColor = Colors.ProgressBar.BorderColor;
+            BarColor = Colors.ProgressBar.BarColor;
             BorderWidth = 1;
             BarMargin = default(Padding);
         }
@@ -120,8 +120,8 @@ namespace TerraUI.Objects {
                     (int)((dim.Width * Percent) - BarMargin.Left - BarMargin.Right - (BorderWidth * 2)),
                     (int)(dim.Height - BarMargin.Top - BarMargin.Bottom - (BorderWidth * 2)));
 
-            TDrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BackColor, GetDimensions().ToRectangle(), BorderWidth);
-            TDrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BarColor, rect, 0);
+            DrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BackColor, GetDimensions().ToRectangle(), BorderWidth);
+            DrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BarColor, rect, 0);
         }
     }
 }

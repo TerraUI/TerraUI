@@ -2,7 +2,7 @@
 using TerraUI.Utils;
 
 namespace TerraUI.Objects {
-    public class TUIBorderedObject : TUIObject {
+    public class TUIBorderedElement : TUIElement {
         private byte _borderWidth;
 
         /// <summary>
@@ -30,9 +30,9 @@ namespace TerraUI.Objects {
         /// <param name="location">location of object</param>
         /// <param name="size">size of object</param>
         /// <param name="borderWidth">width of border around object</param>
-        public TUIBorderedObject(StylePoint location, StylePoint size, byte borderWidth = 1) : base(location, size) {
+        public TUIBorderedElement(StylePoint location, StylePoint size, byte borderWidth = 1) : base(location, size) {
             BorderWidth = borderWidth;
-            BorderColor = TUIColors.Button.BorderColor;
+            BorderColor = Colors.Button.BorderColor;
         }
     }
 }

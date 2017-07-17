@@ -7,7 +7,7 @@ using Terraria.UI;
 using TerraUI.Utils;
 
 namespace TerraUI.Objects {
-    public class TUIButton : TUIBorderedObject {
+    public class TUIButton : TUIBorderedElement {
         /// <summary>
         /// The font used for the text on the object.
         /// </summary>
@@ -50,8 +50,8 @@ namespace TerraUI.Objects {
             Text = text;
             BorderWidth = borderWidth;
 
-            BackColor = TUIColors.Button.BackColor;
-            TextColor = TUIColors.Button.TextColor;
+            BackColor = Utils.Colors.Button.BackColor;
+            TextColor = Utils.Colors.Button.TextColor;
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace TerraUI.Objects {
             CalculatedStyle dim = GetDimensions();
             Rectangle rect = dim.ToRectangle();
 
-            TDrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BackColor, rect, BorderWidth);
+            DrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BackColor, rect, BorderWidth);
 
             if(!string.IsNullOrWhiteSpace(Text)) {
                 Vector2 measure = Font.MeasureString(Text);

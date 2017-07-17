@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 using TerraUI.Objects;
 
 namespace TerraUI.Utils {
-    public delegate void UIEventHandler(TUIObject sender);
-    public delegate void ValueChangedEventHandler<T>(TUIObject sender, ValueChangedEventArgs<T> e);
+    public delegate void UIEventHandler(TUIElement sender);
+    public delegate void ValueChangedEventHandler<T>(TUIElement sender, ValueChangedEventArgs<T> e);
+    public delegate bool AcceptedItemHandler(Item item);
 
     public class ValueChangedEventArgs<T> {
         public T PreviousValue { get; private set; }
