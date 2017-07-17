@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 
 namespace TerraUI.Utils {
-    public class TUIDrawingUtils {
+    public class TUIDrawUtils {
         public static void DrawRectangleBox(SpriteBatch spriteBatch, Color borderColour, Color backColour, Rectangle rect,
             int borderWidth) {
             Texture2D texture = Main.magicPixel;

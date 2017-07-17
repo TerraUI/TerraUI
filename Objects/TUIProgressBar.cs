@@ -120,8 +120,8 @@ namespace TerraUI.Objects {
                     (int)((dim.Width * Percent) - BarMargin.Left - BarMargin.Right - (BorderWidth * 2)),
                     (int)(dim.Height - BarMargin.Top - BarMargin.Bottom - (BorderWidth * 2)));
 
-            TUIDrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BackColor, GetDimensions().ToRectangle(), BorderWidth);
-            TUIDrawingUtils.DrawRectangleBox(spriteBatch, BorderColor, BarColor, rect, 0);
+            TUIDrawUtils.DrawRectangleBox(spriteBatch, BorderColor, BackColor, GetDimensions().ToRectangle(), BorderWidth);
+            TUIDrawUtils.DrawRectangleBox(spriteBatch, BorderColor, BarColor, rect, 0);
         }
     }
 }
