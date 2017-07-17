@@ -55,9 +55,9 @@ namespace TerraUI {
         /// Create a new StylePoint.
         /// </summary>
         /// <param name="size">x- and y-coordinate</param>
-        public StylePoint(float size) {
-            X = new StyleDimension(size, 0);
-            Y = new StyleDimension(size, 0);
+        public StylePoint(float xy) {
+            X = new StyleDimension(xy, 0);
+            Y = new StyleDimension(xy, 0);
         }
     }
 }
