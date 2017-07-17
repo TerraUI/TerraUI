@@ -52,10 +52,17 @@
   <ItemGroup>
     <Compile Include="TerraUITest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.txt" />
     <Content Include="description.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TerraUI\TerraUI.csproj">
+      <Project>{bf30c535-48bb-471f-bb34-89cdb5793c15}</Project>
+      <Name>TerraUI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

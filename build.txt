@@ -2,7 +2,7 @@
 author=abluescarab
 version=1.0.0.0
 homepage=https://github.com/TerraUI/TerraUI/tree/testmod
-dllReferences=
+dllReferences=TerraUI
 modReferences=
 weakReferences=
 buildIgnore=*.csproj, *.user, obj\*, bin\*, .vs\*
