@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.UI;
 using TerraUI.Elements;
 
 namespace TerraUI.Utils {
     public delegate void UIEventHandler(TUIElement sender);
     public delegate void ValueChangedEventHandler<T>(TUIElement sender, ValueChangedEventArgs<T> e);
     public delegate bool AcceptedItemHandler(Item item);
+    public delegate void DrawHandler(UIElement sender, SpriteBatch spriteBatch);
 
     public class ValueChangedEventArgs<T> {
         public T PreviousValue { get; private set; }
