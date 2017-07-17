@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Terraria;
@@ -74,6 +75,82 @@ namespace TerraUI.Utils {
                 default:
                     return Main.inventoryBackTexture;
             }
+        }
+
+        /// <summary>
+        /// Get the empty texture rectangle of a slot based on its context.
+        /// </summary>
+        /// <param name="context">slot context</param>
+        /// <returns>empty item texture</returns>
+        public static Rectangle GetEmptyTextureRectangle(int context) {
+            return GetEmptyTextureRectangle(context, ArmorType.Chest);
+        }
+
+        /// <summary>
+        /// Get the empty texture rectangle of a slot based on its context and armor type.
+        /// </summary>
+        /// <param name="context">slot context</param>
+        /// <param name="armorType">armor type</param>
+        /// <returns>empty item texture</returns>
+        public static Rectangle GetEmptyTextureRectangle(int context, ArmorType armorType) {
+            int pos = -1;
+
+            switch(context) {
+                case ItemSlot.Context.EquipArmor:
+                    if(armorType == ArmorType.Head) {
+                        pos = 0;
+                    }
+                    else if(armorType == ArmorType.Chest) {
+                        pos = 6;
+                    }
+                    else if(armorType == ArmorType.Legs) {
+                        pos = 12;
+                    }
+                    break;
+                case ItemSlot.Context.EquipArmorVanity:
+                    if(armorType == ArmorType.Head) {
+                        pos = 3;
+                    }
+                    else if(armorType == ArmorType.Chest) {
+                        pos = 9;
+                    }
+                    else if(armorType == ArmorType.Legs) {
+                        pos = 15;
+                    }
+                    break;
+                case ItemSlot.Context.EquipAccessory:
+                    pos = 11;
+                    break;
+                case ItemSlot.Context.EquipAccessoryVanity:
+                    pos = 2;
+                    break;
+                case ItemSlot.Context.EquipDye:
+                    pos = 1;
+                    break;
+                case ItemSlot.Context.EquipGrapple:
+                    pos = 4;
+                    break;
+                case ItemSlot.Context.EquipMount:
+                    pos = 13;
+                    break;
+                case ItemSlot.Context.EquipMinecart:
+                    pos = 7;
+                    break;
+                case ItemSlot.Context.EquipPet:
+                    pos = 10;
+                    break;
+                case ItemSlot.Context.EquipLight:
+                    pos = 17;
+                    break;
+                default:
+                    return Rectangle.Empty;
+            }
+
+            Rectangle rectangle = Main.extraTexture[54].Frame(3, 6, pos % 3, pos / 3);
+            rectangle.Width -= 2;
+            rectangle.Height -= 2;
+
+            return rectangle;
         }
 
         /// <summary>
