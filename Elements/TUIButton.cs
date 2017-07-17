@@ -26,22 +26,22 @@ namespace TerraUI.Elements {
         public Color TextColor { get; set; }
 
         /// <summary>
-        /// Create a new object.
+        /// Create a new TUIButton.
         /// </summary>
         /// <param name="location">location of object</param>
         /// <param name="size">size of object</param>
-        /// <param name="font">font used for text</param>
+        /// <param name="font">text font</param>
         /// <param name="text">text displayed on object</param>
         /// <param name="borderWidth">width of object border</param>
         public TUIButton(StylePoint location, StylePoint size, string text = "", byte borderWidth = 1)
             : this(location, size, Main.fontMouseText, text, borderWidth) { }
 
         /// <summary>
-        /// Create a new object.
+        /// Create a new TUIButton.
         /// </summary>
         /// <param name="location">location of object</param>
         /// <param name="size">size of object</param>
-        /// <param name="font">font used for text</param>
+        /// <param name="font">text font</param>
         /// <param name="text">text displayed on object</param>
         /// <param name="borderWidth">width of object border</param>
         public TUIButton(StylePoint location, StylePoint size, DynamicSpriteFont font, string text = "", byte borderWidth = 1)
@@ -52,14 +52,6 @@ namespace TerraUI.Elements {
 
             BackColor = TUIColors.Button.BackColor;
             TextColor = TUIColors.Button.TextColor;
-        }
-
-        /// <summary>
-        /// Fires when the mouse enters the object.
-        /// </summary>
-        public override void MouseOver(UIMouseEvent evt) {
-            base.MouseOver(evt);
-            Main.PlaySound(SoundID.MenuTick, -1, -1, 1, 1f, 0f);
         }
 
         protected override void DrawSelf(SpriteBatch spriteBatch) {
