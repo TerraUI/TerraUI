@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.UI;
 
 namespace TerraUI.Utils {
-    public class DrawingUtils {
+    public class TUIDrawingUtils {
         public static void DrawRectangleBox(SpriteBatch spriteBatch, Color borderColour, Color backColour, Rectangle rect,
             int borderWidth) {
             Texture2D texture = Main.magicPixel;
