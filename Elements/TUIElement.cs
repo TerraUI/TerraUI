@@ -119,10 +119,10 @@ namespace TerraUI.Elements {
         }
 
         /// <summary>
-        /// Create a new object.
+        /// Create a new TUIElement.
         /// </summary>
-        /// <param name="location">location of object in pixels</param>
-        /// <param name="size">size of object in pixels</param>
+        /// <param name="location">location of object</param>
+        /// <param name="size">size of object</param>
         public TUIElement(StylePoint location, StylePoint size) {
             Location = location;
             Size = size;

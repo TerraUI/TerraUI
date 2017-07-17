@@ -25,7 +25,7 @@ namespace TerraUI.Elements {
         }
 
         /// <summary>
-        /// Create a new object.
+        /// Create a new TUIBorderedElement.
         /// </summary>
         /// <param name="location">location of object</param>
         /// <param name="size">size of object</param>

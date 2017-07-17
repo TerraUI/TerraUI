@@ -70,9 +70,8 @@ namespace TerraUI.Elements {
         /// <summary>
         /// Create a new UIProgressBar.
         /// </summary>
-        /// <param name="location">location of the object in pixels</param>
-        /// <param name="size">size of the object in pixels</param>
-        /// <param name="parent">parent UIObject</param>
+        /// <param name="location">location of object</param>
+        /// <param name="size">size of object</param>
         public TUIProgressBar(StylePoint location, StylePoint size) : base(location, size) {
             BackColor = TUIColors.ProgressBar.BackColor;
             BorderColor = TUIColors.ProgressBar.BorderColor;
@@ -104,7 +103,6 @@ namespace TerraUI.Elements {
         /// <summary>
         /// Fires when the progress bar finishes.
         /// </summary>
-        /// <param name="e"></param>
         public virtual void ProgressFinished() {
             if(OnProgressFinished != null) {
                 OnProgressFinished(this);
