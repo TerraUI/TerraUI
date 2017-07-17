@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Terraria;
 using Terraria.UI;
-using TerraUI.Objects;
+using TerraUI.Elements;
 using TerraUI.Utils;
 
 namespace TerraUI {

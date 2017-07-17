@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
-using TerraUI.Objects;
+using TerraUI.Elements;
 
 namespace TerraUI.Utils {
     public delegate void UIEventHandler(TUIElement sender);

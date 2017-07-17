@@ -6,7 +6,7 @@ using Terraria.ID;
 using Terraria.UI;
 using TerraUI.Utils;
 
-namespace TerraUI.Objects {
+namespace TerraUI.Elements {
     public class TUIButton : TUIBorderedElement {
         /// <summary>
         /// The font used for the text on the object.

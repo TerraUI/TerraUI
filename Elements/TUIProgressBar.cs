@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.UI;
 using TerraUI.Utils;
 
-namespace TerraUI.Objects {
+namespace TerraUI.Elements {
     public class TUIProgressBar : TUIBorderedElement {
         private float _target = 100;
         private float _value = 0;

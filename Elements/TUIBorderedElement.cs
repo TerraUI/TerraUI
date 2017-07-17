@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using TerraUI.Utils;
 
-namespace TerraUI.Objects {
+namespace TerraUI.Elements {
     public class TUIBorderedElement : TUIElement {
         private byte _borderWidth;
 

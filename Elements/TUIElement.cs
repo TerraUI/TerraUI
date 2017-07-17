@@ -1,6 +1,6 @@
 ﻿using Terraria.UI;
 
-namespace TerraUI.Objects {
+namespace TerraUI.Elements {
     public class TUIElement : UIElement {
         /// <summary>
         /// Fires when the middle mouse button is clicked.
