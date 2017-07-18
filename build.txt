@@ -1,0 +1,15 @@
+﻿displayName=TerraUI
+author=abluescarab, Boffin
+version=1.0.0.0
+homepage=https://github.com/TerraUI/TerraUI
+dllReferences=
+modReferences=
+weakReferences=
+buildIgnore=*.csproj, *.user, obj\*, bin\*, .vs\*
+languageVersion=4
+side=Both
+noCompile=false
+hideCode=false
+hideResources=false
+includeSource=true
+includePDB=true
