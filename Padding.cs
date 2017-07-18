@@ -27,7 +27,7 @@ namespace TerraUI {
         /// A Padding instance where top, left, bottom, and right are 0.
         /// </summary>
         public static Padding Zero { get { return new Padding(); } }
-        
+
         /// <summary>
         /// Create a new Padding instance.
         /// </summary>
@@ -40,7 +40,7 @@ namespace TerraUI {
         /// <param name="topBottom">top and bottom padding</param>
         /// <param name="leftRight">left and right padding</param>
         public Padding(float topBottom, float leftRight) : this(topBottom, leftRight, topBottom, leftRight) { }
-        
+
         /// <summary>
         /// Create a new Padding instance.
         /// </summary>
@@ -48,7 +48,7 @@ namespace TerraUI {
         /// <param name="left">left padding</param>
         /// <param name="bottom">bottom padding</param>
         /// <param name="right">right padding</param>
-        public Padding(float top, float left, float bottom, float right) {
+        public Padding(float top, float left, float bottom, float right) : this() {
             Top = top;
             Left = left;
             Bottom = bottom;

@@ -27,7 +27,7 @@ namespace TerraUI {
         /// </summary>
         /// <param name="x">x-coordinate</param>
         /// <param name="y">y-coordinate</param>
-        public StylePoint(StyleDimension x, StyleDimension y) {
+        public StylePoint(StyleDimension x, StyleDimension y) : this() {
             X = x;
             Y = y;
         }
@@ -37,28 +37,19 @@ namespace TerraUI {
         /// </summary>
         /// <param name="x">x-coordinate</param>
         /// <param name="y">y-coordinate</param>
-        public StylePoint(float x, float y) {
-            X = new StyleDimension(x, 0);
-            Y = new StyleDimension(y, 0);
-        }
+        public StylePoint(float x, float y) : this(new StyleDimension(x, 0), new StyleDimension(y, 0)) { }
 
         /// <summary>
         /// Create a new StylePoint.
         /// </summary>
         /// <param name="vector">vector to convert</param>
-        public StylePoint(Vector2 vector) {
-            X = new StyleDimension(vector.X, 0);
-            Y = new StyleDimension(vector.Y, 0);
-        }
+        public StylePoint(Vector2 vector) : this(vector.X, vector.Y) { }
 
         /// <summary>
         /// Create a new StylePoint.
         /// </summary>
         /// <param name="size">x- and y-coordinate</param>
-        public StylePoint(float xy) {
-            X = new StyleDimension(xy, 0);
-            Y = new StyleDimension(xy, 0);
-        }
+        public StylePoint(float xy) : this(xy, xy) { }
         
         /// <summary>
         /// Multiply a StylePoint by a float value.
