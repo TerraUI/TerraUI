@@ -42,7 +42,9 @@ namespace TerraUI.Elements {
         public bool DrawVisibilityIcon {
             get { return _drawVisibilityIcon; }
             set {
-                if(value) {
+                _drawVisibilityIcon = value;
+
+                if(_drawVisibilityIcon) {
                     Append(_tick);
                 }
                 else {
