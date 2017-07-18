@@ -15,7 +15,7 @@ namespace TerraUI.Elements {
         protected string _hoverText = "";
         protected float _backOpacity = 1f;
         protected TUIImageButton _tick;
-        
+
         /// <summary>
         /// Whether the item in the slot is visible on the player character.
         /// </summary>
@@ -64,8 +64,7 @@ namespace TerraUI.Elements {
         /// <param name="drawVisibilityIcon">whether to draw visibility (eye) icon</param>
         /// <param name="drawEmptyTexture">whether to draw item texture when slot is empty</param>
         public TUIItemSlot(StylePoint location, float scale = .85f, int context = ItemSlot.Context.InventoryItem,
-            bool drawVisibilityIcon = false, bool drawEmptyTexture = true) 
-            : base(location, new StylePoint(DEFAULT_SIZE)) {
+            bool drawVisibilityIcon = false, bool drawEmptyTexture = true) : base(location, new StylePoint(DEFAULT_SIZE)) {
             Scale = scale;
             Context = context;
             DrawVisibilityIcon = drawVisibilityIcon;
