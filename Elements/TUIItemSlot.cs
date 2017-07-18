@@ -14,6 +14,7 @@ namespace TerraUI.Elements {
         protected Item _item;
         protected string _hoverText = "";
         protected float _backOpacity = 1f;
+        protected bool _drawVisibilityIcon = false;
         protected TUIImageButton _tick;
 
         /// <summary>
@@ -38,7 +39,17 @@ namespace TerraUI.Elements {
         /// <summary>
         /// Whether to draw the visibility icon (eye icon) on a slot.
         /// </summary>
-        public bool DrawVisibilityIcon { get; set; }
+        public bool DrawVisibilityIcon {
+            get { return _drawVisibilityIcon; }
+            set {
+                if(value) {
+                    Append(_tick);
+                }
+                else {
+                    RemoveChild(_tick);
+                }
+            }
+        }
         /// <summary>
         /// The opacity of the item slot background (between 0 and 1).
         /// </summary>
@@ -65,16 +76,15 @@ namespace TerraUI.Elements {
         /// <param name="drawEmptyTexture">whether to draw item texture when slot is empty</param>
         public TUIItemSlot(StylePoint location, float scale = .85f, int context = ItemSlot.Context.InventoryItem,
             bool drawVisibilityIcon = false, bool drawEmptyTexture = true) : base(location, new StylePoint(DEFAULT_SIZE)) {
+            _tick = new TUIImageButton(StylePoint.Zero, Main.inventoryTickOnTexture, 1f);
+            _tick.OnClick += tick_OnClick;
+
             Scale = scale;
             Context = context;
             DrawVisibilityIcon = drawVisibilityIcon;
             DrawEmptyTexture = drawEmptyTexture;
-
+            
             Item = new Item();
-
-            _tick = new TUIImageButton(StylePoint.Zero, Main.inventoryTickOnTexture, 1f);
-            _tick.OnClick += tick_OnClick;
-            Append(_tick);
         }
 
         private void tick_OnClick(UIMouseEvent evt, UIElement listeningElement) {
@@ -159,10 +169,9 @@ namespace TerraUI.Elements {
                 _tick.Location = new StylePoint(Size.X.Pixels - 18, -2);
                 _tick.Texture = (Visible ? Main.inventoryTickOnTexture : Main.inventoryTickOffTexture);
                 RecalculateChildren();
-                DrawChildren(spriteBatch);
             }
 
-            if(_tick.IsMouseHovering) {
+            if(DrawVisibilityIcon && _tick.IsMouseHovering) {
                 Main.hoverItemName = (Visible ? Language.GetTextValue("LegacyInterface.59") : Language.GetTextValue("GameUI.Hidden"));
             }
             else if(IsMouseHovering) {
