@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.UI;
 using TerraUI.Objects;
 
 namespace TerraUI.Utilities {
@@ -19,7 +20,7 @@ namespace TerraUI.Utilities {
         /// Example: Addons/TerraUI
         /// </summary>
         public static string Subdirectory { get; set; }
-        
+
         /// <summary>
         /// Returns a Texture2D with the specified name from the Textures directory.
         /// </summary>
@@ -99,32 +100,32 @@ namespace TerraUI.Utilities {
         /// </summary>
         /// <param name="context">slot context</param>
         /// <returns>texture of the slot</returns>
-        public static Texture2D GetContextTexture(Contexts context) {
+        public static Texture2D GetContextTexture(int context) {
             switch(context) {
-                case Contexts.EquipAccessory:
-                case Contexts.EquipArmor:
-                case Contexts.EquipGrapple:
-                case Contexts.EquipMount:
-                case Contexts.EquipMinecart:
-                case Contexts.EquipPet:
-                case Contexts.EquipLight:
+                case ItemSlot.Context.EquipAccessory:
+                case ItemSlot.Context.EquipArmor:
+                case ItemSlot.Context.EquipGrapple:
+                case ItemSlot.Context.EquipMount:
+                case ItemSlot.Context.EquipMinecart:
+                case ItemSlot.Context.EquipPet:
+                case ItemSlot.Context.EquipLight:
                     return Main.inventoryBack3Texture;
-                case Contexts.EquipArmorVanity:
-                case Contexts.EquipAccessoryVanity:
+                case ItemSlot.Context.EquipArmorVanity:
+                case ItemSlot.Context.EquipAccessoryVanity:
                     return Main.inventoryBack8Texture;
-                case Contexts.EquipDye:
+                case ItemSlot.Context.EquipDye:
                     return Main.inventoryBack12Texture;
-                case Contexts.ChestItem:
+                case ItemSlot.Context.ChestItem:
                     return Main.inventoryBack5Texture;
-                case Contexts.BankItem:
+                case ItemSlot.Context.BankItem:
                     return Main.inventoryBack2Texture;
-                case Contexts.GuideItem:
-                case Contexts.PrefixItem:
-                case Contexts.CraftingMaterial:
+                case ItemSlot.Context.GuideItem:
+                case ItemSlot.Context.PrefixItem:
+                case ItemSlot.Context.CraftingMaterial:
                     return Main.inventoryBack4Texture;
-                case Contexts.TrashItem:
+                case ItemSlot.Context.TrashItem:
                     return Main.inventoryBack7Texture;
-                case Contexts.ShopItem:
+                case ItemSlot.Context.ShopItem:
                     return Main.inventoryBack6Texture;
                 default:
                     return Main.inventoryBackTexture;
@@ -136,27 +137,27 @@ namespace TerraUI.Utilities {
         /// </summary>
         /// <param name="context">context of the slot</param>
         /// <returns>text in current language</returns>
-        public static string GetHoverText(Contexts context) {
+        public static string GetHoverText(int context) {
             switch(context) {
-                case Contexts.EquipAccessory:
+                case ItemSlot.Context.EquipAccessory:
                     return Language.GetTextValue("LegacyInterface.9");
-                case Contexts.EquipAccessoryVanity:
+                case ItemSlot.Context.EquipAccessoryVanity:
                     return Language.GetTextValue("LegacyInterface.11") + " " + Language.GetTextValue("LegacyInterface.9");
-                case Contexts.EquipDye:
+                case ItemSlot.Context.EquipDye:
                     return Language.GetTextValue("LegacyInterface.57");
-                case Contexts.EquipGrapple:
+                case ItemSlot.Context.EquipGrapple:
                     return Language.GetTextValue("LegacyInterface.90");
-                case Contexts.EquipLight:
+                case ItemSlot.Context.EquipLight:
                     return Language.GetTextValue("LegacyInterface.94");
-                case Contexts.EquipMinecart:
+                case ItemSlot.Context.EquipMinecart:
                     return Language.GetTextValue("LegacyInterface.93");
-                case Contexts.EquipMount:
+                case ItemSlot.Context.EquipMount:
                     return Language.GetTextValue("LegacyInterface.91");
-                case Contexts.EquipPet:
+                case ItemSlot.Context.EquipPet:
                     return Language.GetTextValue("LegacyInterface.92");
-                case Contexts.InventoryAmmo:
+                case ItemSlot.Context.InventoryAmmo:
                     return Language.GetTextValue("LegacyInterface.27");
-                case Contexts.InventoryCoin:
+                case ItemSlot.Context.InventoryCoin:
                     return Language.GetTextValue("LegacyInterface.26");
             }
 
@@ -384,7 +385,7 @@ namespace TerraUI.Utilities {
             }
             return "";
         }
-        
+
         /// <summary>
         /// Helper function for TranslateChar().
         /// </summary>
