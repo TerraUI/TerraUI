@@ -73,29 +73,6 @@ namespace TerraUI.Utilities {
         }
 
         /// <summary>
-        /// Get the state of a button.
-        /// </summary>
-        /// <param name="mouseButton">mouse button</param>
-        /// <param name="mouseState">mouse state</param>
-        /// <returns>state of given mouse button</returns>
-        public static ButtonState GetButtonState(MouseButtons mouseButton, MouseState mouseState) {
-            switch(mouseButton) {
-                case MouseButtons.Left:
-                    return mouseState.LeftButton;
-                case MouseButtons.Middle:
-                    return mouseState.MiddleButton;
-                case MouseButtons.Right:
-                    return mouseState.RightButton;
-                case MouseButtons.XButton1:
-                    return mouseState.XButton1;
-                case MouseButtons.XButton2:
-                    return mouseState.XButton2;
-                default:
-                    return ButtonState.Released;
-            }
-        }
-
-        /// <summary>
         /// Get the texture of a slot based on its context.
         /// </summary>
         /// <param name="context">slot context</param>
