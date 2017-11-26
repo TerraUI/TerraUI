@@ -68,7 +68,6 @@ namespace TerraUI.Utilities {
         /// Call after all UIObjects have been updated.
         /// </summary>
         public static void UpdateInput() {
-            MouseUtils.UpdateState();
             KeyboardUtils.UpdateState();
         }
 
