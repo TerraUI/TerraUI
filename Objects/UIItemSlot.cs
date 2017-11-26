@@ -79,14 +79,14 @@ namespace TerraUI.Objects {
         /// </summary>
         public float BackOpacity {
             get { return backOpacity; }
-            set { backOpacity = UIUtils.Clamp(value, 0f, 1f); }
+            set { backOpacity = MathHelper.Clamp(value, 0f, 1f); }
         }
         /// <summary>
         /// The opacity of the item texture in the slot (between 0 and 1).
         /// </summary>
         public float ItemOpacity {
             get { return itemOpacity; }
-            set { itemOpacity = UIUtils.Clamp(value, 0f, 1f); }
+            set { itemOpacity = MathHelper.Clamp(value, 0f, 1f); }
         }
 
         /// <summary>

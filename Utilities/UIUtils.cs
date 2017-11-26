@@ -133,31 +133,6 @@ namespace TerraUI.Utilities {
         }
 
         /// <summary>
-        /// Clamp a specified value within certain parameters.
-        /// </summary>
-        /// <typeparam name="T">any comparable type</typeparam>
-        /// <param name="value">value to clamp</param>
-        /// <param name="min">minimum value</param>
-        /// <param name="max">maximum value</param>
-        /// <returns>clamped value</returns>
-        public static T Clamp<T>(T value, T min, T max) where T : IComparable {
-            if(max.CompareTo(min) < 0) {
-                throw new ArgumentException(string.Format("Maximum value is smaller than minimum value."));
-            }
-
-            int comparedMin = value.CompareTo(min);
-            int comparedMax = value.CompareTo(max);
-
-            if(comparedMin < 0) {
-                return min;
-            }
-            else if(comparedMax > 0) {
-                return max;
-            }
-            else return value;
-        }
-
-        /// <summary>
         /// Switch two items.
         /// </summary>
         /// <param name="item1">first item</param>

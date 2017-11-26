@@ -57,7 +57,7 @@ namespace TerraUI.Objects {
             get { return Convert.ToInt32(textBox.Text); }
             set {
                 int oldValue = this.value;
-                this.value = UIUtils.Clamp(value, Minimum, Maximum);
+                this.value = (int)MathHelper.Clamp(value, Minimum, Maximum);
 
                 if(textBox != null) {
                     textBox.TextChanged -= TextBox_TextChanged;
