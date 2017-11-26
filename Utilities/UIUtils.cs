@@ -64,14 +64,6 @@ namespace TerraUI.Utilities {
         }
 
         /// <summary>
-        /// Updates the current mouse and keyboard state.
-        /// Call after all UIObjects have been updated.
-        /// </summary>
-        public static void UpdateInput() {
-            KeyboardUtils.UpdateState();
-        }
-
-        /// <summary>
         /// Get the texture of a slot based on its context.
         /// </summary>
         /// <param name="context">slot context</param>

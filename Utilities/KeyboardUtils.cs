@@ -1,47 +1,26 @@
 ﻿using Microsoft.Xna.Framework.Input;
+using Terraria;
+using Terraria.GameInput;
 
 namespace TerraUI.Utilities {
     public static class KeyboardUtils {
-        private static KeyboardState lastState;
-        private static KeyboardState state;
-
-        /// <summary>
-        /// The current keyboard state.
-        /// </summary>
-        public static KeyboardState State {
-            get { return state; }
-        }
-        /// <summary>
-        /// The keyboard state the last time Update() was called.
-        /// </summary>
-        public static KeyboardState LastState {
-            get { return lastState; }
-        }
         /// <summary>
         /// Whether the shift key is pressed.
         /// </summary>
         public static bool Shift {
-            get { return (state.IsKeyDown(Keys.LeftShift) || state.IsKeyDown(Keys.RightShift)); }
+            get { return (Main.keyState.IsKeyDown(Keys.LeftShift) || Main.keyState.IsKeyDown(Keys.RightShift)); }
         }
         /// <summary>
         /// Whether the control key is pressed.
         /// </summary>
         public static bool Control {
-            get { return (state.IsKeyDown(Keys.LeftControl) || state.IsKeyDown(Keys.RightControl)); }
+            get { return (Main.keyState.IsKeyDown(Keys.LeftControl) || Main.keyState.IsKeyDown(Keys.RightControl)); }
         }
         /// <summary>
         /// Whether the alt key is pressed.
         /// </summary>
         public static bool Alt {
-            get { return (state.IsKeyDown(Keys.LeftAlt) || state.IsKeyDown(Keys.RightAlt)); }
-        }
-
-        /// <summary>
-        /// Update the State and LastState variables.
-        /// </summary>
-        internal static void UpdateState() {
-            lastState = state;
-            state = Keyboard.GetState();
+            get { return (Main.keyState.IsKeyDown(Keys.LeftAlt) || Main.keyState.IsKeyDown(Keys.RightAlt)); }
         }
 
         /// <summary>
@@ -50,7 +29,7 @@ namespace TerraUI.Utilities {
         /// <param name="key">key to check</param>
         /// <returns>whether key was just pressed</returns>
         public static bool JustPressed(Keys key) {
-            if(lastState.IsKeyUp(key) && state.IsKeyDown(key)) {
+            if(Main.oldKeyState.IsKeyUp(key) && Main.keyState.IsKeyDown(key)) {
                 return true;
             }
 
@@ -63,7 +42,7 @@ namespace TerraUI.Utilities {
         /// <param name="key">key to check</param>
         /// <returns>whether key was just released</returns>
         public static bool JustReleased(Keys key) {
-            if(lastState.IsKeyDown(key) && state.IsKeyUp(key)) {
+            if(Main.oldKeyState.IsKeyDown(key) && Main.keyState.IsKeyUp(key)) {
                 return true;
             }
 
@@ -76,7 +55,7 @@ namespace TerraUI.Utilities {
         /// <param name="key">key to check</param>
         /// <returns>whether key is held down</returns>
         public static bool HeldDown(Keys key) {
-            if(lastState.IsKeyDown(key) && state.IsKeyDown(key)) {
+            if(Main.oldKeyState.IsKeyDown(key) && Main.keyState.IsKeyDown(key)) {
                 return true;
             }
 
