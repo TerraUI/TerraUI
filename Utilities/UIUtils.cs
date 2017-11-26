@@ -63,17 +63,6 @@ namespace TerraUI.Utilities {
         }
 
         /// <summary>
-        /// Play a game sound.
-        /// </summary>
-        /// <param name="type">sound</param>
-        /// <param name="x">x position</param>
-        /// <param name="y">y position</param>
-        /// <param name="style">style</param>
-        public static void PlaySound(Sounds type, int x = -1, int y = -1, int style = 1) {
-            Main.PlaySound((int)type, x, y, style);
-        }
-
-        /// <summary>
         /// Updates the current mouse and keyboard state.
         /// Call after all UIObjects have been updated.
         /// </summary>

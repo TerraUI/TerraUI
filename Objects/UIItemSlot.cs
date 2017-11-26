@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.UI;
 using Terraria.UI.Chat;
@@ -145,7 +146,7 @@ namespace TerraUI.Objects {
         /// <param name="item2">second item</param>
         public void Swap(ref Item item1, ref Item item2) {
             UIUtils.SwitchItems(ref item1, ref item2);
-            UIUtils.PlaySound(Sounds.Grab);
+            Main.PlaySound(SoundID.Grab);
             Recipe.FindRecipes();
         }
 
@@ -154,7 +155,7 @@ namespace TerraUI.Objects {
         /// </summary>
         public void ToggleVisibility() {
             ItemVisible = !ItemVisible;
-            UIUtils.PlaySound(Sounds.MenuTick);
+            Main.PlaySound(SoundID.MenuTick);
         }
 
         /// <summary>
