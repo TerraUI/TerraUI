@@ -127,8 +127,6 @@ namespace TerraUITest {
             if(pnl1 != null) {
                 pnl1.Update();
             }
-
-            UIUtils.UpdateInput();
         }
     }
 }
