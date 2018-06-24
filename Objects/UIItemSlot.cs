@@ -123,7 +123,7 @@ namespace TerraUI.Objects {
         /// The default left click event.
         /// </summary>
         public override void OnLeftClick() {
-            if(Item.stack > 0 && (Conditions == null || Conditions(Main.mouseItem))) {
+            if(Main.mouseItem.stack < 1 || Conditions == null || Conditions(Main.mouseItem)) {
                 Swap(ref item, ref Main.mouseItem);
             }
         }
